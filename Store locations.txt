@@ -1,0 +1,10 @@
+Locations for stores
+
+San Jose
+96 E San Fernando St, San Jose, CA 95113
+37.335168, -121.887195
+
+
+San Mateo
+55 E 3rd Ave, San Mateo, CA 94401
+37.563931, -122.325181
