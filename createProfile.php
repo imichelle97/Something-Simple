@@ -1,143 +1,233 @@
-<?php include('server.php') ?>
+<?php 
+  include('server.php');
+  // session_start(); 
+  if (!isset($_SESSION['username'])) {
+    $_SESSION['msg'] = "You must log in first";
+    header('location: login.php');
+  }
+
+  // echo "session user now: " . $_SESSION['username']['username'];
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
 
   <!-- Site Properties -->
-  <title>Create Profile</title>
-
+  <title>Something Simple</title>
+  <script   src="https://code.jquery.com/jquery-3.3.1.min.js"   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="   crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.js"></script>
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.css">
+  <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
 
   <style type="text/css">
+
     body {
-      background-color: #F5EAD1;
+      min-height: 700px;
+      padding: 0.5em 0em;
+      background: #F5EAD1 url('images/web-graphics/leaf-watermark.png');
+      background-size: 600px;
+      background-repeat: no-repeat;
+      background-position: left bottom;
+      left: -2em;
+      bottom: -2em;
     }
-    body > .grid {
-      height: 100%;
+    #shipping .container {
+      margin-bottom: 2em;
     }
-    .column {
-      max-width: 450px;
+    #shipping .container .header span {
+      font-family: 'Pacifico', cursive;
     }
-    .input {
-      width: 100%;
+    #shipping .container .header i {
+      padding: 0 0.5em;
     }
+    #shipping .container .right .button {
+      margin: 0 1em !important;
+    }
+    #shipping .navbar .container .right h3 {
+      margin: 0 1em !important;
+    }
+    #shipping .container .row h1 {
+      font-size: 5em;
+      margin-bottom: 0.5em;
+      font-family: 'Pacifico', cursive;
+    }
+    #shipping .container .message {
+      margin-bottom: 2em;
+    }
+    #shipping .container .field {
+      margin-bottom: 1em;
+    }
+    #shipping .container .column {
+      margin-bottom: 0;
+    }
+    /* .image {
+      width: 217.5px;
+      height: 217.5px;
+    } */
   </style>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.js"></script>
+
 </head>
 <body>
+  
+  <div class="pusher">
 
-<div class="ui middle aligned center aligned grid">
-  <div class="column">
-    <h2 class="ui green header">
-      <div class="content">
-        Create Your Profile
-      </div>
-    </h2>
-    
-    <form method="post" actions="profile.php">
-
-      <?php include('errors.php'); ?>
-
-      <form class="ui large form">
-
-        <div class="ui stacked segment">
-
-          <div class="field">
-            <div class="ui left icon input">
-              <i class="user icon"></i>
-              <input type="text" name="first_name" placeholder="First Name" value="<?php echo $first_name; ?>">
-            </div>
-          </div>
-
-          <div class="field">
-            <div class="ui left icon input">
-              <i class="user icon"></i>
-              <input type="text" name="last_name" placeholder="Last Name" value="<?php echo $last_name; ?>">
-            </div>
-          </div>
-
-          <div class="field">
-            <div class="ui left icon input">
-              <i class="user icon"></i>
-              <input type="text" name="username" placeholder="Username" value="<?php echo $username; ?>">
-            </div>
-          </div>
-
-          <div class="field">
-            <div class="ui left icon input">
-              <i class="user icon"></i>
-              <input type="text" name="phone_number" placeholder="Phone Number" value="<?php echo $phone_number; ?>">
-            </div>
-          </div>
-
-          <div class="field">
-            <div class="ui left icon input">
-              <i class="lock icon"></i>
-              <input type="text" name="address" placeholder="Address" value="<?php echo $address; ?>">
-            </div>
-          </div>
-          
-          <div class="field">
-            <div class="ui left icon input">
-              <i class="envelope icon"></i>
-              <input type="text" name="city" placeholder="City" value="<?php echo $city; ?>">
-            </div>
-          </div>
-          
-          <div class="field">
-            <div class="ui left icon input">
-              <i class="lock icon"></i>
-              <input type="text" name="state" placeholder="State" value="<?php echo $state; ?>">
-            </div>
-          </div>
-
-          <div class="field">
-            <div class="ui left icon input">
-              <i class="lock icon"></i>
-              <input type="text" name="zipcode" placeholder="Zipcode" value="<?php echo $zipcode; ?>">
-            </div>
-          </div>
-
-          <div class="field">
-            <div class="ui left icon input">
-              <i class="lock icon"></i>
-              <input type="text" name="card_type" placeholder="Card Type" value="<?php echo $card_type; ?>">
-            </div>
-          </div>
-
-          <div class="field">
-            <div class="ui left icon input">
-              <i class="lock icon"></i>
-              <input type="text" name="card_number" placeholder="Card Number" value="<?php echo $card_number; ?>">
-            </div>
-          </div>
-          
-          <div class="field">
-            <button type="submit" class="ui large fluid green submit button" name="create_profile">Create</button>
-          </div>
-          <!-- <div class="ui fluid large green submit button" name="reg_user">Sign up</div> -->
-
-        </div>
-
-      </form>
-
-      <!-- <div class="ui message">
-        Have an account already? <a href="signin.php">Log in here.</a>
-      </div> -->
+    <!-- MASTER HEAD -->
+    <section id="shipping">
       
-      <a href="home.php">    
-        <button class="ui fluid large primary button">
-          <i class="left arrow icon "></i>
-          Home
-        </button>
-      </a>
+      <!-- NAV BAR -->
+      <div class="navbar">
+        <div class="ui container">
+          <div class="ui large secondary menu">
+            <div class="header item">
+              <span>something simple.</span>
+              <i class="leaf icon"></i>
+            </div>
+            <a class="item" href="home.php">Home</a>
+            <a class="item">About</a>
+            <a class="item">Team</a>
+            <a class="item">Contact</a>
+            <div class="right item">
+              <h3>Welcome, <?php echo $_SESSION['username']['username']; ?>!</h3>
+              <!-- <a class="ui primary button" href="profile.php">Profile</a> -->
+              <a class="ui negative button" href="index.php">Log Out</a>
+            </div>
+          </div>
+        </div>
+      </div>
 
-    </form>
+
+      <div class="ui container">
+        <div class="row">
+          <h1>Create Your Profile</h1>
+        </div>
+      </div>
+
+      
+      <form method="post" actions="createProfile.php" class="ui form">
+      <?php include('errors.php'); ?>
+      <div class="ui raised segment container">
+        <div class="ui grid">
+          <div class="ui sixteen wide column">
+            <div class="ui info message">
+              Personal Information.
+            </div>
+            <div class="ui container">
+              <!-- <form class="ui form" method="post" actions="createProfile.php"> -->
+                <!-- CARDHOLDER'S ADDRESS -->
+                    <div class="ui grid">
+                      <div class="ui four wide column field">
+                        <label>First Name</label>
+                        <input type="text" name="first_name" value="<?php echo $first_name; ?>">
+                      </div>
+
+                      <div class="ui four wide column field">
+                        <label>Last Name</label>
+                        <input type="text" name="last_name" value="<?php echo $last_name; ?>">
+                      </div>
+
+                      <div class="ui four wide column field">
+                        <label>Username</label>
+                        <input type="text" name="username" value="<?php echo $username; ?>">
+                      </div>
+
+                      <div class="ui four wide column field">
+                        <label>Phone Number</label>
+                        <input type="text" name="phone_number" value="<?php echo $phone_number; ?>">
+                      </div>
+                  </div>
+              <!-- </form> -->
+            </div>
+
+          <div class="ui sixteen wide column">
+            <div class="ui info message">
+              Shipping Information.
+            </div>
+            <div class="ui container">
+              <!-- <form class="ui form" method="post" actions="createProfile.php"> -->
+                <!-- CARDHOLDER'S ADDRESS -->
+                    <div class="field">
+                      <label>Address</label>
+                      <input type="text" name="address" value="<?php echo $address; ?>">
+                    </div>
+
+                    <div class="ui grid">
+                      <div class="ui nine wide column field">
+                        <label>City</label>
+                        <input type="text" name="city" value="<?php echo $city; ?>">
+                      </div>
+
+                      <div class="ui three wide column field">
+                        <label>State</label>
+                        <input type="text" name="state" value="<?php echo $state; ?>">
+                      </div>
+
+                      <div class="ui four wide column field">
+                        <label>Zip Code</label>
+                        <input type="text" name="zipcode" value="<?php echo $zipcode; ?>">
+                      </div>
+                  </div>
+              <!-- </form> -->
+            </div>
+          </div>
+
+          <div class="ui sixteen wide column">
+            <div class="ui info message">
+              Payment Information.
+            </div>
+            <div class="ui container">
+              <!-- <form class="ui form" method="post" actions="createProfile.php"> -->
+                <!-- CARDHOLDER'S ADDRESS -->
+                    <div class="ui grid">
+                      <div class="ui four wide column field">
+                        <label>Card Number</label>
+                        <input type="text" name="card_number" value="<?php echo $card_number; ?>">
+                      </div>
+
+                      <div class="ui four wide column field">
+                        <label>Card Type</label>
+                        <input type="text" name="card_type" value="<?php echo $card_type; ?>">
+                      </div>
+
+                      <div class="ui four wide column field">
+                        <label>CVC</label>
+                        <input type="text" name="cvc" value="<?php echo $cvc; ?>">
+                      </div>
+
+                      <div class="ui four wide column field">
+                        <label>Expiration Date</label>
+                        <input type="date" name="expiration_date" value="<?php echo $expiration_date; ?>">
+                      </div>
+                  </div>
+              <!-- </form> -->
+            </div>
+
+          <div class="ui center aligned container">
+            <!-- <a href="profile.php"> -->
+              <!-- <button class="ui big green button">Save Profile</button> -->
+              <button type="submit" class="ui big green submit button" name="create_profile">Save Profile</button>
+            <!-- </a> -->
+			    </div>
+        </div>
+      </div>
+    </section>
 
   </div>
 
-</div>
+  <script>
+  $(document)
+    .ready(function() {
+      $('.ui.dropdown')
+        .dropdown({
+          on: 'click'
+        })
+      ;
+    })
+  ;
+  </script>
 
 </body>
 
 </html>
-
