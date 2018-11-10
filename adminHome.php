@@ -1,4 +1,5 @@
 <?php 
+  session_start();
   include('server.php');
 	
 	// if (!isset($_SESSION['username'])) {
@@ -10,7 +11,79 @@
 		$_SESSION['msg'] = "You must log in first";
 		header('location: ../login.php');
 	}
-
+  function query($query)
+  {
+      $connect = mysqli_connect('localhost','OFS','sesame','OFS');
+      if (mysqli_connect_errno()) 
+      {
+        echo "Failed to connect to MySQL: " . mysqli_connect_error();
+      }
+      $result = mysqli_query($connect, $query);
+      while($row=mysqli_fetch_assoc($result))
+      {
+          $set[] = $row;
+      }
+      if (!empty($set))
+      {
+        return $set;
+      }
+  }
+  if(!empty($_GET["action"])) 
+  {
+    switch($_GET["action"]) 
+    {
+      case "add":
+        if(!empty($_POST["quantity"])) 
+        {
+          $product = query("SELECT * FROM item WHERE item_id='" . $_GET["item_id"] . "'");
+          $itemArray = 
+            array
+            (
+              $product[0]["item_id"]=>
+                array
+                (
+                  'item_name'=>$product[0]["item_name"], 
+                  'item_id'=>$product[0]["item_id"], 
+                  'inventory'=>$product[0]["inventory"],
+                  'invenQuantity'=>$_POST["quantity"], 
+                  'item_price'=>$product[0]["item_price"], 
+                )
+            );
+          
+          if(!empty($_SESSION["inven"])) 
+          {
+            $id = $product[0]["item_id"];
+            if(in_array($product[0]["item_id"],array_keys($_SESSION["inven"]))) 
+            {
+              foreach($_SESSION["inven"] as $a => $b) 
+              {
+                if($product[0]["item_id"] == $a) 
+                {
+                  if(empty($_SESSION["inven"][$a]["invenQuantity"])) 
+                  {
+                    $_SESSION["inven"][$a]["invenQuantity"] = 0;
+                  }
+                  $_SESSION["inven"][$a]["invenQuantity"] += $_POST["quantity"];
+                }
+              }
+            } 
+            else 
+            {
+              $_SESSION["inven"] = $_SESSION["inven"] + $itemArray; 
+            }
+            $updatedQ = $product[0]["inventory"] + $_POST["quantity"];
+                  $sql = "UPDATE item SET inventory = '$updatedQ' WHERE item_id = $id";
+                  $connect = mysqli_connect('localhost','OFS','sesame','OFS');
+                  mysqli_query($connect,$sql);
+          } 
+          else 
+          {
+            $_SESSION["inven"] = $itemArray;
+          }
+        }
+      break;
+    }
+  }
 ?>
 
 <!DOCTYPE html>
@@ -102,30 +175,39 @@
         <div class="ui raised segment container">
           <div class="ui grid">
             <?php
-              $conn = mysqli_connect('localhost', 'OFS', 'sesame', 'OFS');
-              // Check connection
-              if (mysqli_connect_errno()) {
-                echo "Failed to connect to MySQL: " . mysqli_connect_error();
-              }
-              $result = mysqli_query($conn,"SELECT * FROM item");
+              $items = query("SELECT * FROM item");
 
               echo "<table class='ui striped table'>
               <thead>
                 <tr>
                 <th>Item Name</th>
+                <th>Item Weight</th>
+                <th>Item Price</th>
                 <th>Inventory</th>
+                <th>Increment Quantity</th>
                 </tr>
               </thead>";
 
-              while($row = mysqli_fetch_array($result)) {
-                echo "<tbody>";
-                echo "<tr>";
-                echo "<td>" . $row['item_name'] . "</td>";
-                echo "<td>" . $row['inventory'] . "</td>";
-                echo "</tr>";
-                echo "</tbody>";
+              if (!empty($items)) 
+              { 
+                foreach($items as $key=>$value)
+                {
+            ?>
+                  <form method="post" action="adminHome.php?action=add&item_id=<?php echo $items[$key]["item_id"]; ?>">
+                    <tr>
+                      <td><?php echo $items[$key]["item_name"]; ?></td>
+                      <td><?php echo $items[$key]["item_weight"];?></td>
+                      <td><?php echo "$".$items[$key]["item_price"]; ?></td>
+                      <td><?php echo $items[$key]["inventory"];?></td>
+                      <td><input type="number"name="quantity" min="0" value="1"/><input type="submit" value="Add to Inventory"/></td>
+                    </tr>
+                  </form>  
+                  <?php
+                }
+                ?>
+              </table>
+              <?php
               }
-              echo "</table>";
             ?>
           </div>
         </div>
