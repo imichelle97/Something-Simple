@@ -1,5 +1,6 @@
 <?php 
-  session_start(); 
+	include("server.php");
+  // session_start(); 
   if (!isset($_SESSION['username'])) {
     $_SESSION['msg'] = "You must log in first";
     header('location: login.php');
@@ -152,19 +153,19 @@
 								<h1>Shopping Cart</h1>
 								<div class="ui grid">
 									<?php
-							        	if(isset($_SESSION["cart"]))
-							          	{
-							            	foreach ($_SESSION["cart"] as $product)
-							            	{
-									            $name = $product["item_name"];
-									            $quantity = $product["quantity"];
-															$item_weight = $product["item_weight"];
-															$item_total_weight = $item_weight * $quantity;
-															$suffix = "lbs";
-															if ($item_total_weight == 1) {
-																$suffix = "lb";
-															}
-												
+										if(isset($_SESSION["cart"])) {
+											foreach ($_SESSION["cart"] as $product) {
+												$name = $product["item_name"];
+												$item_id = $product["item_id"];
+												$quantity = $product["quantity"];
+												$item_price = $product["item_price"];
+												$item_weight = $product["item_weight"];
+												$item_total_weight = $item_weight * $quantity;
+												$suffix = "lbs";
+												if ($item_total_weight == 1) {
+													$suffix = "lb";
+												}
+
 												echo "<!-- ITEMS -->
 												<div class='row'>
 													<div class='ten wide column'>
@@ -177,8 +178,18 @@
 														<span>$item_total_weight"." "."$suffix</span>
 													</div>
 												</div>";
-											}
+												// $username = $_SESSION['username']['username'];
+												// $order = "INSERT INTO order_item_summary(id, order_id, username, item_id, quantity, total) VALUES (NULL, 1, $username, $item_id, $quantity, $item_total_weight, $item_price);";
+												// echo $order;
+												// mysqli_query($db, $order);
+											}	
+										
 										}
+											$username = $_SESSION['username']['username'];
+											$placedOrderQuery = "INSERT INTO placed_order(username, timest) VALUES ($username, NOW());";
+											// mysqli_query($db, $placedOrderQuery);
+											// echo $placedOrderQuery;
+											
 									?>
 
 

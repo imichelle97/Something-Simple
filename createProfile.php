@@ -6,7 +6,7 @@
     header('location: login.php');
   }
 
-  // echo "session user now: " . $_SESSION['username']['username'];
+  
 ?>
 
 <!DOCTYPE html>
@@ -130,7 +130,8 @@
 
                       <div class="ui four wide column field">
                         <label>Username</label>
-                        <input type="text" name="username" value="<?php echo $username; ?>">
+                        <!-- <input type="text" name="username" value="<?php echo $username; ?>"> -->
+                        <input type="text" name="username" value="<?php echo $_SESSION['username']['username']; ?>">
                       </div>
 
                       <div class="ui four wide column field">

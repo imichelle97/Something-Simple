@@ -1,4 +1,45 @@
-<?php include('server.php') ?>
+<?php 
+  include('server.php'); 
+
+  if (!isset($_SESSION['username'])) {
+    $_SESSION['msg'] = "You must log in first";
+    header('location: login.php');
+  }
+
+  $username = $_SESSION['username']['username'];
+  $query = "SELECT * FROM customer_profile WHERE username='$username';";
+  // echo $query;
+
+  $results = mysqli_query($db, $query);
+  if(mysqli_num_rows($results) == 1) {
+    $profile = mysqli_fetch_assoc($results);
+    $firstName = $profile['first_name'];
+    $lastName = $profile['last_name'];
+		$address = $profile['address'];
+		$city = $profile['city'];
+		$state = $profile['state'];
+    $zipcode = $profile['zipcode'];
+    $card_type = $profile['card_type'];
+		$card_number = $profile['card_number'];
+		$cvc = $profile['cvc'];
+		$expiration_date = $profile['expiration_date'];
+  } else if(mysqli_num_rows($results) == 0) {
+    $profile = mysqli_fetch_assoc($results);
+    $firstName = "-";
+    $lastName = "-";
+		$address = "-";
+		$city = "-";
+		$state = "-";
+    $zipcode = "-";
+    $card_type = "-";
+		$card_number = "-";
+		$cvc = "-";
+		$expiration_date = "-";
+  }
+
+  $substring = substr($card_number, -4);   
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -77,7 +118,7 @@
                 <h3><strong>Name</strong></h3>
               </div>
               <div class="ten wide right aligned column">
-                <p>Karl Adrian Lapuz</p>
+                <p><?php echo $firstName . " " . $lastName ?></p>
               </div>
             </div>
           
@@ -86,7 +127,7 @@
                 <h3><strong>Username</strong></h3>
               </div>
               <div class="ten wide right aligned column">
-                <p>karl</p>
+                <p><?php echo $_SESSION['username']['username']; ?></p>
               </div>
             </div>
 
@@ -110,27 +151,16 @@
             
             <div class="row">
               <div class="six wide left aligned column">
-                <h3><strong>Shipping #1</strong></h3>
+                <h3><strong>Primary Shipping</strong></h3>
               </div>
               <div class="ten wide right aligned column">
-                <p>Address #1 <br>
-                  San Jose, CA <br>
-                  95111
+                <p> <?php echo $address ?> <br>
+                  <?php echo $city . ', ' . $state ?> <br>
+                  <?php echo $zipcode ?>
                 </p>
               </div>
             </div>
             <hr>
-            <div class="row">
-              <div class="six wide left aligned column">
-                <h3><strong>Shipping #2</strong></h3>
-              </div>
-              <div class="ten wide right aligned column">
-                <p>Address #2 <br>
-                  San Jose, CA <br>
-                  95111
-                </p>
-              </div>
-            </div>
           </div>
 
           <!-- RENDER WHEN PAYMENT IS ACTIVE -->
@@ -143,27 +173,16 @@
             
             <div class="row">
               <div class="six wide left aligned column">
-                <h3><strong>Payment #1</strong></h3>
+                <h3><strong>Primary Payment</strong></h3>
               </div>
               <div class="ten wide right aligned column">
-                <p>Cardholder's Name #1 <br>
-                  2132 Banana Lane <br>
-                  San Jose, CA 95111
+                <p> <?php echo $firstName . " " . $lastName ?> <br>
+                  <?php echo $card_type . " ending in " . $substring ?> <br>
+                  <?php echo "Expiring on " . $expiration_date ?>
                 </p>
               </div>
             </div>
             <hr>
-            <div class="row">
-              <div class="six wide left aligned column">
-                <h3><strong>Payment #2</strong></h3>
-              </div>
-              <div class="ten wide right aligned column">
-              <p>Cardholder's Name #1 <br>
-                  2132 Banana Lane <br>
-                  San Jose, CA 95111
-                </p>
-              </div>
-            </div>
           </div>
 
 

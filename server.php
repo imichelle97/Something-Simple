@@ -46,8 +46,8 @@
 
 			// Encrypt password before saving into database
 			$password = sha1($password_1);		
-			$query = "INSERT INTO customer (username, email, password) 
-					  VALUES('$username', '$email', '$password')";
+			$query = "INSERT INTO customer (username, email, password, user_type) 
+					  VALUES('$username', '$email', '$password', 'user')";
 			mysqli_query($db, $query);
 
 			$_SESSION['username'] = $username;
@@ -145,27 +145,15 @@
 		// If no errors, proceed to create user profile
 		if (count($errors) == 0) {
 
-			$query = "INSERT INTO customer_profile (customer_id, first_name, last_name, username, phone_number, address, city, state, zipcode, card_type, card_number, cvc, expiration_data) 
+			$query = "INSERT INTO customer_profile (customer_id, first_name, last_name, username, phone_number, address, city, state, zipcode, card_type, card_number, cvc, expiration_date) 
 					  VALUES(NULL, '$first_name', '$last_name', '$username', '$phone_number', '$address', '$city', '$state', '$zipcode','$card_type', '$card_number', '$cvc', '$expiration_date');";
 			mysqli_query($db, $query);
 
 			header('location: profile.php');
 		}
-
-		// echo $first_name . "<br>";
-		// echo $last_name . "<br>"; 
-		// echo $username . "<br>";
-		// echo $phone_number . "<br>"; 
-		// echo $address . "<br>";
-		// echo $city . "<br>"; 
-		// echo $state . "<br>";
-		// echo $zipcode . "<br>"; 
-		// echo $card_type . "<br>";
-		// echo $card_number . "<br>"; 
-		// echo $cvc . "<br>";
-		// echo $expiration_date . "<br>"; 
-		// echo $query;
 	}
+
+	
 	
 
 	

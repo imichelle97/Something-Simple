@@ -95,7 +95,7 @@
           <a class="item">Team</a>
           <a class="item">Contact</a>
           <div class="right item">
-            <h3>Welcome, <?php echo $_SESSION['username']['username']; ?>!</h3>
+            <h3>Welcome, <?php echo $_SESSION['username']; ?>!</h3>
             <a href="pantry.php">
               <div class="ui vertical animated green button" tabindex="0">
                 <div class="hidden content">Shop</div>

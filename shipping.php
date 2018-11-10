@@ -15,6 +15,8 @@
     $tax = $_SESSION["tax"];
     $orderTot = $_SESSION["orderTot"];
   }
+
+  
 ?>
 
 <!DOCTYPE html>
