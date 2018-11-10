@@ -150,23 +150,23 @@
                 <!-- CARDHOLDER'S ADDRESS -->
                     <div class="field">
                       <label>Address</label>
-                      <input type="text" name="address" id="autocomplete" onFocus="geolocate()" value="<?php echo $address; ?>">
+                      <input type="text" name="address" id="street_number" onFocus="geolocate()" value="<?php echo $address; ?>">
                     </div>
 
                     <div class="ui grid">
                       <div class="ui nine wide column field">
                         <label>City</label>
-                        <input type="text" name="city" value="<?php echo $city; ?>">
+                        <input type="text" name="city" id = "locality" value="<?php echo $city; ?>">
                       </div>
 
                       <div class="ui three wide column field">
                         <label>State</label>
-                        <input type="text" name="state" value="<?php echo $state; ?>">
+                        <input type="text" name="state" id = "administrative_area_level_1" value="<?php echo $state; ?>">
                       </div>
 
                       <div class="ui four wide column field">
                         <label>Zip Code</label>
-                        <input type="text" name="zipcode" value="<?php echo $zipcode; ?>">
+                        <input type="text" name="zipcode" id="postal_code" value="<?php echo $zipcode; ?>">
                       </div>
                   </div>
               <!-- </form> -->
@@ -229,11 +229,41 @@
   </script>
 
   <script>
+
+    var componentForm = {
+      locality: 'long_name',
+      administrative_area_level_1: 'short_name',
+      postal_code: 'short_name'
+      };
+    var autocomplete;
+
+
     function initAutoComplete(){
-    autocomplete = new google.maps.places.Autocomplete(
-         /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
+      autocomplete = new google.maps.places.Autocomplete(
+      (document.getElementById('street_number')),
         {types: ['geocode']});
+      autocomplete.addListener('place_changed', fillInAddress);
     }
+
+    function fillInAddress() {
+        var place = autocomplete.getPlace();
+        // Resets the text fields
+        for (var component in componentForm) {
+          document.getElementById(component).value = '';
+        }
+        // Get each component of the address from the place details
+        // and fill the corresponding field on the form.
+        for (var i = 0; i < place.address_components.length; i++) {
+          var addressType = place.address_components[i].types[0];
+          if (componentForm[addressType]) {
+            var val = place.address_components[i][componentForm[addressType]];
+            document.getElementById(addressType).value = val;
+          }
+        }
+        var address_with_number = document.getElementById("street_number").value;
+        document.getElementById("street_number").value = address_with_number.substring(0,address_with_number.indexOf(','));
+      }  
+
     function geolocate() {
         if (navigator.geolocation) {
            navigator.geolocation.getCurrentPosition(function(position) {
