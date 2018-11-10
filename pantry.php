@@ -428,8 +428,14 @@
                     <div class="cart">
                       <span>Quantity:</span>
                       <span class="ui input">
-                        <input type="number" class="quantity" name="quantity" placeholder="0" min="0">
+                        <input type="number" class="quantity" name="quantity" placeholder="0" min="0" max="<?php echo $item_inventory?>">
                       </span>
+                      <?php
+                      if ($item_inventory < 1)
+                      {
+                        echo "Out of stock";
+                      }
+                      ?>
                       <button class="ui bottom attached olive fluid button" type="submit">
                         <i class="shop icon"></i>
                         Add to cart
