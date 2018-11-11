@@ -1,8 +1,40 @@
 <?php 
-  session_start(); 
+  include('server.php');
+  // session_start(); 
   if (!isset($_SESSION['username'])) {
     $_SESSION['msg'] = "You must log in first";
     header('location: login.php');
+  }
+
+  // User Profile Contents
+  $username = $_SESSION['username']['username'];
+  $query = "SELECT * FROM customer_profile WHERE username='$username';";
+
+  $results = mysqli_query($db, $query);
+  if(mysqli_num_rows($results) == 1) {
+    $profile = mysqli_fetch_assoc($results);
+    $firstName = $profile['first_name'];
+    $lastName = $profile['last_name'];
+		$address = $profile['address'];
+		$city = $profile['city'];
+		$state = $profile['state'];
+    $zipcode = $profile['zipcode'];
+    $card_type = $profile['card_type'];
+		$card_number = $profile['card_number'];
+		$cvc = $profile['cvc'];
+		$expiration_date = $profile['expiration_date'];
+  } else if(mysqli_num_rows($results) == 0) {
+    $profile = mysqli_fetch_assoc($results);
+    $firstName = "-";
+    $lastName = "-";
+		$address = "-";
+		$city = "-";
+		$state = "-";
+    $zipcode = "-";
+    $card_type = "-";
+		$card_number = "-";
+		$cvc = "-";
+		$expiration_date = "-";
   }
 ?>
 
@@ -150,41 +182,31 @@
                 <!-- CARDHOLDER'S NAME -->
                 <div class="field">
                   <label>Cardholder's Name</label>
-                  <input type="text">
+                  <input type="text" value="<?php echo $firstName . " " . $lastName?>">
                 </div>
 
                 <!-- CARD INFORMATION -->
                 <div class="ui grid">
-                  <div class="ui thirteen wide column field">
+                  <div class="ui six wide column field">
                     <label>Card Number</label>
-                    <div class="ui right labeled input">
-                      <input type="text">
-                      <div class="ui dropdown label">
-                        <div class="text">Card Type</div>
-                          <i class="dropdown icon"></i>
-                          <div class="menu">
-                            <div class="item">VISA</div>
-                            <div class="item">Mastercard</div>
-                            <div class="item">Discover</div>
-                        </div>
-                      </div>
-                    </div>
+                    <input type="text" name="card_number" value="<?php echo $card_number; ?>">
                   </div>
-                  <div class="ui three wide column field">
-                    <label>CVC</label>
-                    <input type="password">
-                  </div>
-                </div>
 
-                <div class="ui grid">
-                  <div class="ui eight wide column field">
-                    <label>Expiration Date</label>
-                    <input type="date">
+                  <div class="ui five wide column field">
+                    <label>Card Type</label>
+                    <input type="text" name="card_type" value="<?php echo $card_type; ?>">
                   </div>
-                  <div class="ui eight wide column field">
-                    <label>Email Address</label>
-                    <input type="text">
+
+                  <div class="ui two wide column field">
+                    <label>CVC</label>
+                    <input type="text" name="cvc" value="<?php echo $cvc; ?>">
                   </div>
+
+                  <div class="ui six wide column field">
+                        <label>Expiration Date</label>
+                        <input type="date" name="expiration_date" value="<?php echo $expiration_date; ?>">
+                  </div>
+
                 </div>
 
                 <div class="ui checkbox">
@@ -226,9 +248,10 @@
               <div class="row">
                 <div class="ten wide column">
                   <p>
-                  Name <br>
-                  Address <br>
-                  City, State Zip Code
+                  <?php echo $firstName . " " . $lastName?> <br>
+                  <?php echo $address ?> <br>
+                  <?php echo $city . ', ' . $state ?> <br>
+                  <?php echo $zipcode ?>
                   </p>
                 </div>
               </div>

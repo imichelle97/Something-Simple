@@ -1,5 +1,6 @@
 <?php 
-  session_start(); 
+  // session_start(); 
+  include('server.php');
   if (!isset($_SESSION['username'])) {
     $_SESSION['msg'] = "You must log in first";
     header('location: login.php');
@@ -14,6 +15,37 @@
     $price = $_SESSION["price"];
     $tax = $_SESSION["tax"];
     $orderTot = $_SESSION["orderTot"];
+  }
+
+  // User Profile Contents
+  $username = $_SESSION['username']['username'];
+  $query = "SELECT * FROM customer_profile WHERE username='$username';";
+
+  $results = mysqli_query($db, $query);
+  if(mysqli_num_rows($results) == 1) {
+    $profile = mysqli_fetch_assoc($results);
+    $firstName = $profile['first_name'];
+    $lastName = $profile['last_name'];
+		$address = $profile['address'];
+		$city = $profile['city'];
+		$state = $profile['state'];
+    $zipcode = $profile['zipcode'];
+    $card_type = $profile['card_type'];
+		$card_number = $profile['card_number'];
+		$cvc = $profile['cvc'];
+		$expiration_date = $profile['expiration_date'];
+  } else if(mysqli_num_rows($results) == 0) {
+    $profile = mysqli_fetch_assoc($results);
+    $firstName = "-";
+    $lastName = "-";
+		$address = "-";
+		$city = "-";
+		$state = "-";
+    $zipcode = "-";
+    $card_type = "-";
+		$card_number = "-";
+		$cvc = "-";
+		$expiration_date = "-";
   }
 
   
@@ -161,27 +193,30 @@
                 <!-- CARDHOLDER'S NAME -->
                 <div class="field">
                   <label>Name</label>
-                  <input type="text">
+                  <input type="text" value=<?php echo $firstName . " " . $lastName ?>>
                 </div>
 
                 <!-- CARDHOLDER'S ADDRESS -->
-                <div class="field">
-                  <label>Address</label>
-                  <input type="text" id = "autocomplete" onFocus = "geolocate()">
-                </div>
-                <div class="ui grid">
-                  <div class="ui nine wide column field">
-                    <label>City</label>
-                    <input type="text">
-                  </div>
-                  <div class="ui three wide column field">
-                    <label>State</label>
-                    <input type="text">
-                  </div>
-                  <div class="ui four wide column field">
-                    <label>Zip Code</label>
-                    <input type="text">
-                  </div>
+                    <div class="field">
+                      <label>Address</label>
+                      <input type="text" name="address" id="street_number" onFocus="geolocate()" value="<?php echo $address; ?>">
+                    </div>
+
+                    <div class="ui grid">
+                      <div class="ui nine wide column field">
+                        <label>City</label>
+                        <input type="text" name="city" id = "locality" value="<?php echo $city; ?>">
+                      </div>
+
+                      <div class="ui three wide column field">
+                        <label>State</label>
+                        <input type="text" name="state" id = "administrative_area_level_1" value="<?php echo $state; ?>">
+                      </div>
+
+                      <div class="ui four wide column field">
+                        <label>Zip Code</label>
+                        <input type="text" name="zipcode" id="postal_code" value="<?php echo $zipcode; ?>">
+                      </div>
                 </div>
 
               </form>

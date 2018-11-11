@@ -4,7 +4,7 @@
   if (!isset($_SESSION['username'])) {
     $_SESSION['msg'] = "You must log in first";
     header('location: login.php');
-  }
+	}
   $weight = 0;
   $price = 0;
   $tax = 0;
@@ -15,7 +15,41 @@
     $price = $_SESSION["price"];
     $tax = $_SESSION["tax"];
     $orderTot = $_SESSION["orderTot"];
+	}
+	
+	$username = $_SESSION['username']['username'];
+  $query = "SELECT * FROM customer_profile WHERE username='$username';";
+  // echo $query;
+
+  $results = mysqli_query($db, $query);
+  if(mysqli_num_rows($results) == 1) {
+    $profile = mysqli_fetch_assoc($results);
+    $firstName = $profile['first_name'];
+    $lastName = $profile['last_name'];
+		$address = $profile['address'];
+		$city = $profile['city'];
+		$state = $profile['state'];
+    $zipcode = $profile['zipcode'];
+    $card_type = $profile['card_type'];
+		$card_number = $profile['card_number'];
+		$cvc = $profile['cvc'];
+		$expiration_date = $profile['expiration_date'];
+  } else if(mysqli_num_rows($results) == 0) {
+    $profile = mysqli_fetch_assoc($results);
+    $firstName = "-";
+    $lastName = "-";
+		$address = "-";
+		$city = "-";
+		$state = "-";
+    $zipcode = "-";
+    $card_type = "-";
+		$card_number = "-";
+		$cvc = "-";
+		$expiration_date = "-";
   }
+
+  $substring = substr($card_number, -4);   
+
 ?>
 
 <!DOCTYPE html>
@@ -185,8 +219,8 @@
 											}	
 										
 										}
-											$username = $_SESSION['username']['username'];
-											$placedOrderQuery = "INSERT INTO placed_order(username, timest) VALUES ($username, NOW());";
+											// $username = $_SESSION['username']['username'];
+											// $placedOrderQuery = "INSERT INTO placed_order(username, timest) VALUES ($username, NOW());";
 											// mysqli_query($db, $placedOrderQuery);
 											// echo $placedOrderQuery;
 											
@@ -266,9 +300,10 @@
 									<div class="row">
 										<div class="sixteen wide column">
 											<p>
-											Name <br>
-											Address <br>
-											City, State Zip Code
+											<?php echo $firstName . " " . $lastName?> <br>
+											<?php echo $address ?> <br>
+											<?php echo $city . ', ' . $state ?> <br>
+											<?php echo $zipcode ?>
 											</p>
 										</div>
 									</div>
@@ -292,9 +327,9 @@
 								<div class="row">
 									<div class="sixteen wide column">
 										<p>
-										Name <br>
-										Card number ending in  <br>
-										Expiring on 
+										<?php echo $firstName . " " . $lastName ?> <br>
+										<?php echo $card_type . " ending in " . $substring ?> <br>
+										<?php echo "Expiring on " . $expiration_date ?>
 										</p>
 									</div>
 								</div>
