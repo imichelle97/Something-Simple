@@ -11,6 +11,7 @@
   // echo $query;
 
   $results = mysqli_query($db, $query);
+
   if(mysqli_num_rows($results) == 1) {
     $profile = mysqli_fetch_assoc($results);
     $firstName = $profile['first_name'];

@@ -23,7 +23,8 @@
 
   $results = mysqli_query($db, $query);
   if(mysqli_num_rows($results) == 1) {
-    $profile = mysqli_fetch_assoc($results);
+		$profile = mysqli_fetch_assoc($results);
+		$customerID = $profile['customer_id'];
     $firstName = $profile['first_name'];
     $lastName = $profile['last_name'];
 		$address = $profile['address'];
@@ -48,7 +49,9 @@
 		$expiration_date = "-";
   }
 
-  $substring = substr($card_number, -4);   
+	$substring = substr($card_number, -4); 
+	
+	// echo $customerID;
 
 ?>
 
@@ -212,17 +215,13 @@
 														<span>$item_total_weight"." "."$suffix</span>
 													</div>
 												</div>";
-												// $username = $_SESSION['username']['username'];
-												// $order = "INSERT INTO order_item_summary(id, order_id, username, item_id, quantity, total) VALUES (NULL, 1, $username, $item_id, $quantity, $item_total_weight, $item_price);";
+												$username = $_SESSION['username']['username'];
+												$order = "INSERT INTO orders(order_id, customer_id, username, item_id, quantity) VALUES (NULL, $customerID, '$username', $item_id, $quantity);";
+												mysqli_query($db, $order);
 												// echo $order;
-												// mysqli_query($db, $order);
 											}	
 										
 										}
-											// $username = $_SESSION['username']['username'];
-											// $placedOrderQuery = "INSERT INTO placed_order(username, timest) VALUES ($username, NOW());";
-											// mysqli_query($db, $placedOrderQuery);
-											// echo $placedOrderQuery;
 											
 									?>
 

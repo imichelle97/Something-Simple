@@ -5,8 +5,6 @@
     $_SESSION['msg'] = "You must log in first";
     header('location: login.php');
   }
-
-  
 ?>
 
 <!DOCTYPE html>
