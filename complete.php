@@ -1,3 +1,32 @@
+<?php
+	include("server.php");
+  	if(!empty($_GET["action"])) 
+  	{
+	    switch($_GET["action"]) 
+	    {
+	      	case "submit":
+	      	if(isset($_SESSION["cart"])) 
+	      	{
+				foreach ($_SESSION["cart"] as $product) 
+				{
+					$item_id = $product["item_id"];
+					$quantity = $product["quantity"];
+					$inventory = $product["inventory"];
+													
+			      	if($quantity < $inventory)
+					{										
+						$updatedQuan = $inventory - $quantity;
+						$inventoryQuery = "UPDATE item SET inventory = '$updatedQuan' WHERE item_id = $item_id";
+						mysqli_query($db,$inventoryQuery);
+					}
+				}
+				//Destroys cart session
+				unset($_SESSION["cart"]);
+			}	
+	      break;
+	  	}
+	}
+?>
 <!DOCTYPE html>
 <html>
 <head>
