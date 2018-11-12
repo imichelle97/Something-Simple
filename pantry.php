@@ -190,8 +190,65 @@
   $_SESSION["tax"] = $tax;
   $_SESSION["orderTot"] = $order_tot;
 ?>
+  
   <!-- SIDEBAR SHOPPING CART -->
   <div class="ui vertical inverted wide sidebar menu">
+    <!-- SHOPPING CART -->
+    <div class="item">
+      <h1>Shopping Cart</h1> <br>
+      <div class="ui grid">
+        <div class="row">
+          <div class="sixteen wide column">
+          <div class="ui middle aligned divided list">
+            <?php
+              if(isset($_SESSION["cart"]))
+              {
+                foreach ($_SESSION["cart"] as $product)
+                {
+                  $name = $product["item_name"];
+                  $item_id = $product["item_id"];
+                  $quantity = $product["quantity"];
+                  $suffix = "lbs";
+                  echo 
+                  "<div class='item'>
+                    <div class='ui grid'>
+                      <div class='row'>
+                        <div class='ten wide column'>
+                          <div class='content'>
+                          $name
+                          </div>
+                        </div>
+                        <div class='three wide column right aligned'>
+                          <span>$quantity</span>
+                        </div>
+                        <div class='three wide column right aligned'>
+                          <a href='pantry.php?action=removeFromCart&item_id=$item_id'>
+                          <div class='ui mini button'><i class='ui minus icon'></i></div></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>";
+                }
+                echo "
+                <div class='remove'>
+                  <a href='pantry.php?action=removeAll'>
+                    <button class='ui fluid red button'>
+                      Remove all items
+                    </button>
+                  </a>
+                </div>";
+              }
+              else
+              {
+                echo "<h3>No items in cart.</h3>";
+              }
+            ?>
+          </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
     <div class="item">
       <h1>Order Summary</h1> <br>
       <div class="ui grid">
@@ -272,63 +329,6 @@
         </a>";
       }
       ?>
-    </div>
-
-    <!-- SHOPPING CART -->
-    <div class="item">
-      <h1>Shopping Cart</h1> <br>
-      <div class="ui grid">
-        <div class="row">
-          <div class="sixteen wide column">
-          <div class="ui middle aligned divided list">
-            <?php
-              if(isset($_SESSION["cart"]))
-              {
-                foreach ($_SESSION["cart"] as $product)
-                {
-                  $name = $product["item_name"];
-                  $item_id = $product["item_id"];
-                  $quantity = $product["quantity"];
-                  $suffix = "lbs";
-                  echo 
-                  "<div class='item'>
-                    <div class='ui grid'>
-                      <div class='row'>
-                        <div class='ten wide column'>
-                          <div class='content'>
-                          $name
-                          </div>
-                        </div>
-                        <div class='three wide column right aligned'>
-                          <span>$quantity</span>
-                        </div>
-                        <div class='three wide column right aligned'>
-                          <a href='pantry.php?action=removeFromCart&item_id=$item_id'>
-                          <div class='ui mini button'><i class='ui minus icon'></i></div></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>";
-                }
-                echo "
-                <div class='remove'>
-                  <a href='pantry.php?action=removeAll'>
-                    <button class='ui fluid red button'>
-                      Remove all items
-                    </button>
-                  </a>
-                </div>";
-              }
-              else
-              {
-                echo "<h3>No items in cart.</h3>";
-              }
-            ?>
-          </div>
-          </div>
-        </div>
-      </div>
-      
     </div>
   </div>
   

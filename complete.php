@@ -1,5 +1,9 @@
 <?php
 	include("server.php");
+  	if (!isset($_SESSION['username'])) {
+    $_SESSION['msg'] = "You must log in first";
+    header('location: login.php');
+	}
   	if(!empty($_GET["action"])) 
   	{
 	    switch($_GET["action"]) 
@@ -97,7 +101,7 @@
 				</div>
 				<div class="ui raised segment container buttons">
 					<h3>
-						Hi, Michelle! Thank you from purchasing from our organic food store. Your order has been placed and will be arriving soon.
+						Hi, <?php echo $_SESSION["username"]["username"]; ?>! Thank you from purchasing from our organic food store. Your order has been placed and will be arriving soon.
 					</h3>
 					<a href="home.php">
 						<div class="ui large blue button">
