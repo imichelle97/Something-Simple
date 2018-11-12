@@ -200,7 +200,7 @@
                       <td><?php echo $items[$key]["item_weight"];?></td>
                       <td><?php echo "$".$items[$key]["item_price"]; ?></td>
                       <td><?php echo $items[$key]["inventory"];?></td>
-                      <td><input type="number"name="quantity" min="0" value="1"/></td>
+                      <td><span class="ui input"><input type="number"name="quantity" min="0" value="1"/></span></td>
                       <td><button class="ui bottom attached olive fluid button" type="submit"><i class="shop icon"></i>Add to inventory</button></td>
                     </tr>
                   </form>  
