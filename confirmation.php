@@ -197,6 +197,7 @@
 												$quantity = $product["quantity"];
 												$item_price = $product["item_price"];
 												$item_weight = $product["item_weight"];
+												$inventory = $product["inventory"];
 												$item_total_weight = $item_weight * $quantity;
 												$suffix = "lbs";
 												if ($item_total_weight == 1) {
@@ -218,9 +219,21 @@
 												$username = $_SESSION['username']['username'];
 												$order = "INSERT INTO orders(order_id, customer_id, username, item_id, quantity) VALUES (NULL, $customerID, '$username', $item_id, $quantity);";
 												mysqli_query($db, $order);
+												if($quantity > $inventory)
+												{
+													echo "Out of stock";
+												}
+												else
+												{
+													$updatedQuan = $inventory - $quantity;
+													$inventoryQuery = "UPDATE item SET inventory = '$updatedQuan' WHERE item_id = $item_id";
+													mysqli_query($db,$inventoryQuery);
+												}
+
 												// echo $order;
-											}	
-										
+											}
+											//Destroys cart session
+											unset($_SESSION["cart"]);	
 										}
 											
 									?>
