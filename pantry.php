@@ -36,7 +36,8 @@
                   'item_name'=>$products[0]["item_name"], 
                   'item_weight'=>$products[0]["item_weight"], 
                   'quantity'=>$_POST["quantity"], 
-                  'item_price'=>$products[0]["item_price"]));
+                  'item_price'=>$products[0]["item_price"],
+                  'inventory'=>$products[0]["inventory"]));
       
           if(!empty($_SESSION["cart"])) 
           { 
