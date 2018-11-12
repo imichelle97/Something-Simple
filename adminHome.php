@@ -1,5 +1,5 @@
 <?php 
-  // session_start();
+  session_start();
   include('server.php');
 	
 	// if (!isset($_SESSION['username'])) {
@@ -185,6 +185,7 @@
                 <th>Item Price</th>
                 <th>Inventory</th>
                 <th>Increment Quantity</th>
+                <th></th>
                 </tr>
               </thead>";
 
@@ -199,7 +200,8 @@
                       <td><?php echo $items[$key]["item_weight"];?></td>
                       <td><?php echo "$".$items[$key]["item_price"]; ?></td>
                       <td><?php echo $items[$key]["inventory"];?></td>
-                      <td><input type="number"name="quantity" min="0" value="1"/><input type="submit" value="Add to Inventory"/></td>
+                      <td><input type="number"name="quantity" min="0" value="1"/></td>
+                      <td><button class="ui bottom attached olive fluid button" type="submit"><i class="shop icon"></i>Add to inventory</button></td>
                     </tr>
                   </form>  
                   <?php
