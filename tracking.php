@@ -418,15 +418,15 @@
               else{
                   window.alert("Directions request failed due to " + status);
               }
-              var image = "https://i.gyazo.com/00224fdfae08f2ef66a7aaa95ea6e8ee.png";
+              var image = "https://cdn2.iconfinder.com/data/icons/love-nature/600/green-Leaves-nature-leaf-tree-garden-environnement-512.png";
               var movingMarker = new google.maps.Marker({
                 map: map,
                 position: start,
-                /*icon:{
+                icon:{
                   url: image,
                   size: new google.maps.Size(40, 40),
                   scaledSize: new google.maps.Size(40, 40)
-                }*/
+                }
               });
               movingMarker.setMap(map);
               startRouteAnimation(movingMarker,result.routes[0].overview_path);
