@@ -1,5 +1,5 @@
 <?php 
-  session_start();
+  // session_start();
   include('server.php');
 	
 	// if (!isset($_SESSION['username'])) {
