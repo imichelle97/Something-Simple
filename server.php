@@ -3,7 +3,8 @@
 
 	// Declare variables
 	$username = "";
-	$email    = "";
+	$name = "";
+	$email = "";
 	$first_name = "";
 	$last_name = "";
 	$phone_number = "";
@@ -17,6 +18,7 @@
 	$expiration_date = "";
 	$usertype = "";
 	$errors = array(); 
+	$message = "";
 	$_SESSION['success'] = "";
 
 	// Database connection
@@ -150,6 +152,19 @@
 			mysqli_query($db, $query);
 
 			header('location: profile.php');
+		}
+	}
+
+	if(isset($_POST['submit_contact'])) {
+		
+		$name = mysqli_real_escape_string($db, $_POST['name']);
+		$message = mysqli_real_escape_string($db, $_POST['message']);
+
+		if(count($errors) == 0) {
+			$query = "INSERT INTO admin_contact(contact_id, name, message) 
+					VALUES(NULL, '$name', '$message');";
+			mysqli_query($db, $query);
+			header('location: home.php');
 		}
 	}
 

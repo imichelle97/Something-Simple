@@ -199,7 +199,7 @@
               <div class="content">
                 <a class="header">Abraham Kong</a>
                 <div class="meta">
-                  <span class="date">Project Role</span>
+                  <span class="date">Payment Engineer</span>
                 </div>
               </div>
             </div>
@@ -220,7 +220,7 @@
               <div class="content">
                 <a class="header">Karl Lapuz</a>
                 <div class="meta">
-                  <span class="date">Project Role</span>
+                  <span class="date">Front-end Developer</span>
                 </div>
               </div>
             </div>
@@ -241,7 +241,7 @@
               <div class="content">
                 <a class="header">Michelle Luong</a>
                 <div class="meta">
-                  <span class="date">Project Role</span>
+                  <span class="date">Backend Developer</span>
                 </div>
               </div>
             </div>
@@ -262,7 +262,7 @@
               <div class="content">
                 <a class="header">Katelynn Tran</a>
                 <div class="meta">
-                  <span class="date">Project Role</span>
+                  <span class="date">Backend Developer</span>
                 </div>
               </div>
             </div>
@@ -283,7 +283,7 @@
               <div class="content">
                 <a class="header">Vincent Tran</a>
                 <div class="meta">
-                  <span class="date">Project Role</span>
+                  <span class="date">Locations Engineer</span>
                 </div>
               </div>
             </div>
@@ -306,18 +306,19 @@
         <div class="center aligned row">
           <h2><i class="paper plane icon"></i></h2>
           <div class="ui raised segment container">
-            <form class="ui form" action="">
+            <form class="ui form" method="post" action="home.php">
               <h3>Leave us a note!</h3>
               <div class="field">
                 <label>Name</label>
-                <input type="text">
+                <input type="text" name="name" value=<?php echo $name; ?>>
               </div>
               <div class="field">
                 <label>Message</label>
-                <textarea></textarea>
+                <textarea name="message"><?php echo htmlspecialchars($message); ?></textarea>
               </div>
               <div class="field">
-                <div class="ui fluid primary submit button">Submit</div>
+                <!-- <div class="ui fluid primary submit button">Submit</div> -->
+                <button type="submit" class="ui fluid primary submit button" name="submit_contact">Submit</div>
               </div>
             </form>
           </div>
