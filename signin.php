@@ -30,6 +30,10 @@
     }
     .input {
       width: 100%;
+      margin: 0.3em 0;
+    }
+    .field button {
+      margin-top: 1em !important;
     }
   </style>
 </head>
