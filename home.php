@@ -118,9 +118,9 @@
             <i class="leaf icon"></i>
           </div>
           <a class="active item">Home</a>
-          <a class="item">About</a>
-          <a class="item">Team</a>
-          <a class="item">Contact</a>
+          <a href="#about" class="item">About</a>
+          <a href="#about" class="item">Team</a>
+          <a href="#contact" class="item">Contact</a>
           <div class="right item">
             <h3>Welcome, <?php echo $_SESSION['username']['username']; ?>!</h3>
             <a href="pantry.php">
@@ -142,7 +142,7 @@
         <!-- LEFT SIDE TEXTS -->
         <div class="column">
           <h1>something simple.</h1>
-          <h2>Creating a hearty world one drone at a time</h2>
+          <h2>creating a hearty world one drone at a time</h2>
           <a href="pantry.php">
             <div class="ui massive olive button">Get Started <i class="right arrow icon"></i></div>
           </a>
@@ -189,12 +189,12 @@
                 <div class="ui inverted dimmer">
                   <div class="content">
                     <div class="center">
-                      <a target="_blank" href="https://github.com/karllapuz"><div class="ui black button"><i class="github icon"></i>Github</div></a>
-                      <a target="_blank" href="https://www.linkedin.com/in/karllapuz/"><div class="ui linkedin button"><i class="linkedin icon"></i> LinkedIn</div></a>
+                      <a target="_blank" href="https://github.com/AbrahamKong"><div class="ui black button"><i class="github icon"></i>Github</div></a>
+                      <a target="_blank" href="https://www.linkedin.com/in/abraham-kong-117010b7/"><div class="ui linkedin button"><i class="linkedin icon"></i> LinkedIn</div></a>
                     </div>
                   </div>
                 </div>
-                <img src="https://picsum.photos/200">
+                <img src="images/team/abraham_kong.jpg">
               </div>
               <div class="content">
                 <a class="header">Abraham Kong</a>
@@ -215,7 +215,7 @@
                     </div>
                   </div>
                 </div>
-                <img src="https://picsum.photos/200">
+                <img src="images/team/karl_lapuz.jpg">
               </div>
               <div class="content">
                 <a class="header">Karl Lapuz</a>
@@ -236,7 +236,7 @@
                     </div>
                   </div>
                 </div>
-                <img src="https://picsum.photos/200">
+                <img src="images/team/michelle_luong.jpg">
               </div>
               <div class="content">
                 <a class="header">Michelle Luong</a>
@@ -257,7 +257,7 @@
                     </div>
                   </div>
                 </div>
-                <img src="https://picsum.photos/200">
+                <img src="images/team/katelynn_tran.jpg">
               </div>
               <div class="content">
                 <a class="header">Katelynn Tran</a>
@@ -273,12 +273,12 @@
                 <div class="ui inverted dimmer">
                   <div class="content">
                     <div class="center">
-                      <div class="ui black button"><i class="github icon"></i>Github</div>
-                      <div class="ui linkedin button"><i class="linkedin icon"></i> LinkedIn</div>
+                      <a target="_blank" href="https://github.com/bhtvincent"><div class="ui black button"><i class="github icon"></i>Github</div></a>
+                      <a target="_blank" href="https://www.linkedin.com/in/vincentran/"><div class="ui linkedin button"><i class="linkedin icon"></i> LinkedIn</div></a>
                     </div>
                   </div>
                 </div>
-                <img src="https://picsum.photos/200">
+                <img src="images/team/vincent_tran.jpg">
               </div>
               <div class="content">
                 <a class="header">Vincent Tran</a>
