@@ -106,6 +106,11 @@
   <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
 
   <style type="text/css">
+    body {
+      min-height: 700px;
+      padding: 0.5em 0em;
+      background: #F5EAD1;
+    }
     #toggle .text {
       display: none;
     }
@@ -121,12 +126,7 @@
     #pantry {
       min-height: 700px;
       padding: 0.5em 0em;
-      background: #F5EAD1 url('images/web-graphics/leaf-watermark.png');
-      background-size: 600px;
-      background-repeat: no-repeat;
-      background-position: left bottom;
-      left: -2em;
-      bottom: -2em;
+      background: #F5EAD1;
     }
     #pantry .container {
       margin-bottom: 2em;
@@ -160,8 +160,17 @@
       max-width: 100%;
       max-height: auto;
     }
+    #pantry .four .segment {
+      margin: 1em 1em;
+    }
+    #pantry .cart .button {
+      margin-top: 1em;
+    }
     #weight {
       color: #ca3b33;
+    }
+    hr {
+      opacity: 0.4;
     }
   </style>
 
@@ -382,8 +391,8 @@
         </div>
       </div>   
 
-      <div class="ui grid container">
-        <div class="ui four doubling cards">
+      <div class="ui container">
+        <div class="ui four center aligned column doubling stackable grid container cards">
 
            <?php
             
@@ -410,41 +419,55 @@
                 $image = $products[$key]["image"];
                 // print_r($image);
             ?>
-                <div class="card">
-                  <form method="post" action="pantry.php?action=addToCart&item_id=<?php echo $products[$key]["item_id"]?>">  
-                    <div class="image">
-                      <!-- <img src="$image"> -->
-                      <img src = <?php echo $image?> >
+              <div class="ui column raised card">
+                <form method="post" action="pantry.php?action=addToCart&item_id=<?php echo $products[$key]["item_id"]?>">
+                  <div class="image">
+                    <img src = <?php echo $image?> >
+                  </div>
+                  <hr>
+                  <div class="content">
+                    <h3 class="left aligned header"><?php echo $item_name ?></h3>
+                    <div class="right floated meta">
+                      <span><?php echo $item_weight." ".$weight_unit ?></span>
                     </div>
-                    <div class="content">
-                      <h3 class="header"><?php echo $item_name ?></h3>
-                      <div class="meta">
-                        <span class="date"><?php echo "$ ".$item_price ?></span> <br>
-                        <span class="date"><?php echo $item_weight." ".$weight_unit ?></span>
-                      </div>
-                      <div class="description"><?php echo
-                        $item_description ?>
+                    <div class="left aligned">
+                      <p class="ui green label"><?php echo "$".$item_price ?></p>
+                    </div>
+                    <div class="left aligned description"><?php echo $item_description ?>
+                    </div>
+                  </div>
+                  <div class="cart">
+                    <div class="ui grid">
+                      <div class="middle aligned row">
+                        <div class="eight wide column">
+                          <span class="left floated"><strong>Quantity:</strong></span>
+                        </div>
+                        <div class="eight wide column">
+                            <span class="ui input right floated"><input class="ui input right floated" type="number" class="quantity" name="quantity" placeholder="0" min="0" max="<?php echo $item_inventory?>"></span>
+                        </div>
                       </div>
                     </div>
-                    <div class="cart">
-                      <span>Quantity:</span>
-                      <span class="ui input">
-                        <input type="number" class="quantity" name="quantity" placeholder="0" min="0" max="<?php echo $item_inventory?>">
-                      </span>
-                      <?php
-                      if ($item_inventory < 1)
-                      {
-                        echo "Out of stock";
-                      }
-                      ?>
-                      <button class="ui bottom attached olive fluid button" type="submit">
-                        <i class="shop icon"></i>
+                     <?php
+                     if ($item_inventory < 1)
+                     {
+                      echo "<div class='ui negative fluid button'>
+                      <i class='ban icon'></i>
+                        Out of stock
+                      </div>";
+                     }
+                     else {
+                      echo "<button class='ui olive fluid button' type='submit'>
+                      <i class='shop icon'></i>
                         Add to cart
-                      </button>
-                    </div>
-            
-                  </form>
-                </div>
+                      </button>";
+                     }
+                     ?>
+
+                  </div>
+                </form>
+              </div>
+      
+                
               <?php
             }
           }
