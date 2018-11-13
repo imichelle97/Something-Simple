@@ -78,9 +78,9 @@
     .button {
 			margin: 0 1em !important;
 		}
-    hr {
-      width: 90%;
-      opacity: 0.4;
+    #account {
+      margin-top: 0.5em !important;
+      padding-top: 0.5em !important;
     }
   </style>
 </head>
@@ -115,6 +115,11 @@
           <!-- RENDER WHEN ACCOUNT IS ACTIVE -->
           <div id="account" class="ui grid">
             <div class="row">
+              <div class="sixteen wide left aligned column">
+                <h2><strong>Account Details</strong></h2>
+              </div>
+            </div>
+            <div class="row">
               <div class="six wide left aligned column">
                 <h3><strong>Name</strong></h3>
               </div>
@@ -137,7 +142,7 @@
                 <h3><strong>Password</strong></h3>
               </div>
               <div class="ten wide right aligned column">
-                <p>*********</p>
+                <p>•••••••</p>
               </div>
             </div>
           </div>
@@ -161,7 +166,6 @@
                 </p>
               </div>
             </div>
-            <hr>
           </div>
 
           <!-- RENDER WHEN PAYMENT IS ACTIVE -->
@@ -183,7 +187,6 @@
                 </p>
               </div>
             </div>
-            <hr>
           </div>
 
 
