@@ -166,7 +166,7 @@
 
           <!-- RENDER WHEN PAYMENT IS ACTIVE -->
           <div id="payment" class="ui grid">
-          <div class="row">
+            <div class="row">
               <div class="sixteen wide left aligned column">
                 <h2><strong>Payment Information</strong></h2>
               </div>
@@ -207,20 +207,39 @@
               </div>
             </button>
           </a>
-          <a href="home.php">
-            <button class="ui large animated fade red button" tabindex="0">
-              <div class="hidden content"><i class="trash alternate icon"></i></div>
-              <div class="visible content">
-                <span class="text">Delete account</span>
-              </div>
-            </button>
-          </a>
+          <button class="ui large animated fade red button" tabindex="0">
+            <div class="hidden content"><i class="trash alternate icon"></i></div>
+            <div class="visible content">
+              <span class="text">Delete account</span>
+            </div>
+          </button>
         </div>
       </div>
     </div>
 
   </div>
 
+</div>
+
+<div class="ui mini modal">
+  <i class="close icon"></i>
+  <div class="header">
+    Delete Account
+  </div>
+  <div class="content">
+    <div class="description">
+      <p>Are you sure you want to delete your account?</p>
+    </div>
+  </div>
+  <div class="actions">
+    <div class="ui negative button">
+      No
+    </div>
+    <div class="ui positive right labeled icon button">
+      Yes
+      <i class="checkmark icon"></i>
+    </div>
+  </div>
 </div>
 
 <script type="text/javascript">
@@ -233,6 +252,12 @@
               .removeClass('active');
           }
         });
+  $('.red').on('click', function() {
+    $('.ui.modal')
+    .modal('show')
+    ;
+  });
+  
   </script>
 
 </body>
