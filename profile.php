@@ -95,15 +95,15 @@
     <div class="ui grid container">
       <div class="four wide column">
         <div class="ui green vertical menu">
-        <a class="item active">
+        <a id="accountSection" class="item active">
           <h4 class="ui header">Account</h4>
           <p>Includes your name, username, and password</p>
         </a>
-        <a class="item">
+        <a id="shippingSection" class="item">
           <h4 class="ui header">Shipping</h4>
           <p>Add or remove shipping addresses</p>
         </a>
-        <a class="item">
+        <a id="paymentSection" class="item">
           <h4 class="ui header">Payment</h4>
           <p>Add or remove payment information</p>
         </a>
@@ -256,6 +256,26 @@
     $('.ui.modal')
     .modal('show')
     ;
+  });
+  $(document).ready(function() {
+    $('#account').show();
+    $('#shipping').hide();
+    $('#payment').hide();
+  });
+  $('#accountSection').on('click', function(){
+    $('#account').show();
+    $('#shipping').hide();
+    $('#payment').hide();
+  });
+  $('#shippingSection').on('click', function(){
+    $('#account').hide();
+    $('#shipping').show();
+    $('#payment').hide();
+  });
+  $('#paymentSection').on('click', function(){
+    $('#account').hide();
+    $('#shipping').hide();
+    $('#payment').show();
   });
   
   </script>
