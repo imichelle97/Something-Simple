@@ -1,15 +1,17 @@
 <?php 
   include('server.php');
   
-  // if (!isset($_SESSION['username'])) {
-  //  $_SESSION['msg'] = "You must log in first";
-  //  header('location: login.php');
-  // }
-  
-  if (!isLoggedIn()) {
-    $_SESSION['msg'] = "You must log in first";
-    header('location: login.php');
+  if (!isset($_SESSION['username'])) {
+   $_SESSION['msg'] = "You must log in first";
+   header('location: login.php');
   }
+
+  // echo $_SESSION['username'];
+  
+  // if (!isLoggedIn()) {
+  //   $_SESSION['msg'] = "You must log in first";
+  //   header('location: login.php');
+  // }
 
 ?>
 
@@ -122,7 +124,16 @@
           <a href="#about" class="item">Team</a>
           <a href="#contact" class="item">Contact</a>
           <div class="right item">
-            <h3>Welcome, <?php echo $_SESSION['username']['username']; ?>!</h3>
+            <h3>Welcome, 
+              <?php 
+                // echo $_SESSION['username']['username']; 
+                if(is_array($_SESSION)) {
+                  echo $_SESSION['username']['username'];
+                } else if(!is_array($_SESSION)) {
+                  echo $_SESSION['username'];
+                }
+              ?>!
+            </h3>
             <a href="pantry.php">
               <div class="ui vertical animated green button" tabindex="0">
                 <div class="hidden content">Shop</div>

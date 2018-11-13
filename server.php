@@ -50,11 +50,35 @@
 			$password = sha1($password_1);		
 			$query = "INSERT INTO customer (username, email, password, user_type) 
 					  VALUES('$username', '$email', '$password', 'user')";
-			mysqli_query($db, $query);
+			$results = mysqli_query($db, $query);
+			// print_r( $results );
+			
+			// if(mysqli_num_rows($results) == 1) {
+			// 	$logged_in_user = mysqli_fetch_assoc($results);
+			// 	$_SESSION['username'] = $logged_in_user['username'];
+			// 	$_SESSION['success'] = "You are now logged in";
+			// 	header('location: home.php');
+			// } 
 
-			$_SESSION['username'] = $username;
-			$_SESSION['success'] = "You are now logged in";
-			header('location: home.php');
+			// $_SESSION['username'] = $username;
+			// $_SESSION['success'] = "You are now logged in";
+			// header('location: home.php');
+		}
+
+		$check = "SELECT * FROM customer WHERE username='$username' AND password='$password'";
+		$checkResults = mysqli_query($db, $check);
+
+		if (mysqli_num_rows($checkResults) == 1) {
+			$user = mysqli_fetch_assoc($checkResults);
+			if($user['user_type'] == 'Admin') {
+				$_SESSION['username'] = $user;
+				$_SESSION['success'] = "You are now logged in";
+				header('location: adminHome.php');
+			} else {
+				$_SESSION['username'] = $user;
+				$_SESSION['success']  = "You are now logged in";
+				header('location: home.php');
+			}
 		}
 	}
 
