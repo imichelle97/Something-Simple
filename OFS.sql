@@ -190,7 +190,7 @@ INSERT INTO `item` (`item_id`, `item_category`, `item_name`, `item_desc`, `item_
 (54, 'Soups, Stocks, and Broths', 'Chicken Broth', "Low-Sodium", '2.29', '2.00', 'lbs', 0, 'images/ChickenBroth.jpg'),
 (55, 'Soups, Stocks, and Broths', 'Chicken Stock', "Low-Sodium", '2.99', '2.00', 'lbs', 0, 'images/ChickenStock.jpg'),
 (56, 'Soups, Stocks, and Broths', 'Vegetable Broth', 'Low-Sodium', '2.99', '2.00', 'lbs', 0, 'images/VegetableBroth.jpg'),
-(57, 'Soups, Stocks, and Broths', 'Vegetable Soup', "", '2.59', '0.91', 'lbs', 0, 'images/HeartyGardenVegetableSoup.jpg'),
+(57, 'Soups, Stocks, and Broths', 'Vegetable Soup', "Hearty Garden", '2.59', '0.91', 'lbs', 0, 'images/HeartyGardenVegetableSoup.jpg'),
 (58, 'Soups, Stocks, and Broths', 'Chicken Noodle Soup', 'Free Range Chicken', '2.38', '0.91', 'lbs', 0, 'images/ChickenNoodleSoup.jpg'),
 (59, 'Soups, Stocks, and Broths', 'Chili', 'Medium with Vegetabes', '3.00', '0.92', 'lbs', 0, 'images/Chili.jpg'),
 (60, 'Soups, Stocks, and Broths', 'Bone Broth', 'Chicken, Tumeric, Ginger', '1.52', '0.52', 'lbs', 0, 'images/BoneBroth.jpg');
