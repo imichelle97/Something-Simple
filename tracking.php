@@ -160,10 +160,10 @@
 			</div>
 
 			<div class="ui container">
-				<h2>Your order will arrive in <span id="timeLeft"></span> minutes</h2>
+				<h2 id = "order">Your order will arrive in <span id="timeLeft"></span> </h2>
 				<div class="ui indicating progress">
 					<div class="bar"></div>
-					<div class="label">Processing</div>
+					<div id = "processing" class="label">Processing</div>
 				</div>
 				<div class="ui grid">
 					<div class="ten wide column">
@@ -315,16 +315,12 @@
             var durationSJ;
             var durationSM;
             var duration;
+
             var origin1 = {lat: 37.335168, lng: -121.887195}//San jose
             var origin2 = {lat: 37.563931, lng: -122.325181}// San Mateo
-            // var destination1 = document.getElementById('autocomplete').value;
             var destination1 = <?php echo " ' " . $fullAddress . " ' " ?>;
-            // destation1 = destination1.toString();
-            // console.log(destination1);
-            // var destination2 = document.getElementById('autocomplete').value;
             var destination2 = <?php echo " ' " . $fullAddress . " ' " ?>;
-            //165 Blossom Hill Road, San Jose, CA, USA
-
+            console.log(destination1);
             service.getDistanceMatrix({
                 origins: [origin1,origin2],
                 destinations: [destination1, destination2],
@@ -356,13 +352,11 @@
                         showGeocodedAddressOnMap(true));
                         if(count === 0 ){
                             distanceFromSJ = results[j].duration.value;
-                            console.log(results[j].duration.text);
-                      durationSJ = results[j].duration.value;
+                            durationSJ = results[j].duration.value;
                         }
                         else if(count === 1){
                             distanceFromSM = results[j].duration.value;
-                            console.log(results[j].duration.text);
-                      durationSM = results[j].duration.value;
+                            durationSM = results[j].duration.value;
                         }
                     }
                     count++
@@ -389,74 +383,75 @@
                         }
                     }
                     start = origin2;
-            duration = durationSM;
+                    duration = durationSM;
                 }
                 directionsService.route(request, function(result, status){
-                        if(status == "OK"){
-                            directionsDisplay.setDirections(result);
-                            autoDriveSteps = new Array();
-                            var remainingSeconds = 0;
-                            var leg = result.routes[0].legs[0]; // supporting single route, single legs currently
-                var points = result.routes[0].overview_path;
-                var routePoints = new Array();
-                            /*leg.steps.forEach(function(step){
-                                var stepSeconds = step.duration.value;
-                                var nextStopSeconds = speedFactor - remainingSeconds;
-                  console.log("Step Seconds: " + stepSeconds);
-                  console.log("next step seconds: "+ nextStopSeconds);
-                                while (nextStopSeconds <= stepSeconds){
-                                    var nextStopLatLng = getPointBetween(step.start_location, step.end_location, nextStopSeconds/stepSeconds);
-                                    autoDriveSteps.push(nextStopLatLng);
-                                    nextStopSeconds += speedFactor;
-                                }
-                                remainingSeconds = stepSeconds + speedFactor - nextStopSeconds;
-                            });
-                            //if(remainingSeconds > 0){
-                                //autoDriveSteps.push(leg.end_location);
-                            //}*/
+                    if(status == "OK"){
+                       directionsDisplay.setDirections(result);
+                        var image = "https://cdn2.iconfinder.com/data/icons/love-nature/600/green-Leaves-nature-leaf-tree-garden-environnement-512.png";
+                        var movingMarker = new google.maps.Marker({
+                          map: map,
+                          position: start,
+                          icon:{
+                          url: image,
+                          size: new google.maps.Size(40, 40),
+                          scaledSize: new google.maps.Size(40, 40)
                         }
-              else{
-                  window.alert("Directions request failed due to " + status);
-              }
-              var image = "https://cdn2.iconfinder.com/data/icons/love-nature/600/green-Leaves-nature-leaf-tree-garden-environnement-512.png";
-              var movingMarker = new google.maps.Marker({
-                map: map,
-                position: start,
-                icon:{
-                  url: image,
-                  size: new google.maps.Size(40, 40),
-                  scaledSize: new google.maps.Size(40, 40)
-                }
-              });
-              movingMarker.setMap(map);
-              startRouteAnimation(movingMarker,result.routes[0].overview_path);
-              var d  = new Date(new Date().getTime() + duration*1000);
-              var e = d.toLocaleTimeString();
-              var hourNow = new Date().getHours();
-              var minuteNow = new Date().getMinutes();
-              var hourArrival = d.getHours();
-              var minuteArrival = d.getMinutes();
-              var hoursLeft = hourArrival - hourNow;
-              var minutesLeft = minuteArrival - minuteNow;
-              if(minutesLeft < 0){
-                hoursLeft--;
-              }
+                       });
+                    }
+                    else{
+                        window.alert("Directions request failed due to " + status);
+                    }
+              
+              //Calculate remaining time
+              var hoursLeft = Math.trunc(duration / 3600);
+              var minutesLeft = Math.trunc((duration - (hoursLeft * 3600)) / 60) ;
+              var secondsLeft = hoursLeft * 3600 + minutesLeft * 60;
+              console.log("hoursleft: "+ hoursLeft);
+              console.log("minutesleft: " + minutesLeft);
               if(hoursLeft === 0){
-                console.log("Your order will arrive in " + minutesLeft + "min");
+                var text = document.getElementById("timeLeft");
+                text.innerHTML = minutesLeft.toString() + " minutes";
+                var timer = setInterval(function(){
+                  if(minutesLeft === 1){
+                    clearInterval(timer);
+                    var orderText = document.getElementById('order');
+                    orderText.innerHTML = "Your order has arrived!";
+                    var processingText = document.getElementById("processing");
+                    processingText.innerHTML = "Completed";
+                    $('.progress').progress({
+                      percent: 100 
+                    });
+                  }
+                  else{
+                    --minutesLeft;
+                    text.innerHTML = minutesLeft.toString() + " minutes";
+                  }
+                }, 60000);
               }
               else{
-                console.log("Your order will arrive in " +hoursLeft + 'hours and ' + minutesLeft + " min");
+                document.getElementById("timeLeft").innerHTML = hoursLeft.toString() + " hours and "+ minutesLeft.toString() + " minutes";
+                seconds = hoursLeft * 60 * minutesLeft * 60;
               }
-              console.log("Hours Left:" + hoursLeft + ".  MinutesLeft: "+ minutesLeft);
-              console.log("duration is "+duration);
-              console.log("d is " +e);
-              document.getElementById("timeLeft").innerHTML = minutesLeft.toString();
-              console.log(minutesLeft.toString() + "asdfadfasd");
-                    });//close of directionService braces
-             }
+
+              var interval  = secondsLeft / result.routes[0].overview_path.length * 1000;
+              movingMarker.setMap(map);
+              //Starts the Route animation here
+              startRouteAnimation(movingMarker,result.routes[0].overview_path, interval);
+
+              // var processTime = 5;
+              // var deliveryTime = 20;
+              // var totalTime = processTime + deliveryTime;
+              // var percentDone = (totalTime - timeLeft / totalTime) * 100;
+              
+
+
+             });//close of directionService braces
+            }
         });
         
         }
+
         //Helper method to erase previous markers on map
         function deleteMarkers(markersArray) {
             for (var i = 0; i < markersArray.length; i++) {
@@ -468,19 +463,30 @@
         return new google.maps.LatLng(a.lat() + (b.lat() - a.lat()) * ratio, a.lng() + (b.lng() - a.lng()) * ratio);
         }
         //Start animation google maps
-    function startRouteAnimation(marker,list){
-        var autoDriveTimer = setInterval(function(){
-      //stop the timer if the route is finished
-      console.log(list.length);
+    function startRouteAnimation(marker,list,interval){
+         var percent = 0;
+         var add = (1 / (list.length -1))*100; 
+         console.log("list length is "+ list.length);
+         var autoDriveTimer = setInterval(function(){
+        //stop the timer if the route is finished
         if(list.length === 0){
                 clearInterval(autoDriveTimer);
+                $('.progress').progress({
+                 percent: 100 
+              });
         } else {
          //move marker to the next position (always the first in the array)
          marker.setPosition(list[0]);
           //remove the processed position
           list.shift();
+          console.log(list.length);
+          $('.progress').progress({
+                 percent: percent 
+              });
+          console.log(percent);
+          percent = percent + add;
         }
-      }, 1000);
+      }, interval);
     }
     </script>
 
@@ -489,15 +495,7 @@
 
         async defer></script>
 
-	<script>
-	// var processTime = 5;
-	// var deliveryTime = 20;
-	// var totalTime = processTime + deliveryTime;
-	// var percentDone = (totalTime - timeLeft / totalTime) * 100;
-	$('.progress').progress({
-  		percent: 40
-	});
-	</script>
+
 
 </body>
 </html>
