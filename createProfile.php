@@ -182,12 +182,12 @@
                     <div class="ui grid">
                       <div class="ui four wide column field">
                         <label>Card Number</label>
-                        <input type="text" name="card_number" value="<?php echo $card_number; ?>">
+                        <input type="text" name="card_number" value="<?php echo $card_number; ?>" id="cardNumber">
                       </div>
 
                       <div class="ui four wide column field">
                         <label>Card Type</label>
-                        <input type="text" name="card_type" value="<?php echo $card_type; ?>">
+                        <input type="text" name="card_type" value="<?php echo $card_type; ?>" id="cardType">
                       </div>
 
                       <div class="ui four wide column field">
@@ -197,7 +197,7 @@
 
                       <div class="ui four wide column field">
                         <label>Expiration Date</label>
-                        <input type="month" name="expiration_date" value="<?php echo $expiration_date; ?>">
+                        <input type="month" name="expiration_date" value="<?php echo $expiration_date; ?>" id="cardDate">
                       </div>
                   </div>
               <!-- </form> -->
@@ -206,9 +206,158 @@
           <div class="ui center aligned container">
             <!-- <a href="profile.php"> -->
               <!-- <button class="ui big green button">Save Profile</button> -->
-              <button type="submit" class="ui big green submit button" name="create_profile">Save Profile</button>
+              <button type="submit" class="ui big green submit button" name="create_profile" onmouseover="creditcardValidation()" id="confirm_button">Save Profile</button>
             <!-- </a> -->
 			    </div>
+          <script>
+                  //credit card validation function
+                    function creditcardValidation(cardNumber = document.getElementById("cardNumber").value, cardType = document.getElementById("cardType").value){
+                        var cards = new Array();
+                        cards [0] = {
+                          type: "VISA",
+                          length: "13, 16",
+                          prefices: "4",
+                          checkDigit: true
+                        };
+                        cards [1] = {
+                          type: "Mastercard",
+                          length: "16",
+                          prefices: "51,52,53,54,55",
+                          checkDigit: true
+                        };
+                        cards [2] = {
+                          type: "Discover",
+                          length: "16",
+                          prefices: "6011, 622, 64, 65",
+                          checkDigit: true
+                        };
+                        cards [3] = {
+                          type: "American Express",
+                          length: "15",
+                          prefices: "34, 37",
+                          checkDigit: true
+                        };
+
+                        //Make sure about Card Type
+                        var cardTypeNumber = -1;
+                        var cardType = document.getElementById("cardType").value;
+                        var cardnumber = document.getElementById("cardNumber").value;
+                        for (var i=0; i<cards.length; i++) {
+                          // See if it is this card (ignoring the case of the string)
+                          if (cardType.toLowerCase () == cards[i].type.toLowerCase()) {
+                            cardTypeNumber = i;
+                            // console.log(cards[i].type.toLowerCase()); //for testing
+                            break;
+                          }
+                        }
+                        // console.log(cardnumber); //for testing
+                        
+                        // If card type not found, report an error
+                        if (cardTypeNumber == -1) {
+                           alert("Unknown card type");
+                           return false; 
+                        }
+                         
+                        // Ensure that the user has provided a credit card number
+                        if (cardnumber == "-" || cardnumber.length == 0)  {
+                           alert("No card number provided");
+                           return false; 
+                        }
+                          
+                        // Now remove any spaces from the credit card number
+                        cardnumber = cardnumber.replace (/\s/g, "");
+                        
+                        // Check that the number is numeric
+                        var cardNo = cardnumber
+                        var cardexp = /^[0-9]{13,19}$/;
+                        if (!cardexp.exec(cardNo))  {
+                           alert("Credit card number is in invalid format");
+                           return false; 
+                        }
+                             
+                        // Now check the modulus 10 check digit - if required
+                        if (cards[cardTypeNumber].checkdigit) {
+                          var checksum = 0;                                  // running checksum total
+                          var mychar = "";                                   // next char to process
+                          var j = 1;                                         // takes value of 1 or 2
+                        
+                          // Process each digit one by one starting at the right
+                          var calc;
+                          for (i = cardNo.length - 1; i >= 0; i--) {
+                          
+                            // Extract the next digit and multiply by 1 or 2 on alternative digits.
+                            calc = Number(cardNo.charAt(i)) * j;
+                          
+                            // If the result is in two digits add 1 to the checksum total
+                            if (calc > 9) {
+                              checksum = checksum + 1;
+                              calc = calc - 10;
+                            }
+                          
+                            // Add the units element to the checksum total
+                            checksum = checksum + calc;
+                          
+                            // Switch the value of j
+                            if (j ==1) {j = 2} else {j = 1};
+                          } 
+                        
+                          // All done - if checksum is divisible by 10, it is a valid modulus 10.
+                          // If not, report an error.
+                          if (checksum % 10 != 0)  {
+                            alert("Credit card number is invalid");
+                            return false; 
+                          }
+                        }  
+
+                        // The following are the card-specific checks we undertake.
+                        var LengthValid = false;
+                        var PrefixValid = false; 
+                        var undefined; 
+
+                        // We use these for holding the valid lengths and prefixes of a card type
+                        var prefix = new Array ();
+                        var lengths = new Array ();
+                          
+                        // Load an array with the valid prefixes for this card
+                        prefix = cards[cardTypeNumber].prefices.split(",");
+                        
+                            
+                        // Now see if any of them match what we have in the card number
+                        for (i=0; i<prefix.length; i++) {
+                          var exp = new RegExp ("^" + prefix[i]);
+                          if (exp.test (cardNo)) PrefixValid = true;
+                        }
+                            
+                        // If it isn't a valid prefix there's no point at looking at the length
+                        if (!PrefixValid) {
+                            alert("Credit card number is invalid");
+                            return false; 
+                        }
+                          
+                        // See if the length is valid for this card
+                        lengths = cards[cardTypeNumber].length.split(",");
+                        for (j=0; j<lengths.length; j++) {
+                          if (cardNo.length == lengths[j]) LengthValid = true;
+                        }
+                        
+                        // See if all is OK by seeing if the length was valid. We only check the length if all else was 
+                        // hunky dory.
+                        if (!LengthValid) {
+                           alert("Credit card number has an inappropriate number of digits");
+                           return false; 
+                        };   
+
+                        // See if the expiration date has passed
+                        var now = new Date();
+                        if (document.getElementById("cardDate").value < now){
+                          alert("Credit catd date is out of date");
+                          return false;
+                        }
+                        
+                        // The credit card is in the required format.
+                        return true;
+                    }
+                </script>
         </div>
       </div>
     </section>
