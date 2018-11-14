@@ -15,15 +15,22 @@
     $tax = $_SESSION["tax"];
     $orderTot = $_SESSION["orderTot"];
 	}
-	
+
 	$username = $_SESSION['username']['username'];
+
+	$userQuery = "SELECT * FROM customer WHERE username='$username';";
+	$userResults = mysqli_query($db, $userQuery);
+	if(mysqli_num_rows($userResults) == 1) {
+		$user = mysqli_fetch_assoc($userResults);
+		$customerID = $user['user_id'];
+	}
+	
   $query = "SELECT * FROM customer_profile WHERE username='$username';";
   // echo $query;
-
   $results = mysqli_query($db, $query);
   if(mysqli_num_rows($results) == 1) {
 		$profile = mysqli_fetch_assoc($results);
-		$customerID = $profile['customer_id'];
+		// $customerID = $profile['customer_id'];
     $firstName = $profile['first_name'];
     $lastName = $profile['last_name'];
 		$address = $profile['address'];

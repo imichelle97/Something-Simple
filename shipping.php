@@ -188,12 +188,13 @@
             </div>
             <div class="ui container">
 
-              <form class="ui form">
+              <form method="post" actions="shipping.php" class="ui form">
               
                 <!-- CARDHOLDER'S NAME -->
                 <div class="field">
                   <label>Name</label>
-                  <input type="text" value=<?php echo $firstName . " " . $lastName ?>>
+                  <input type="text" value=<?php echo "'" . $firstName . " " . $lastName . "'" ?>>
+                  <input type="hidden" name="username" value=<?php echo $username;?>>
                 </div>
 
                 <!-- CARDHOLDER'S ADDRESS -->
@@ -217,6 +218,10 @@
                         <label>Zip Code</label>
                         <input type="text" name="zipcode" id="postal_code" value="<?php echo $zipcode; ?>">
                       </div>
+
+                      <div class="ui left aligned container">
+                        <button type="submit" class="ui big green submit button" name="shipping_update">Save</button>
+			                </div>
                 </div>
 
               </form>

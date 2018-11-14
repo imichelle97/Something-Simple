@@ -48,8 +48,8 @@
 
 			// Encrypt password before saving into database
 			$password = sha1($password_1);		
-			$query = "INSERT INTO customer (username, email, password, user_type) 
-					  VALUES('$username', '$email', '$password', 'user')";
+			$query = "INSERT INTO customer (user_id, username, email, password, user_type) 
+					  VALUES(NULL, '$username', '$email', '$password', 'user')";
 			$results = mysqli_query($db, $query);
 			// print_r( $results );
 			
@@ -189,6 +189,26 @@
 					VALUES(NULL, '$name', '$message');";
 			mysqli_query($db, $query);
 			header('location: home.php');
+		}
+	}
+
+	//UPDATE SHIPPING
+	if (isset($_POST['shipping_update'])) {
+
+		// Fetch input values from create profile form
+		$username = mysqli_real_escape_string($db, $_POST['username']);
+		$address = mysqli_real_escape_string($db, $_POST['address']);
+		$city = mysqli_real_escape_string($db, $_POST['city']);
+		$state = mysqli_real_escape_string($db, $_POST['state']);
+		$zipcode = mysqli_real_escape_string($db, $_POST['zipcode']);
+
+		// If no errors, proceed to create user profile
+		if (count($errors) == 0) {
+			
+			$query = "UPDATE customer_profile SET address='$address', city='$city', state='$state', zipcode='$zipcode' WHERE username='$username';";
+			mysqli_query($db, $query);
+
+			header('location: shipping.php');
 		}
 	}
 
