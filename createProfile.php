@@ -204,10 +204,10 @@
             </div>
 
           <div class="ui center aligned container">
-            <!-- <a href="profile.php"> -->
+            <a href="profile.php">
               <!-- <button class="ui big green button">Save Profile</button> -->
               <button type="submit" class="ui big green submit button" name="create_profile" onmouseover="creditcardValidation()" id="confirm_button">Save Profile</button>
-            <!-- </a> -->
+            </a>
 			    </div>
           <script>
                   //credit card validation function
