@@ -189,13 +189,26 @@
             <div class="ui container">
 
               <form method="post" actions="shipping.php" class="ui form">
-              
-                <!-- CARDHOLDER'S NAME -->
-                <div class="field">
-                  <label>Name</label>
-                  <input type="text" value=<?php echo "'" . $firstName . " " . $lastName . "'" ?>>
-                  <input type="hidden" name="username" value=<?php echo $username;?>>
+                <div class="ui grid">
+                  <div class="eight wide column">
+                    <div class="field">
+                      <label>First Name</label>
+                      <input type="text" name="first_name" value=<?php echo $firstName; ?>>
+                      <input type="hidden" name="username" value=<?php echo $username;?>>
+                    </div>
+                  </div>
+
+                  
+                  <div class="eight wide column">
+                    <div class="field">
+                      <label>Last Name</label>
+                      <input type="text" name="last_name" value=<?php echo $lastName; ?>>
+                      <input type="hidden" name="username" value=<?php echo $username;?>>
+                    </div>
+                  </div>
                 </div>
+                <!-- CARDHOLDER'S NAME -->
+                
 
                 <!-- CARDHOLDER'S ADDRESS -->
                     <div class="field">
@@ -275,9 +288,19 @@
               <!-- BUTTON -->
               <div class="row">
                 <div class="sixteen wide column">
-                  <a href="payment.php">
-                    <button class="ui fluid green button">Proceed to payment</button>
-                  </a>
+                  <?php
+                    if(mysqli_num_rows($results) == 0)
+                    {
+                      
+                        echo"<button class='ui disabled fluid green button'>Proceed to payment</button>";
+                    }
+                    else
+                    {
+                      echo "<a href='payment.php'>
+                        <button class='ui fluid green button'>Proceed to payment</button>
+                      </a>";
+                    }
+                    ?>
                 </div>
               </div>
 

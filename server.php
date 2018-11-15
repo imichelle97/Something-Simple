@@ -202,10 +202,25 @@
 		$state = mysqli_real_escape_string($db, $_POST['state']);
 		$zipcode = mysqli_real_escape_string($db, $_POST['zipcode']);
 
+		$result = mysqli_query($db, "SELECT * FROM customer_profile WHERE username='$username'");
 		// If no errors, proceed to create user profile
-		if (count($errors) == 0) {
-			
-			$query = "UPDATE customer_profile SET address='$address', city='$city', state='$state', zipcode='$zipcode' WHERE username='$username';";
+		if(mysqli_num_rows($result) == 1)
+		{
+			if (count($errors) == 0) 
+			{
+				
+				$query = "UPDATE customer_profile SET address='$address', city='$city', state='$state', zipcode='$zipcode' WHERE username='$username';";
+				mysqli_query($db, $query);
+
+				header('location: shipping.php');
+			}
+		}
+		else
+		{
+   			$first_name = $_POST['first_name'];
+   			$last_name = $_POST['last_name'];
+   			$query = "INSERT INTO customer_profile (customer_id, first_name, last_name, username, phone_number, address, city, state, zipcode) 
+					  VALUES(NULL, '$first_name', '$last_name', '$username', '$phone_number', '$address', '$city', '$state', '$zipcode');";
 			mysqli_query($db, $query);
 
 			header('location: shipping.php');
