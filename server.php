@@ -184,10 +184,12 @@
 		}
 		else
 		{
-			$query = "UPDATE customer_profile SET phone_number='$phone_number', address='$address', city='$city', state='$state', zipcode='$zipcode', card_type='$card_type', card_number='$card_number', cvc='$cvc', expiration_date='$expiration_date' WHERE username='$username';";
-				mysqli_query($db, $query);
+			if (count($errors) == 0) {
+				$query = "UPDATE customer_profile SET phone_number='$phone_number', address='$address', city='$city', state='$state', zipcode='$zipcode', card_type='$card_type', card_number='$card_number', cvc='$cvc', expiration_date='$expiration_date' WHERE username='$username';";
+					mysqli_query($db, $query);
 
-				header('location: profile.php');
+					header('location: profile.php');
+			}
 		}
 	}
 
@@ -238,24 +240,34 @@
 			header('location: shipping.php');
 		}
 	}
+	
 	/*
 	//UPDATE SHIPPING
 	if (isset($_POST['payment_update'])) 
 	{
-		// Fetch input values from create profile form
-		$card_number = mysqli_real_escape_string($db, $_POST['card_number']);
-		$card_type = mysqli_real_escape_string($db, $_POST['card_type']);
-		$cvc = mysqli_real_escape_string($db, $_POST['cvc']);
-		$expiration_date = mysqli_real_escape_string($db, $_POST['expiration_date']);
 		
-		if (count($errors) == 0) 
-		{		
+		$result = mysqli_query($db, "SELECT * FROM customer_profile WHERE username='$username' AND card_number=NULL");
+		if (mysqli_num_rows($result) == 0)
+		{
+		// Fetch input values from create profile form
+			$card_number = mysqli_real_escape_string($db, $_POST['card_number']);
+			$card_type = mysqli_real_escape_string($db, $_POST['card_type']);
+			$cvc = mysqli_real_escape_string($db, $_POST['cvc']);
+			$expiration_date = mysqli_real_escape_string($db, $_POST['expiration_date']);
+		}
+		else
+		{
+			$card_number = $_POST['card_number'];
+			$card_type = $_POST['card_type'];
+			$cvc = $_POST['cvc'];
+			$expiration_date = $_POST['expiration_date'];
+		}
+
 			$query = "UPDATE customer_profile SET card_type='$card_type', card_number='$card_number', cvc='$cvc', expiration_date='$expiration_date' WHERE username='$username';";
+			echo $query;
 			mysqli_query($db, $query);
 
 			header('location: payment.php');
-		}
-		
 	}
 	*/
 
