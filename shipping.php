@@ -328,7 +328,7 @@
   <script>
     function initAutoComplete(){
     autocomplete = new google.maps.places.Autocomplete(
-         /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
+         /** @type {!HTMLInputElement} */(document.getElementById('street_number')),
         {types: ['geocode']});
     }
     function geolocate() {
