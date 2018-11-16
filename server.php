@@ -68,21 +68,20 @@
 			// $_SESSION['username'] = $username;
 			// $_SESSION['success'] = "You are now logged in";
 			// header('location: home.php');
-		}
-
-		$check = "SELECT * FROM customer WHERE username='$username' AND password='$password'";
-		$checkResults = mysqli_query($db, $check);
-
-		if (mysqli_num_rows($checkResults) == 1) {
-			$user = mysqli_fetch_assoc($checkResults);
-			if($user['user_type'] == 'Admin') {
-				$_SESSION['username'] = $user;
-				$_SESSION['success'] = "You are now logged in";
-				header('location: adminHome.php');
-			} else {
-				$_SESSION['username'] = $user;
-				$_SESSION['success']  = "You are now logged in";
-				header('location: home.php');
+			$check = "SELECT * FROM customer WHERE username='$username' AND password='$password'";
+			$checkResults = mysqli_query($db, $check);
+	
+			if (mysqli_num_rows($checkResults) == 1) {
+				$user = mysqli_fetch_assoc($checkResults);
+				if($user['user_type'] == 'Admin') {
+					$_SESSION['username'] = $user;
+					$_SESSION['success'] = "You are now logged in";
+					header('location: adminHome.php');
+				} else {
+					$_SESSION['username'] = $user;
+					$_SESSION['success']  = "You are now logged in";
+					header('location: home.php');
+				}
 			}
 		}
 	}
