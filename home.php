@@ -1,6 +1,6 @@
 <?php 
   include('server.php');
-  
+  $_SESSION["hasOrder"];
   if (!isset($_SESSION['username'])) {
    $_SESSION['msg'] = "You must log in first";
    header('location: login.php');
@@ -153,7 +153,7 @@
         <!-- LEFT SIDE TEXTS -->
         <div class="column">
           <h1>something simple.</h1>
-          <h2>creating a hearty world. one drone at a time</h2>
+          <h2>creating a hearty world one drone at a time</h2>
           <a href="pantry.php">
             <div class="ui massive olive button">Get Started <i class="right arrow icon"></i></div>
           </a>
@@ -161,9 +161,20 @@
             <a href="#about">
               <button class="ui inverted large black button">Learn more</button>
             </a>
-            <a href="tracking.php">
-              <button class="ui inverted large black button">Track order</button>
-            </a>
+            <?php
+            $dest = "";
+            if($_SESSION["hasOrder"] == "true")
+            {
+              $dest = "tracking.php";
+            }
+            else
+            {
+              $dest = "pantry.php";
+            }
+            ?>
+            <a href=<?php echo $dest; ?>>
+                <button class='ui inverted large black button'>Track order</button>
+              </a>
           </div>
         </div>
       </div>
@@ -181,14 +192,13 @@
 
         <div class="center aligned row">
           <h2>Our Goal</h2>
-          <p>
-            Something Simple is a delivery company that provides fresh organic produce right to your doorsteps. 
-            We strive to bring our consumers the highest quality produce at the click of a button. 
-            Skip the traffic with our advanced drone technology and have your ingredients ready after a long workday. 
-            Our drones are installed with GPS-tracking and a security camera system to estimate delivery time and ensure that any problems are resolved. 
-            <br><br>
-            In the busyness of every day, it's easy to lose passion for a healthy lifestyle and give in to the temptation of fast, time-saving meals. 
-            Something Simple is pushing for a change—to create a hearty world, one drone at a time.
+          <p>Something Simple is a delivery company that provides organic, fresh produce right to your doorsteps.  
+          Started in the Bay Area, we strive to bring our consumers the highest quality of produce at the click of a button.  
+          With our advanced drone technology, skip the traffic and commute, and have your ingredients ready right after a long work day.  
+          Our drones are installed with GPS tracking and security camera system to estimate delivery time and ensure any problems resolved.
+          <br> <br>
+          In the busyness of everyday, it's easy to lose passion for a healthy lifestyle and give in to temptation of fast, time saving meals.  
+          Something simple is pushing for a change, to create a hearty world one drone at a time.
           </p>
         </div>
         <hr>
