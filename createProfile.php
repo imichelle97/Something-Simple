@@ -183,11 +183,13 @@
                       <div class="ui four wide column field">
                         <label>Card Number</label>
                         <input type="text" name="card_number" value="<?php echo $card_number; ?>" id="cardNumber">
+                        <label>No spaces</label>
                       </div>
 
                       <div class="ui four wide column field">
                         <label>Card Type</label>
                         <input type="text" name="card_type" value="<?php echo $card_type; ?>" id="cardType">
+                        <label>(Discover, Visa, Mastercard, AMEX)</label>
                       </div>
 
                       <div class="ui four wide column field">
@@ -350,7 +352,7 @@
                         // See if the expiration date has passed
                         var now = new Date();
                         if (document.getElementById("cardDate").value < now){
-                          alert("Credit catd date is out of date");
+                          alert("Credit card date is out of date");
                           return false;
                         }
                         
