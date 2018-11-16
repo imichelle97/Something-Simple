@@ -25,16 +25,37 @@
 		$expiration_date = $profile['expiration_date'];
   } else if(mysqli_num_rows($results) == 0) {
     $profile = mysqli_fetch_assoc($results);
-    $firstName = "-";
-    $lastName = "-";
-		$address = "-";
-		$city = "-";
-		$state = "-";
-    $zipcode = "-";
-    $card_type = "-";
-		$card_number = "-";
-		$cvc = "-";
-		$expiration_date = "-";
+    $firstName = "";
+    $lastName = "";
+		$address = "";
+		$city = "";
+		$state = "";
+    $zipcode = "";
+    $card_type = "";
+		$card_number = "";
+		$cvc = "";
+		$expiration_date = "";
+  }
+    //UPDATE SHIPPING
+  if (isset($_POST['payment_update'])) 
+  {
+    $result = mysqli_query($db, "SELECT * FROM customer_profile WHERE username='$username' AND card_number = NULL");
+    $card_number = $_POST['card_number'];
+    $card_type = $_POST['card_type'];
+    $cvc = $_POST['cvc'];
+    $expiration_date = $_POST['expiration_date'];
+
+    if (mysqli_num_rows($result) == 0)
+    {
+      // Fetch input values from create profile form
+      $query = "UPDATE customer_profile SET card_type='$card_type', card_number='$card_number', cvc='$cvc', expiration_date='$expiration_date' WHERE username='$username';";
+    }
+    else
+    {
+      $query = "INSERT INTO customer_profile (customer_id, first_name, last_name, username, phone_number, address, city, state, zipcode) 
+            VALUES(NULL, '$first_name', '$last_name', '$username', '$phone_number', '$address', '$city', '$state', '$zipcode');";
+    }
+    mysqli_query($db, $query);
   }
 ?>
 
@@ -177,7 +198,7 @@
             </div>
             <div class="ui container">
 
-              <form class="ui form">
+              <form method="post" actions="payment.php" class="ui form">
               
                 <!-- CARDHOLDER'S NAME -->
                 <div class="field">
@@ -189,12 +210,12 @@
                 <div class="ui grid">
                   <div class="ui six wide column field">
                     <label>Card Number</label>
-                    <input type="text" name="card_number" value="<?php echo $card_number; ?>" id="cardNumber">
+                    <input type="text" name="card_number" id="cardNumber" value="<?php echo $card_number; ?>">
                   </div>
 
                   <div class="ui five wide column field">
                     <label>Card Type</label>
-                    <input type="text" name="card_type" value="<?php echo $card_type; ?>" id="cardType">
+                    <input type="text" name="card_type" id="cardType" value="<?php echo $card_type; ?>">
                   </div>
 
                   <div class="ui two wide column field">
@@ -204,36 +225,13 @@
 
                   <div class="ui six wide column field">
                         <label>Expiration Date</label>
-                        <input type="month" name="expiration_date" value="<?php echo $expiration_date; ?>" id="cardDate">
+                        <input type="month" name="expiration_date" id="cardDate" value="<?php echo $expiration_date; ?>">
                   </div>
 
-                </div>
+                  <div class="ui left aligned container">
+                        <button type="submit" onmouseover="creditcardValidation()" class="ui big green submit button" name="payment_update">Save</button>
+                      </div>
 
-                <div class="ui checkbox">
-                  <input id="billingAdd" type="checkbox" name="example">
-                  <label>Billing  address is the same as shipping address</label>
-                </div>
-
-                <!-- CARDHOLDER'S ADDRESS -->
-                <div id="address">
-                  <div class="field">
-                    <label>Cardholder's Address</label>
-                    <input type="text">
-                  </div>
-                  <div class="ui grid">
-                    <div class="ui nine wide column field">
-                      <label>City</label>
-                      <input type="text">
-                    </div>
-                    <div class="ui three wide column field">
-                      <label>State</label>
-                      <input type="text">
-                    </div>
-                    <div class="ui four wide column field">
-                      <label>Zip Code</label>
-                      <input type="text">
-                    </div>
-                  </div>
                 </div>
 
               </form>
@@ -259,11 +257,20 @@
               <!-- BUTTON -->
               <div class="row">
                 <div class="sixteen wide column">
-                  <a href="confirmation.php">
-                    <button class="ui fluid green button" onmouseover="creditcardValidation()" id="confirm_button">Confirm</button>
-                  </a>
+                	<?php 
+                	if($card_number == "")
+                	{
+                		echo "<button class='ui disabled fluid green button'>Confirm</button>";
+                	}
+                	else
+                	{
+	                  echo "<a href='confirmation.php'>
+	                    <button class='ui fluid green button' id='confirm_button'>Confirm</button>
+	                  </a>";
+              		}
+                  ?>
                 </div>
-                <script>
+                 <script>
                   //credit card validation function
                     function creditcardValidation(cardNumber = document.getElementById("cardNumber").value, cardType = document.getElementById("cardType").value){
                         var cards = new Array();
@@ -291,7 +298,6 @@
                           prefices: "34, 37",
                           checkDigit: true
                         };
-
                         //Make sure about Card Type
                         var cardTypeNumber = -1;
                         var cardType = document.getElementById("cardType").value;
@@ -362,12 +368,10 @@
                             return false; 
                           }
                         }  
-
                         // The following are the card-specific checks we undertake.
                         var LengthValid = false;
                         var PrefixValid = false; 
                         var undefined; 
-
                         // We use these for holding the valid lengths and prefixes of a card type
                         var prefix = new Array ();
                         var lengths = new Array ();
@@ -400,7 +404,6 @@
                            alert("Credit card number has an inappropriate number of digits");
                            return false; 
                         };   
-
                         // See if the expiration date has passed
                         var now = new Date();
                         if (document.getElementById("cardDate").value < now){

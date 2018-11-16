@@ -168,14 +168,28 @@
 		if (empty($city)) { array_push($errors, "City name is required"); }
 		if (empty($address)) { array_push($errors, "Street address is required"); }
 
-		// If no errors, proceed to create user profile
-		if (count($errors) == 0) {
+		$result = mysqli_query($db, "SELECT * FROM customer_profile WHERE username='$username'");
 
-			$query = "INSERT INTO customer_profile (customer_id, first_name, last_name, username, phone_number, address, city, state, zipcode, card_type, card_number, cvc, expiration_date) 
-					  VALUES(NULL, '$first_name', '$last_name', '$username', '$phone_number', '$address', '$city', '$state', '$zipcode','$card_type', '$card_number', '$cvc', '$expiration_date');";
-			mysqli_query($db, $query);
+		if(mysqli_num_rows($result) == 0)
+		{
+			// If no errors, proceed to create user profile
+			if (count($errors) == 0) {
 
-			header('location: profile.php');
+				$query = "INSERT INTO customer_profile (customer_id, first_name, last_name, username, phone_number, address, city, state, zipcode, card_type, card_number, cvc, expiration_date) 
+						  VALUES(NULL, '$first_name', '$last_name', '$username', '$phone_number', '$address', '$city', '$state', '$zipcode','$card_type', '$card_number', '$cvc', '$expiration_date');";
+				mysqli_query($db, $query);
+
+				header('location: profile.php');
+			}
+		}
+		else
+		{
+			if (count($errors) == 0) {
+				$query = "UPDATE customer_profile SET phone_number='$phone_number', address='$address', city='$city', state='$state', zipcode='$zipcode', card_type='$card_type', card_number='$card_number', cvc='$cvc', expiration_date='$expiration_date' WHERE username='$username';";
+					mysqli_query($db, $query);
+
+					header('location: profile.php');
+			}
 		}
 	}
 
@@ -202,15 +216,60 @@
 		$state = mysqli_real_escape_string($db, $_POST['state']);
 		$zipcode = mysqli_real_escape_string($db, $_POST['zipcode']);
 
+		$result = mysqli_query($db, "SELECT * FROM customer_profile WHERE username='$username'");
 		// If no errors, proceed to create user profile
-		if (count($errors) == 0) {
-			
-			$query = "UPDATE customer_profile SET address='$address', city='$city', state='$state', zipcode='$zipcode' WHERE username='$username';";
+		if(mysqli_num_rows($result) == 1)
+		{
+			if (count($errors) == 0) 
+			{
+				
+				$query = "UPDATE customer_profile SET address='$address', city='$city', state='$state', zipcode='$zipcode' WHERE username='$username';";
+				mysqli_query($db, $query);
+
+				header('location: shipping.php');
+			}
+		}
+		else
+		{
+   			$first_name = $_POST['first_name'];
+   			$last_name = $_POST['last_name'];
+   			$query = "INSERT INTO customer_profile (customer_id, first_name, last_name, username, phone_number, address, city, state, zipcode) 
+					  VALUES(NULL, '$first_name', '$last_name', '$username', '$phone_number', '$address', '$city', '$state', '$zipcode');";
 			mysqli_query($db, $query);
 
 			header('location: shipping.php');
 		}
 	}
+	
+	/*
+	//UPDATE SHIPPING
+	if (isset($_POST['payment_update'])) 
+	{
+		
+		$result = mysqli_query($db, "SELECT * FROM customer_profile WHERE username='$username' AND card_number=NULL");
+		if (mysqli_num_rows($result) == 0)
+		{
+		// Fetch input values from create profile form
+			$card_number = mysqli_real_escape_string($db, $_POST['card_number']);
+			$card_type = mysqli_real_escape_string($db, $_POST['card_type']);
+			$cvc = mysqli_real_escape_string($db, $_POST['cvc']);
+			$expiration_date = mysqli_real_escape_string($db, $_POST['expiration_date']);
+		}
+		else
+		{
+			$card_number = $_POST['card_number'];
+			$card_type = $_POST['card_type'];
+			$cvc = $_POST['cvc'];
+			$expiration_date = $_POST['expiration_date'];
+		}
+
+			$query = "UPDATE customer_profile SET card_type='$card_type', card_number='$card_number', cvc='$cvc', expiration_date='$expiration_date' WHERE username='$username';";
+			echo $query;
+			mysqli_query($db, $query);
+
+			header('location: payment.php');
+	}
+	*/
 
 	
 	

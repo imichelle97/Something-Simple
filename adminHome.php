@@ -158,6 +158,7 @@
             <i class="leaf icon"></i>
           </div>
           <a class="active item">Admin</a>
+          <a href="contact.php" class="item">Contact</a>
           <div class="right item">
             <h3>Welcome, <?php echo $_SESSION['username']['username']; ?>!</h3>
             <!-- <a href="pantry.php">
