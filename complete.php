@@ -110,12 +110,6 @@
 							<span class="text">Go home</span>
 						</div>
 					</a>
-					<a href="pantry.php">
-						<div class="ui large gray button">
-							<i class="cart icon"></i>
-							<span class="text">Continue shopping</span>
-						</div>
-					</a>
 					<a href="tracking.php">
 						<div class="ui large green button">
 							<i class="thumbtack icon"></i>

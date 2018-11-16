@@ -134,14 +134,30 @@
                 }
               ?>!
             </h3>
-            <a href="pantry.php">
-              <div class="ui vertical animated green button" tabindex="0">
-                <div class="hidden content">Shop</div>
-                <div class="visible content">
-                  <i class="shop icon"></i>
-                </div>
-              </div>
-            </a>
+            <?php
+            {
+              if($_SESSION["hasOrder"] == "true")
+              {
+                echo "<div class='ui disabled vertical animated green button' tabindex='0'>
+                  <div class='hidden content'>Shop</div>
+                  <div class='visible content'>
+                    <i class='shop icon'></i>
+                  </div>
+                  </div>";
+              }
+              else
+              { 
+                echo "<a href='pantry.php'>
+                  <div class='ui vertical animated green button' tabindex='0'>
+                  <div class='hidden content'>Shop</div>
+                  <div class='visible content'>
+                    <i class='shop icon'></i>
+                  </div>
+                  </div>
+                </a>";
+              }
+            }
+            ?>
             <a class="ui primary button" href="profile.php">Profile</a>
             <a class="ui negative button" href="index.php">Log Out</a>
           </div>
