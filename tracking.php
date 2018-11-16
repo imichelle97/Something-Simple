@@ -158,115 +158,13 @@
 					<div id = "processing" class="label">Processing</div>
 				</div>
 				<div class="ui grid">
-					<div class="ten wide column">
+					<div class="sixteen wide column">
 						<div class="ui raised segment">
 							<div id="map"></div>
 						</div>
 					</div>
-					<div class="six wide column">
-						<div class="ui raised segment">
-							<div class="ui container">
-
-								<!-- SHOPPING CART -->
-								<div class="row">
-									<h2>Your Order</h2>
-								</div>
-								<div class="ui grid">
-								<?php
-							        	if(isset($_SESSION["cart"]))
-							          	{
-							            	foreach ($_SESSION["cart"] as $product)
-							            	{
-									            $name = $product["item_name"];
-									            $quantity = $product["quantity"];
-															$item_weight = $product["item_weight"];
-															$item_total_weight = $item_weight * $quantity;
-															$suffix = "lbs";
-															if ($item_total_weight <= 1) {
-																$suffix = "lb";
-															}
-												
-												echo "<!-- ITEMS -->
-												<div class='row'>
-													<div class='two wide column'>
-														<span><strong>$quantity</strong></span>
-													</div>
-													<div class='eleven wide column left floated left aligned'>
-														<span><strong>$name</strong></span>
-													</div>
-													<div class='three wide column right floated right aligned'>
-														<span>$item_total_weight"." "."$suffix</span>
-													</div>
-												</div>";
-											}
-										}
-								?>
-								</div>
-								
-							</div>
-							
-							<!-- ORDER DETAILS -->
-							<div class="row">
-								<h2>Order Summary</h2>
-							</div>
-							
-							<div class="ui grid">
-								<!-- WEIGHT  -->
-								<div class="row">
-									<div class="ten wide column">
-										<span>Weight</span>
-									</div>
-									<div class="six wide column right floated right aligned">
-										<span><?php echo $weight." lbs"; ?></span>
-									</div>
-								</div>
-
-								<!-- TOTAL BEFORE TAX -->
-								<div class="row">
-									<div class="ten wide column">
-										<span>Total before tax</span>
-									</div>
-									<div class="six wide column right floated right aligned">
-										<span><?php echo "$ ".number_format($price, 2); ?></span>
-									</div>
-								</div>
-
-								<!-- ESTIMATED TAX -->
-								<div class="row">
-									<div class="ten wide column">
-										<span>Estimated tax</span>
-									</div>
-									<div class="six wide column right floated right aligned">
-										<span><?php echo "$ ".number_format($tax, 2); ?></span>
-									</div>
-								</div>
-
-								<!-- ORDER TOTAL -->
-								<div class="row">
-									<div class="ten wide column">
-										<span><h3>Order Total:</h3></span>
-									</div>
-									<div class="six wide column right floated right aligned">
-										<span><h3><?php echo "$ ".number_format($orderTot, 2); ?></h3></span>
-									</div>
-								</div>
-
-								<!-- HOME BUTTON -->
-								<div class="row">
-									<div class="sixteen wide column">
-										<a href="home.php">
-											<button class="ui fluid blue button"><i class="home icon"></i> Home</button>
-										</a>
-									</div>
-								</div>
-							</div>
-							
-						</div>
-					</div>
-				</div>
-				
-				
 			</div>
+      </div>
 
 		</section>
 	</div>
@@ -411,7 +309,6 @@
                     orderText.innerHTML = "Your order has arrived!";
                     var processingText = document.getElementById("processing");
                     processingText.innerHTML = "Completed";
-                    unset($_SESSION["cart"]);
                     $('.progress').progress({
                       percent: 100 
                     });

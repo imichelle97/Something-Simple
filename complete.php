@@ -25,7 +25,7 @@
 					}
 				}
 				//Destroys cart session
-				//unset($_SESSION["cart"]);
+				unset($_SESSION["cart"]);
 			}	
 	      break;
 	  	}
