@@ -38,6 +38,11 @@
 		if (empty($email)) { array_push($errors, "Email is required"); }
 		if (empty($password_1)) { array_push($errors, "Password is required"); }
 
+		//check if email is in the valid format
+		if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
+			 array_push($errors, "Email format is invalid");
+		}
+
 		// Check if passwords match
 		if ($password_1 != $password_2) {
 			array_push($errors, "The two passwords do not match");
