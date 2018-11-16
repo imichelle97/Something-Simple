@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 15, 2018 at 11:59 PM
+-- Generation Time: Nov 16, 2018 at 01:37 AM
 -- Server version: 10.1.34-MariaDB
 -- PHP Version: 5.6.37
 
@@ -39,7 +39,9 @@ CREATE TABLE `admin_contact` (
 --
 
 INSERT INTO `admin_contact` (`contact_id`, `name`, `message`) VALUES
-(9, 'Michelle Luong', 'This is a test message to see whether this message will connect to the database testing here.');
+(9, 'Michelle Luong', 'This is a test message to see whether this message will connect to the database testing here.'),
+(10, 'Michelle Luong', 'Testing contact message #2.'),
+(11, 'ML', 'Test #3 ');
 
 -- --------------------------------------------------------
 
@@ -85,7 +87,8 @@ CREATE TABLE `customer` (
 
 INSERT INTO `customer` (`user_id`, `username`, `password`, `email`, `user_type`) VALUES
 (2, 'admin', 'dc76e9f0c0006e8f919e0c515c66dbba3982f785', 'admin@gmail.com', 'Admin'),
-(3, 'imichelle97', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'imichelle97@gmail.com', 'user');
+(3, 'imichelle97', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'imichelle97@gmail.com', 'user'),
+(7, 'feathers', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'feathers@gmail.com', 'user');
 
 -- --------------------------------------------------------
 
@@ -114,7 +117,7 @@ CREATE TABLE `customer_profile` (
 --
 
 INSERT INTO `customer_profile` (`customer_id`, `first_name`, `last_name`, `username`, `phone_number`, `address`, `city`, `state`, `zipcode`, `card_type`, `card_number`, `cvc`, `expiration_date`) VALUES
-(13, 'Michelle', 'Luong', 'imichelle97', '', '7190 Rosencrans Way', 'San Jose', 'CA', '95139', NULL, NULL, NULL, NULL);
+(13, 'Michelle', 'Luong', 'imichelle97', '408-807-7560', '131 West Santa Clara Street', 'San Jose', 'CA', '95113', 'Discover', '6011002385913218', '000', '2019-01');
 
 -- --------------------------------------------------------
 
@@ -225,7 +228,8 @@ INSERT INTO `orders` (`order_id`, `customer_id`, `username`, `item_id`, `quantit
 (20, 3, 'imichelle97', 2, 2),
 (21, 3, 'imichelle97', 3, 2),
 (22, 3, 'imichelle97', 6, 1),
-(23, 3, 'imichelle97', 4, 2);
+(23, 3, 'imichelle97', 4, 2),
+(25, 3, 'imichelle97', 1, 1);
 
 --
 -- Indexes for dumped tables
@@ -276,13 +280,13 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `admin_contact`
 --
 ALTER TABLE `admin_contact`
-  MODIFY `contact_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `contact_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `customer_profile`
@@ -300,7 +304,7 @@ ALTER TABLE `item`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- Constraints for dumped tables
