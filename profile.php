@@ -39,7 +39,15 @@
   }
 
   $substring = substr($card_number, -4);   
-
+        
+  if(isset($_POST['delete']))
+  {
+    $query = "DELETE FROM customer WHERE username='$username';";
+    mysqli_query($db, $query);
+    $query2 = "DELETE FROM customer_profile WHERE username='$username'";
+    mysqli_query($db, $query2);
+    header('location: index.php');
+  }
 ?>
 <!DOCTYPE html>
 <html>
@@ -223,7 +231,6 @@
   </div>
 
 </div>
-
 <div class="ui mini modal">
   <i class="close icon"></i>
   <div class="header">
@@ -233,16 +240,19 @@
     <div class="description">
       <p>Are you sure you want to delete your account?</p>
     </div>
-  </div>
+  </div> 
+  <form method="post" action="profile.php"> 
   <div class="actions">
     <div class="ui negative button">
       No
     </div>
-    <div class="ui positive right labeled icon button">
-      Yes
-      <i class="checkmark icon"></i>
-    </div>
+
+    <button class="ui positive right labeled icon button" name="delete">
+        Yes
+        <i class="checkmark icon"></i>  
+    </button>
   </div>
+  </form>
 </div>
 
 <script type="text/javascript">
