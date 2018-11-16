@@ -211,13 +211,11 @@
                   <div class="ui six wide column field">
                     <label>Card Number</label>
                     <input type="text" name="card_number" id="cardNumber" value="<?php echo $card_number; ?>">
-                    <label>No spaces</label>
                   </div>
 
-                  <div class="ui six wide column field">
+                  <div class="ui five wide column field">
                     <label>Card Type</label>
                     <input type="text" name="card_type" id="cardType" value="<?php echo $card_type; ?>">
-                    <label>(Discover, Visa, Mastercard, AMEX)</label>
                   </div>
 
                   <div class="ui two wide column field">
@@ -234,33 +232,6 @@
                         <button type="submit" onmouseover="creditcardValidation()" class="ui big green submit button" name="payment_update">Save</button>
                       </div>
 
-                </div>
-
-                <div class="ui checkbox">
-                  <input id="billingAdd" type="checkbox" name="example">
-                  <label>Billing  address is the same as shipping address</label>
-                </div>
-
-                <!-- CARDHOLDER'S ADDRESS -->
-                <div id="address">
-                  <div class="field">
-                    <label>Cardholder's Address</label>
-                    <input type="text">
-                  </div>
-                  <div class="ui grid">
-                    <div class="ui nine wide column field">
-                      <label>City</label>
-                      <input type="text">
-                    </div>
-                    <div class="ui three wide column field">
-                      <label>State</label>
-                      <input type="text">
-                    </div>
-                    <div class="ui four wide column field">
-                      <label>Zip Code</label>
-                      <input type="text">
-                    </div>
-                  </div>
                 </div>
 
               </form>
