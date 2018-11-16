@@ -412,7 +412,6 @@
                     var processingText = document.getElementById("processing");
                     processingText.innerHTML = "Completed";
                     unset($_SESSION["cart"]);
-                    $_SESSION["hasOrder"] = "false";
                     $('.progress').progress({
                       percent: 100 
                     });

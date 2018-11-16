@@ -47,6 +47,7 @@
     $query2 = "DELETE FROM customer_profile WHERE username='$username'";
     mysqli_query($db, $query2);
     header('location: index.php');
+    unset($_SESSION["cart"]);
   }
 ?>
 <!DOCTYPE html>

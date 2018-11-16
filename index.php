@@ -118,14 +118,6 @@
           <a href="signin.php">
             <div class="ui massive olive button">Get Started <i class="right arrow icon"></i></div>
           </a>
-          <div class="ui container">
-            <a href="#about">
-              <button class="ui inverted large black button">Learn more</button>
-            </a>
-            <a href="signin.php">
-              <button class="ui inverted large black button">Track order</button>
-            </a>
-          </div>
         </div>
       </div>
       

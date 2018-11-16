@@ -26,7 +26,6 @@
 				}
 				//Destroys cart session
 				//unset($_SESSION["cart"]);
-				$_SESSION["hasOrder"] = "true";
 			}	
 	      break;
 	  	}

@@ -1,6 +1,5 @@
 <?php 
   include('server.php');
-  $_SESSION["hasOrder"];
   if (!isset($_SESSION['username'])) {
    $_SESSION['msg'] = "You must log in first";
    header('location: login.php');
@@ -134,30 +133,14 @@
                 }
               ?>!
             </h3>
-            <?php
-            {
-              if($_SESSION["hasOrder"] == "true")
-              {
-                echo "<div class='ui disabled vertical animated green button' tabindex='0'>
-                  <div class='hidden content'>Shop</div>
-                  <div class='visible content'>
-                    <i class='shop icon'></i>
-                  </div>
-                  </div>";
-              }
-              else
-              { 
-                echo "<a href='pantry.php'>
+            <a href='pantry.php'>
                   <div class='ui vertical animated green button' tabindex='0'>
                   <div class='hidden content'>Shop</div>
                   <div class='visible content'>
                     <i class='shop icon'></i>
                   </div>
                   </div>
-                </a>";
-              }
-            }
-            ?>
+                </a>
             <a class="ui primary button" href="profile.php">Profile</a>
             <a class="ui negative button" href="index.php">Log Out</a>
           </div>
@@ -173,25 +156,6 @@
           <a href="pantry.php">
             <div class="ui massive olive button">Get Started <i class="right arrow icon"></i></div>
           </a>
-          <div class="ui container">
-            <a href="#about">
-              <button class="ui inverted large black button">Learn more</button>
-            </a>
-            <?php
-            $dest = "";
-            if($_SESSION["hasOrder"] == "true")
-            {
-              $dest = "tracking.php";
-            }
-            else
-            {
-              $dest = "pantry.php";
-            }
-            ?>
-            <a href=<?php echo $dest; ?>>
-                <button class='ui inverted large black button'>Track order</button>
-              </a>
-          </div>
         </div>
       </div>
       
