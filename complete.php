@@ -101,7 +101,7 @@
 				</div>
 				<div class="ui raised segment container buttons">
 					<h3>
-						Hi, <?php echo $_SESSION["username"]["username"]; ?>! Thank you from purchasing from our organic food store. Your order has been placed and will be arriving soon.
+						Hi, <?php echo $_SESSION["username"]["username"]; ?>! Thank you from purchasing from our Something Simple. Your order has been placed and will be arriving soon.
 					</h3>
 					<a href="home.php">
 						<div class="ui large blue button">
