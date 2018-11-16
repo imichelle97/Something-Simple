@@ -289,7 +289,7 @@
               <div class="row">
                 <div class="sixteen wide column">
                   <?php
-                    if(mysqli_num_rows($results) == 0)
+                    if(mysqli_num_rows($results) == 0 || $firstName == "-" || $lastName == "-" || $address == "-" || $city == "-" || $state == "-" || $zipcode == "-")
                     {
                       
                         echo"<button class='ui disabled fluid green button'>Proceed to payment</button>";
