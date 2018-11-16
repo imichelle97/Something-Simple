@@ -211,6 +211,8 @@
 
 		// Fetch input values from create profile form
 		$username = mysqli_real_escape_string($db, $_POST['username']);
+		$firstName = mysqli_real_escape_string($db, $_POST['first_name']);
+		$lastName = mysqli_real_escape_string($db, $_POST['last_name']);
 		$address = mysqli_real_escape_string($db, $_POST['address']);
 		$city = mysqli_real_escape_string($db, $_POST['city']);
 		$state = mysqli_real_escape_string($db, $_POST['state']);
@@ -223,7 +225,7 @@
 			if (count($errors) == 0) 
 			{
 				
-				$query = "UPDATE customer_profile SET address='$address', city='$city', state='$state', zipcode='$zipcode' WHERE username='$username';";
+				$query = "UPDATE customer_profile SET first_name='$firstName', last_name='$lastName', address='$address', city='$city', state='$state', zipcode='$zipcode' WHERE username='$username';";
 				mysqli_query($db, $query);
 
 				header('location: shipping.php');
