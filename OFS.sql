@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 15, 2018 at 12:01 AM
+-- Generation Time: Nov 15, 2018 at 11:59 PM
 -- Server version: 10.1.34-MariaDB
 -- PHP Version: 5.6.37
 
@@ -33,6 +33,13 @@ CREATE TABLE `admin_contact` (
   `name` varchar(256) NOT NULL,
   `message` longtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `admin_contact`
+--
+
+INSERT INTO `admin_contact` (`contact_id`, `name`, `message`) VALUES
+(9, 'Michelle Luong', 'This is a test message to see whether this message will connect to the database testing here.');
 
 -- --------------------------------------------------------
 
@@ -78,9 +85,7 @@ CREATE TABLE `customer` (
 
 INSERT INTO `customer` (`user_id`, `username`, `password`, `email`, `user_type`) VALUES
 (2, 'admin', 'dc76e9f0c0006e8f919e0c515c66dbba3982f785', 'admin@gmail.com', 'Admin'),
-(3, 'imichelle97', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'imichelle97@gmail.com', 'user'),
-(4, 'cjavan', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'cjavan@gmail.com', 'user'),
-(5, 'feathers', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'test', 'user');
+(3, 'imichelle97', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'imichelle97@gmail.com', 'user');
 
 -- --------------------------------------------------------
 
@@ -109,7 +114,7 @@ CREATE TABLE `customer_profile` (
 --
 
 INSERT INTO `customer_profile` (`customer_id`, `first_name`, `last_name`, `username`, `phone_number`, `address`, `city`, `state`, `zipcode`, `card_type`, `card_number`, `cvc`, `expiration_date`) VALUES
-(11, 'Michelle', 'Luong', 'imichelle97', '408-807-7560', '5601 Great Oaks Pkwy', 'San Jose', 'CA', '95119', 'Discover', '8173-0917-2282-9167', '439', '2018-12');
+(13, 'Michelle', 'Luong', 'imichelle97', '', '7190 Rosencrans Way', 'San Jose', 'CA', '95139', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -134,18 +139,18 @@ CREATE TABLE `item` (
 --
 
 INSERT INTO `item` (`item_id`, `item_category`, `item_name`, `item_desc`, `item_price`, `item_weight`, `item_weight_unit`, `inventory`, `image`) VALUES
-(1, 'Produce', 'Organic Bananas (min 5 ct.)', '', '1.55', '1.70', 'lbs', 47, 'images/OrganicBananas.jpg'),
-(2, 'Produce', 'Organic Baby Carrots', '- Grown in the United States ', '1.69', '1.00', 'lbs', 49, 'images/OrganicBabyCarrots.jpg'),
-(3, 'Produce', 'Organic Strawberries', '- Grown in the United States or Mexico', '4.49', '1.00', 'lbs', 50, 'images/OrganicStrawberries.jpg'),
-(4, 'Produce', 'Organic Gala Apple', '- Grown in Washington or Chile', '4.89', '3.00', 'lbs', 48, 'images/OrganicGalaApple.jpg'),
-(5, 'Produce', 'Organic Blueberries', '- Grown in United States, Mexico, Peru, Chile, Argentina and Canada', '3.99', '0.38', 'lbs', 50, 'images/OrganicBlueberries.jpg'),
-(6, 'Produce', 'Organic Baby Spinich', '- Triple-washed', '4.99', '1.00', 'lbs', 50, 'images/OrganicBabySpinach.jpg'),
-(7, 'Produce', 'Organic Raspberries', '- Grown in the United States, Mexico, or Chile', '4.99', '0.38', 'lbs', 49, 'images/OrganicRaspberries.jpg'),
-(8, 'Produce', 'Organic Gold Potatoes', NULL, '5.99', '5.00', 'lbs', 50, 'images/OrganicGoldPotatoes.jpg'),
-(9, 'Produce', 'Yellow Onion Organic', NULL, '4.99', '3.00', 'lbs', 50, 'images/YellowOnionOrganic.jpg'),
-(10, 'Produce', 'Organic White Mushrooms', NULL, '3.49', '0.62', 'lbs', 50, 'images/OrganicWhiteMushrooms.jpg'),
-(11, 'Produce', 'Organic Whole Milk', '- Vitamin D', '5.49', '8.00', 'lbs', 49, 'images/OrganicWholeMilk.jpg'),
-(12, 'Produce', 'Organic Zucchini Squash', '- Grown in United States or Mexico', '3.00', '1.50', 'lbs', 0, 'images/OrganicZucchiniSquash.jpg'),
+(1, 'Produce', 'Organic Bananas', 'Minimum 5 ct.', '1.55', '1.70', 'lbs', 47, 'images/OrganicBananas.jpg'),
+(2, 'Produce', 'Organic Baby Carrots', 'Grown in the US', '1.69', '1.00', 'lbs', 47, 'images/OrganicBabyCarrots.jpg'),
+(3, 'Produce', 'Organic Strawberries', 'Grown in the US', '4.49', '1.00', 'lbs', 50, 'images/OrganicStrawberries.jpg'),
+(4, 'Produce', 'Organic Gala Apple', 'Grown in Washington or Chile', '4.89', '3.00', 'lbs', 46, 'images/OrganicGalaApple.jpg'),
+(5, 'Produce', 'Organic Blueberries', 'Grown in US & Mexico', '3.99', '0.38', 'lbs', 50, 'images/OrganicBlueberries.jpg'),
+(6, 'Produce', 'Organic Baby Spinich', 'Triple-washed', '4.99', '1.00', 'lbs', 49, 'images/OrganicBabySpinach.jpg'),
+(7, 'Produce', 'Organic Raspberries', 'Grown in the US & Mexico', '4.99', '0.38', 'lbs', 49, 'images/OrganicRaspberries.jpg'),
+(8, 'Produce', 'Organic Gold Potatoes', 'Grown in the US', '5.99', '5.00', 'lbs', 48, 'images/OrganicGoldPotatoes.jpg'),
+(9, 'Produce', 'Yellow Onion Organic', 'Grown in the US', '4.99', '3.00', 'lbs', 50, 'images/YellowOnionOrganic.jpg'),
+(10, 'Produce', 'Organic White Mushrooms', 'Grown in the US', '3.49', '0.62', 'lbs', 50, 'images/OrganicWhiteMushrooms.jpg'),
+(11, 'Produce', 'Organic Whole Milk', 'Vitamin D', '5.49', '8.00', 'lbs', 49, 'images/OrganicWholeMilk.jpg'),
+(12, 'Produce', 'Organic Zucchini Squash', 'Grown in United States or Mexico', '3.00', '1.50', 'lbs', 0, 'images/OrganicZucchiniSquash.jpg'),
 (13, 'Breads and Bakery', 'Organic Bread', '21 Whole Grains', '4.99', '1.69', 'lbs', 0, 'images/21WholeGrains.jpg'),
 (14, 'Breads and Bakery', 'Organic Bread', 'White Bread', '5.99', '1.50', 'lbs', 0, 'images/WhiteBread.jpg'),
 (15, 'Breads and Bakery', 'Organic Bread', 'Whole Wheat', '5.99', '1.56', 'lbs', 0, 'images/WholeWheat.jpg'),
@@ -177,7 +182,7 @@ INSERT INTO `item` (`item_id`, `item_category`, `item_name`, `item_desc`, `item_
 (41, 'Frozen', 'Mixed Mushrooms', 'Organic', '3.99', '0.62', 'lbs', 0, 'images/MixedMushrooms.jpg'),
 (42, 'Meat and Seafood', 'Chicken Breast', 'Boneless & Skinless', '10.26', '1.00', 'lbs', 0, 'images/ChickenBreast.jpg'),
 (43, 'Meat and Seafood', 'Ground Chicken', 'Organic', '5.55', '1.00', 'lbs', 0, 'images/GroundChicken.jpg'),
-(44, 'Meat and Seafood', 'Whole Chicken', 'Organic Whole Chicken with Giblets, Free Range, All Natural', '13.76', '5.00', 'lbs', 0, 'images/WholeChicken.jpg'),
+(44, 'Meat and Seafood', 'Whole Chicken', 'All Natural', '13.76', '5.00', 'lbs', 0, 'images/WholeChicken.jpg'),
 (45, 'Meat and Seafood', 'Sunday Bacon', 'Organic Uncured', '7.99', '0.50', 'lbs', 0, 'images/SundayBacon.jpg'),
 (46, 'Meat and Seafood', 'Stirloin Steaks', '100% Grass-Fed', '12.34', '0.62', 'lbs', 0, 'images/StirloinSteaks.jpg'),
 (47, 'Meat and Seafood', 'Pork Chops', 'Center Cut Boneless', '7.65', '0.50', 'lbs', 0, 'images/PorkChops.jpg'),
@@ -186,11 +191,11 @@ INSERT INTO `item` (`item_id`, `item_category`, `item_name`, `item_desc`, `item_
 (50, 'Meat Substitutes', 'Tofu', 'Organic Extra Firm', '2.49', '0.75', 'lbs', 0, 'images/Tofu.jpg'),
 (51, 'Meat Substitutes', 'Tempeh', 'Original Soy', '2.59', '0.50', 'lbs', 0, 'images/Tempeh.jpg'),
 (52, 'Meat Substitutes', 'Soyrizo', 'Organic Soyrizo Meatless Soy Chorizo', '3.79', '0.75', 'lbs', 0, 'images/Soyrizo.jpg'),
-(53, 'Soups, Stocks, and Broths', 'Roasted Red Pepper & Tomato Soup', 'Organic', '3.99', '2.00', 'lbs', 0, 'images/RoastedRedPepper&TomatoSoup.jpg'),
+(53, 'Soups, Stocks, and Broths', 'Red Pepper & Tomato Soup', 'Organic', '3.99', '2.00', 'lbs', 0, 'images/RoastedRedPepper&TomatoSoup.jpg'),
 (54, 'Soups, Stocks, and Broths', 'Chicken Broth', 'Organic', '2.29', '2.00', 'lbs', 0, 'images/ChickenBroth.jpg'),
 (55, 'Soups, Stocks, and Broths', 'Chicken Stock', 'Organic', '2.99', '2.00', 'lbs', 0, 'images/ChickenStock.jpg'),
 (56, 'Soups, Stocks, and Broths', 'Vegetable Broth', 'Low-Sodium', '2.99', '2.00', 'lbs', 0, 'images/VegetableBroth.jpg'),
-(57, 'Soups, Stocks, and Broths', 'Hearty Garden Vegetable Soup', 'Organic', '2.59', '0.91', 'lbs', 0, 'images/HeartyGardenVegetableSoup.jpg'),
+(57, 'Soups, Stocks, and Broths', 'Vegetable Soup', 'Organic', '2.59', '0.91', 'lbs', 0, 'images/HeartyGardenVegetableSoup.jpg'),
 (58, 'Soups, Stocks, and Broths', 'Chicken Noodle Soup', 'Free Range Chicken', '2.38', '0.91', 'lbs', 0, 'images/ChickenNoodleSoup.jpg'),
 (59, 'Soups, Stocks, and Broths', 'Chili', 'Medium with Vegetabes', '3.00', '0.92', 'lbs', 0, 'images/Chili.jpg'),
 (60, 'Soups, Stocks, and Broths', 'Bone Broth', 'Chicken, Tumeric, Ginger', '1.52', '0.52', 'lbs', 0, 'images/BoneBroth.jpg');
@@ -216,22 +221,11 @@ CREATE TABLE `orders` (
 INSERT INTO `orders` (`order_id`, `customer_id`, `username`, `item_id`, `quantity`) VALUES
 (17, 3, 'imichelle97', 1, 3),
 (18, 3, 'imichelle97', 1, 3),
-(19, 3, 'imichelle97', 2, 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `shipping`
---
-
-CREATE TABLE `shipping` (
-  `id` int(11) NOT NULL,
-  `username` varchar(256) NOT NULL,
-  `address` varchar(256) NOT NULL,
-  `city` varchar(256) NOT NULL,
-  `state` varchar(256) NOT NULL,
-  `zipcode` varchar(256) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+(19, 3, 'imichelle97', 2, 1),
+(20, 3, 'imichelle97', 2, 2),
+(21, 3, 'imichelle97', 3, 2),
+(22, 3, 'imichelle97', 6, 1),
+(23, 3, 'imichelle97', 4, 2);
 
 --
 -- Indexes for dumped tables
@@ -275,12 +269,6 @@ ALTER TABLE `orders`
   ADD PRIMARY KEY (`order_id`);
 
 --
--- Indexes for table `shipping`
---
-ALTER TABLE `shipping`
-  ADD PRIMARY KEY (`id`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -288,19 +276,19 @@ ALTER TABLE `shipping`
 -- AUTO_INCREMENT for table `admin_contact`
 --
 ALTER TABLE `admin_contact`
-  MODIFY `contact_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `contact_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `customer_profile`
 --
 ALTER TABLE `customer_profile`
-  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `item`
@@ -312,13 +300,7 @@ ALTER TABLE `item`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
-
---
--- AUTO_INCREMENT for table `shipping`
---
-ALTER TABLE `shipping`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- Constraints for dumped tables
