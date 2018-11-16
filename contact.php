@@ -87,7 +87,7 @@
             <span>something simple.</span>
             <i class="leaf icon"></i>
           </div>
-          <a class="item">Admin</a>
+          <a href="adminHome.php" class="item">Admin</a>
           <a href="contact.php" class="active item">Contact</a>
           <div class="right item">
             <h3>Welcome, <?php echo $_SESSION['username']['username']; ?>!</h3>
