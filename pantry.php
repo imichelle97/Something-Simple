@@ -63,6 +63,7 @@
           else 
           {
             $_SESSION["cart"] = $itemArray;
+            $_SESSION["hasOrder"] = false;
           }
         }
         break;
@@ -77,8 +78,9 @@
               $_SESSION["cart"][$a]["quantity"]--;
               if($_SESSION["cart"][$a]["quantity"] == 0)
               {
-                unset($_SESSION["cart"]);
+                unset($_SESSION["cart"][$a]);
               }
+              
             }       
             if(empty($_SESSION["cart"]))
             {
