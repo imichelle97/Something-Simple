@@ -351,11 +351,12 @@
 						<button class="ui big green button">Submit order</button>
 					</a>
 				</div>
-				<div class="ui center aligned container">
-					<a href="home.php">
-						<button class="ui small gray button">Cancel order</button>
-					</a>
-				</div>
+					<div class="ui center aligned container">
+						<form method="post" action="home.php">
+							<input type="hidden" name="cancel" value="yes"></input>
+							<button class="ui small gray button" type="submit">Cancel order</button>
+						</form>
+					</div>
 			</div>
   
 

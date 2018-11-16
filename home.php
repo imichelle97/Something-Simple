@@ -12,6 +12,11 @@
   //   header('location: login.php');
   // }
 
+  if(isset($_POST['cancel']))
+  {
+    unset($_SESSION["cart"]);
+  }
+
 ?>
 
 <!DOCTYPE html>
@@ -183,7 +188,7 @@
         </div>
         <hr>
         <div class="center aligned row">
-          <h2>The Team</h2>
+          <h2>The Failures</h2>
           <div class="ui five doubling special cards">
           
             <div class="card">
@@ -201,7 +206,7 @@
               <div class="content">
                 <a class="header">Abraham Kong</a>
                 <div class="meta">
-                  <span class="date">Payment Engineer</span>
+                  <span class="date">Failure 1</span>
                 </div>
               </div>
             </div>
@@ -222,7 +227,7 @@
               <div class="content">
                 <a class="header">Karl Lapuz</a>
                 <div class="meta">
-                  <span class="date">Front-end Developer</span>
+                  <span class="date">Failure 2</span>
                 </div>
               </div>
             </div>
@@ -243,7 +248,7 @@
               <div class="content">
                 <a class="header">Michelle Luong</a>
                 <div class="meta">
-                  <span class="date">Backend Developer</span>
+                  <span class="date">Failure 3</span>
                 </div>
               </div>
             </div>
@@ -264,7 +269,7 @@
               <div class="content">
                 <a class="header">Katelynn Tran</a>
                 <div class="meta">
-                  <span class="date">Backend Developer</span>
+                  <span class="date">Failure 4</span>
                 </div>
               </div>
             </div>
@@ -285,7 +290,7 @@
               <div class="content">
                 <a class="header">Vincent Tran</a>
                 <div class="meta">
-                  <span class="date">Locations Engineer</span>
+                  <span class="date">Failure 5</span>
                 </div>
               </div>
             </div>
