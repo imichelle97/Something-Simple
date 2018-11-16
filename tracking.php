@@ -419,6 +419,7 @@
                     orderText.innerHTML = "Your order has arrived!";
                     var processingText = document.getElementById("processing");
                     processingText.innerHTML = "Completed";
+                    unset($_SESSION["cart"]);
                     $('.progress').progress({
                       percent: 100 
                     });
