@@ -206,7 +206,7 @@
               <div class="content">
                 <a class="header">Abraham Kong</a>
                 <div class="meta">
-                  <span class="date">Failure 1</span>
+                  <span class="date">Payment Engineer</span>
                 </div>
               </div>
             </div>
@@ -227,7 +227,7 @@
               <div class="content">
                 <a class="header">Karl Lapuz</a>
                 <div class="meta">
-                  <span class="date">Failure 2</span>
+                  <span class="date">Front-end Developer</span>
                 </div>
               </div>
             </div>
@@ -248,7 +248,7 @@
               <div class="content">
                 <a class="header">Michelle Luong</a>
                 <div class="meta">
-                  <span class="date">Failure 3</span>
+                  <span class="date">Backend Developer</span>
                 </div>
               </div>
             </div>
@@ -269,7 +269,7 @@
               <div class="content">
                 <a class="header">Katelynn Tran</a>
                 <div class="meta">
-                  <span class="date">Failure 4</span>
+                  <span class="date">Backend Developer</span>
                 </div>
               </div>
             </div>
@@ -290,7 +290,7 @@
               <div class="content">
                 <a class="header">Vincent Tran</a>
                 <div class="meta">
-                  <span class="date">Failure 5</span>
+                  <span class="date">Locations Engineer</span>
                 </div>
               </div>
             </div>
