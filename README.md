@@ -29,7 +29,7 @@ LOCAL CONFIGURATION: If you would like to run Something Simple on your local mac
 13. Within that folder, copy over all the source files (including the images folder, all the php files).
 14. Now from your browser, you should be able to navigate to Something Simple by typing in http://localhost/something-simple/. 
 
-    
+If you would like to watch a video on configuring/installing Something Simple on your local machine, watch our video: https://youtu.be/sDIdQrAc2wU.  
 
 
 
