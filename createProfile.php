@@ -189,7 +189,7 @@
                       <div class="ui four wide column field">
                         <label>Card Type</label>
                         <input type="text" name="card_type" value="<?php echo $card_type; ?>" id="cardType">
-                        <label>(Discover, Visa, Mastercard, AMEX)</label>
+                        <label>(Discover, Visa, Mastercard, American Express)</label>
                       </div>
 
                       <div class="ui four wide column field">
