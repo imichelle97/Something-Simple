@@ -133,9 +133,9 @@
               <i class="leaf icon"></i>
             </div>
             <a class="item" href="home.php">Home</a>
-            <a class="item">About</a>
-            <a class="item">Team</a>
-            <a class="item">Contact</a>
+            <a href="home.php#about" class="item">About</a>
+            <a href="home.php#about" class="item">Team</a>
+            <a href="home.php#contact" class="item">Contact</a>
             <div class="right item">
               <h3>Welcome, <?php echo $_SESSION['username']['username']; ?>!</h3>
               <a class="ui primary button" href="profile.php">Profile</a>
