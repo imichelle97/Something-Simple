@@ -73,8 +73,20 @@
       left: -2em;
       bottom: -2em;
     }
-    body > .grid {
-      height: 100%;
+    #profile .container {
+      margin-bottom: 2em;
+    }
+    #profile .container .header span {
+      font-family: 'Pacifico', cursive;
+    }
+    #profile .container .header i {
+      padding: 0 0.5em;
+    }
+    #profile .container .right .button {
+      margin: 0 1em !important;
+    }
+    #profile .navbar .container .right h3 {
+      margin: 0 1em !important;
     }
     .input {
       width: 100%;
@@ -95,166 +107,191 @@
 </head>
 <body>
 
-<div class="ui middle aligned center aligned grid container">
-  <div class="column">
-    <h1 class="ui left aligned header">
-      Profile
-    </h1>
+    <!-- MASTER HEAD -->
+    <section id="profile">
 
-    <div class="ui grid container">
-      <div class="four wide column">
-        <div class="ui green vertical menu">
-        <a id="accountSection" class="item active">
-          <h4 class="ui header">Account</h4>
-          <p>Includes your name, username, and password</p>
-        </a>
-        <a id="shippingSection" class="item">
-          <h4 class="ui header">Shipping</h4>
-          <p>Add or remove shipping addresses</p>
-        </a>
-        <a id="paymentSection" class="item">
-          <h4 class="ui header">Payment</h4>
-          <p>Add or remove payment information</p>
-        </a>
+      <!-- NAV BAR -->
+      <div class="navbar">
+        <div class="ui container">
+          <div class="ui large secondary menu">
+            <div class="header item">
+              <span>something simple.</span>
+              <i class="leaf icon"></i>
+            </div>
+            <a class="item" href="home.php">Home</a>
+            <a href="home.php#about" class="item">About</a>
+            <a href="home.php#about" class="item">Team</a>
+            <a href="home.php#contact" class="item">Contact</a>
+            <div class="right item">
+              <h3>Welcome, <?php echo $_SESSION['username']['username']; ?>!</h3>
+              <a class="ui primary button" href="profile.php">Profile</a>
+              <a class="ui negative button" href="index.php">Log Out</a>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="twelve wide stretched column">
-        <div class="ui segment">
 
-          <!-- RENDER WHEN ACCOUNT IS ACTIVE -->
-          <div id="account" class="ui grid">
-            <div class="row">
-              <div class="sixteen wide left aligned column">
-                <h2><strong>Account Details</strong></h2>
-              </div>
-            </div>
-            <div class="row">
-              <div class="six wide left aligned column">
-                <h3><strong>Name</strong></h3>
-              </div>
-              <div class="ten wide right aligned column">
-                <p><?php echo $firstName . " " . $lastName ?></p>
-              </div>
-            </div>
-          
-            <div class="row">
-              <div class="six wide left aligned column">
-                <h3><strong>Username</strong></h3>
-              </div>
-              <div class="ten wide right aligned column">
-                <p><?php echo $_SESSION['username']['username']; ?></p>
-              </div>
-            </div>
+  <div class="ui middle aligned center aligned grid container">
+    <div class="column">
+      <h1 class="ui left aligned header">
+        Profile
+      </h1>
 
-            <div class="row">
-              <div class="six wide left aligned column">
-                <h3><strong>Password</strong></h3>
-              </div>
-              <div class="ten wide right aligned column">
-                <p>•••••••</p>
-              </div>
-            </div>
+      <div class="ui grid container">
+        <div class="four wide column">
+          <div class="ui green vertical menu">
+          <a id="accountSection" class="item active">
+            <h4 class="ui header">Account</h4>
+            <p>Includes your name, username, and password</p>
+          </a>
+          <a id="shippingSection" class="item">
+            <h4 class="ui header">Shipping</h4>
+            <p>Add or remove shipping addresses</p>
+          </a>
+          <a id="paymentSection" class="item">
+            <h4 class="ui header">Payment</h4>
+            <p>Add or remove payment information</p>
+          </a>
           </div>
-
-          <!-- RENDER WHEN SHIPPING IS ACTIVE -->
-          <div id="shipping" class="ui grid">
-            <div class="row">
-              <div class="sixteen wide left aligned column">
-                <h2><strong>Shipping Addresses</strong></h2>
-              </div>
-            </div>
-            
-            <div class="row">
-              <div class="six wide left aligned column">
-                <h3><strong>Primary Shipping</strong></h3>
-              </div>
-              <div class="ten wide right aligned column">
-                <p> <?php echo $address ?> <br>
-                  <?php echo $city . ', ' . $state ?> <br>
-                  <?php echo $zipcode ?>
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <!-- RENDER WHEN PAYMENT IS ACTIVE -->
-          <div id="payment" class="ui grid">
-            <div class="row">
-              <div class="sixteen wide left aligned column">
-                <h2><strong>Payment Information</strong></h2>
-              </div>
-            </div>
-            
-            <div class="row">
-              <div class="six wide left aligned column">
-                <h3><strong>Primary Payment</strong></h3>
-              </div>
-              <div class="ten wide right aligned column">
-                <p> <?php echo $firstName . " " . $lastName ?> <br>
-                  <?php echo $card_type . " ending in " . $substring ?> <br>
-                  <?php echo "Expiring on " . $expiration_date ?>
-                </p>
-              </div>
-            </div>
-          </div>
-
-
         </div>
+        <div class="twelve wide stretched column">
+          <div class="ui segment">
 
-        <!-- EDIT AND HOME BUTTONS -->
-        <div class="center aligned row">
-          <a href="home.php">
-            <button class="ui large animated fade blue button" tabindex="0">
-              <div class="hidden content"><i class="home icon"></i></div>
-              <div class="visible content">
-                <span class="text">Go home</span>
+            <!-- RENDER WHEN ACCOUNT IS ACTIVE -->
+            <div id="account" class="ui grid">
+              <div class="row">
+                <div class="sixteen wide left aligned column">
+                  <h2><strong>Account Details</strong></h2>
+                </div>
               </div>
-            </button>
-          </a>
-          <a href="createProfile.php">
-            <button class="ui large animated fade gray button" tabindex="0">
-              <div class="hidden content"><i class="edit icon"></i></div>
-              <div class="visible content">
-                <span class="text">Edit info</span>
+              <div class="row">
+                <div class="six wide left aligned column">
+                  <h3><strong>Name</strong></h3>
+                </div>
+                <div class="ten wide right aligned column">
+                  <p><?php echo $firstName . " " . $lastName ?></p>
+                </div>
               </div>
-            </button>
-          </a>
-          <button class="ui large animated fade red button" tabindex="0">
-            <div class="hidden content"><i class="trash alternate icon"></i></div>
-            <div class="visible content">
-              <span class="text">Delete account</span>
+            
+              <div class="row">
+                <div class="six wide left aligned column">
+                  <h3><strong>Username</strong></h3>
+                </div>
+                <div class="ten wide right aligned column">
+                  <p><?php echo $_SESSION['username']['username']; ?></p>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="six wide left aligned column">
+                  <h3><strong>Password</strong></h3>
+                </div>
+                <div class="ten wide right aligned column">
+                  <p>•••••••</p>
+                </div>
+              </div>
             </div>
-          </button>
+
+            <!-- RENDER WHEN SHIPPING IS ACTIVE -->
+            <div id="shipping" class="ui grid">
+              <div class="row">
+                <div class="sixteen wide left aligned column">
+                  <h2><strong>Shipping Addresses</strong></h2>
+                </div>
+              </div>
+              
+              <div class="row">
+                <div class="six wide left aligned column">
+                  <h3><strong>Primary Shipping</strong></h3>
+                </div>
+                <div class="ten wide right aligned column">
+                  <p> <?php echo $address ?> <br>
+                    <?php echo $city . ', ' . $state ?> <br>
+                    <?php echo $zipcode ?>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- RENDER WHEN PAYMENT IS ACTIVE -->
+            <div id="payment" class="ui grid">
+              <div class="row">
+                <div class="sixteen wide left aligned column">
+                  <h2><strong>Payment Information</strong></h2>
+                </div>
+              </div>
+              
+              <div class="row">
+                <div class="six wide left aligned column">
+                  <h3><strong>Primary Payment</strong></h3>
+                </div>
+                <div class="ten wide right aligned column">
+                  <p> <?php echo $firstName . " " . $lastName ?> <br>
+                    <?php echo $card_type . " ending in " . $substring ?> <br>
+                    <?php echo "Expiring on " . $expiration_date ?>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+
+          <!-- EDIT AND HOME BUTTONS -->
+          <div class="center aligned row">
+            <a href="home.php">
+              <button class="ui large animated fade blue button" tabindex="0">
+                <div class="hidden content"><i class="home icon"></i></div>
+                <div class="visible content">
+                  <span class="text">Go home</span>
+                </div>
+              </button>
+            </a>
+            <a href="createProfile.php">
+              <button class="ui large animated fade gray button" tabindex="0">
+                <div class="hidden content"><i class="edit icon"></i></div>
+                <div class="visible content">
+                  <span class="text">Edit info</span>
+                </div>
+              </button>
+            </a>
+            <button class="ui large animated fade red button" tabindex="0">
+              <div class="hidden content"><i class="trash alternate icon"></i></div>
+              <div class="visible content">
+                <span class="text">Delete account</span>
+              </div>
+            </button>
+          </div>
         </div>
       </div>
+
     </div>
 
   </div>
-
-</div>
-<div class="ui mini modal">
-  <i class="close icon"></i>
-  <div class="header">
-    Delete Account
-  </div>
-  <div class="content">
-    <div class="description">
-      <p>Are you sure you want to delete your account?</p>
+  <div class="ui mini modal">
+    <i class="close icon"></i>
+    <div class="header">
+      Delete Account
     </div>
-  </div> 
-  <form method="post" action="profile.php"> 
-  <div class="actions">
-    <div class="ui negative button">
-      No
-    </div>
+    <div class="content">
+      <div class="description">
+        <p>Are you sure you want to delete your account?</p>
+      </div>
+    </div> 
+    <form method="post" action="profile.php"> 
+    <div class="actions">
+      <div class="ui negative button">
+        No
+      </div>
 
-    <button class="ui positive right labeled icon button" name="delete">
-        Yes
-        <i class="checkmark icon"></i>  
-    </button>
+      <button class="ui positive right labeled icon button" name="delete">
+          Yes
+          <i class="checkmark icon"></i>  
+      </button>
+    </div>
+    </form>
   </div>
-  </form>
-</div>
+</section>
 
 <script type="text/javascript">
   $('.ui.green.menu')
