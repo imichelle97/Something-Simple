@@ -1,3 +1,22 @@
+<?php
+  // include('server.php');
+  // Database connection
+	$db = mysqli_connect('localhost', 'OFS', 'sesame', 'OFS');
+  $name="";
+  $message="";
+  if(isset($_POST['submit_contact_index'])) {
+		
+		$name = mysqli_real_escape_string($db, $_POST['name']);
+		$message = mysqli_real_escape_string($db, $_POST['message']);
+
+		if(count($errors) == 0) {
+			$query = "INSERT INTO admin_contact(contact_id, name, message) 
+					VALUES(NULL, '$name', '$message');";
+			mysqli_query($db, $query);
+			header('location: index.php');
+		}
+	}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -270,18 +289,19 @@
         <div class="center aligned row">
           <h2><i class="paper plane icon"></i></h2>
           <div class="ui raised segment container">
-            <form class="ui form" action="">
+            <form class="ui form" method="post" action="index.php">
               <h3>Leave us a note!</h3>
               <div class="field">
                 <label>Name</label>
-                <input type="text">
+                <input type="text" name="name" value=<?php echo $name; ?>>
               </div>
               <div class="field">
                 <label>Message</label>
-                <textarea></textarea>
+                <textarea name="message"><?php echo htmlspecialchars($message); ?></textarea>
               </div>
               <div class="field">
-                <div class="ui fluid primary submit button">Submit</div>
+                <!-- <div class="ui fluid primary submit button">Submit</div> -->
+                <button type="submit" class="ui fluid primary submit button" name="submit_contact_index">Submit</div>
               </div>
             </form>
           </div>
