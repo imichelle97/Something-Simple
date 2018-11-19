@@ -30,33 +30,33 @@
       left: -2em;
       bottom: -2em;
     }
-    #shipping .container {
+    #createProf .container {
       margin-bottom: 2em;
     }
-    #shipping .container .header span {
+    #createProf .container .header span {
       font-family: 'Pacifico', cursive;
     }
-    #shipping .container .header i {
+    #createProf .container .header i {
       padding: 0 0.5em;
     }
-    #shipping .container .right .button {
+    #createProf .container .right .button {
       margin: 0 1em !important;
     }
-    #shipping .navbar .container .right h3 {
+    #createProf .navbar .container .right h3 {
       margin: 0 1em !important;
     }
-    #shipping .container .row h1 {
+    #createProf .container .row h1 {
       font-size: 5em;
       margin-bottom: 0.5em;
       font-family: 'Pacifico', cursive;
     }
-    #shipping .container .message {
+    #createProf .container .message {
       margin-bottom: 2em;
     }
-    #shipping .container .field {
+    #createProf .container .field {
       margin-bottom: 1em;
     }
-    #shipping .container .column {
+    #createProf .container .column {
       margin-bottom: 0;
     }
     /* .image {
@@ -73,7 +73,7 @@
   <div class="pusher">
 
     <!-- MASTER HEAD -->
-    <section id="shipping">
+    <section id="createProf">
       
       <!-- NAV BAR -->
       <div class="navbar">
