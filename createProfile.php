@@ -199,7 +199,7 @@
 
                       <div class="ui four wide column field">
                         <label>Expiration Date</label>
-                        <input type="date" name="expiration_date" value="<?php echo $expiration_date; ?>" id="cardDate">
+                        <input type="month" name="expiration_date" value="<?php echo $expiration_date; ?>" id="cardDate">
                       </div>
                   </div>
               <!-- </form> -->
