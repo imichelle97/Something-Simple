@@ -17,9 +17,9 @@ LOCAL CONFIGURATION: If you would like to run Something Simple on your local mac
 5. Click on phpMyAdmin
 6. Click on User Accounts.  **The next few steps are really important to set up correctly.  Our source code has specific user account and password for security purposes for our database**
 7. Click on ‘Add a new user’ towards the bottom of the page.  Input in the following information:
-    **User name: OFS
-    Host name: localhost (remove the % that is already inputted in that field)
-    Password: sesame
+    **User name: 'OFS'
+    Host name: 'localhost' (remove the % that is already inputted in that field)
+    Password: 'sesame'
     Make sure to check on ‘Create database with same name and grant all privileges’**
 8. Now you created the database needed for Something Simple.  Now you can click on OFS on the left side panel.  There should be no tables yet in the OFS database. 
 9. The next step is to import the SQL dump.  In our GitHub repository, there is a file called OFS.sql.  
