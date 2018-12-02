@@ -89,6 +89,21 @@
           }
         }
         break; 
+
+      case "addOneToCart":
+        if(!empty($_SESSION["cart"])) 
+        {
+          foreach($_SESSION["cart"] as $a => $b) 
+          {
+            if($_GET["item_id"] == $b["item_id"])
+            {
+              $_SESSION["cart"][$a]["quantity"]++;
+              
+            }       
+          }
+        }
+        break; 
+
       case "removeAll":
         unset($_SESSION["cart"]);
         break;
@@ -235,6 +250,10 @@
                         <div class='three wide column right aligned'>
                           <a href='pantry.php?action=removeFromCart&item_id=$item_id'>
                           <div class='ui mini button'><i class='ui minus icon'></i></div></a>
+                        </div>
+                        <div class='three wide column right aligned'>
+                          <a href='pantry.php?action=addOneToCart&item_id=$item_id'>
+                          <div class='ui mini button'><i class='ui plus icon'></i></div></a>
                         </div>
                       </div>
                     </div>
