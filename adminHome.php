@@ -28,11 +28,11 @@
         return $set;
       }
   }
-  if(!empty($_GET["action"])) 
+ if(!empty($_GET["action"])) 
   {
     switch($_GET["action"]) 
     {
-      case "add":
+      case "addOrRemove":
         if(!empty($_POST["quantity"])) 
         {
           $product = query("SELECT * FROM item WHERE item_id='" . $_GET["item_id"] . "'");
@@ -63,7 +63,24 @@
                   {
                     $_SESSION["inven"][$a]["invenQuantity"] = 0;
                   }
-                  $_SESSION["inven"][$a]["invenQuantity"] += $_POST["quantity"];
+                  if(!empty($_POST["add"]))
+                  {
+                    $_SESSION["inven"][$a]["invenQuantity"] += $_POST["quantity"];
+                    $updatedQ = $product[0]["inventory"] + $_POST["quantity"];
+                  }
+                  if(!empty($_POST["remove"]))
+                  {
+                    if($_SESSION["inven"][$a]["invenQuantity"] < $_POST["quantity"])
+                    {
+                      echo "Cannot have negative inventory.";
+                      $updatedQ = $_SESSION["inven"][$a]["invenQuantity"];
+                    }
+                    else
+                    {
+                      $_SESSION["inven"][$a]["invenQuantity"] -= $_POST["quantity"];
+                      $updatedQ = $product[0]["inventory"] - $_POST["quantity"];
+                    }
+                  }
                 }
               }
             } 
@@ -71,10 +88,9 @@
             {
               $_SESSION["inven"] = $_SESSION["inven"] + $itemArray; 
             }
-            $updatedQ = $product[0]["inventory"] + $_POST["quantity"];
-                  $sql = "UPDATE item SET inventory = '$updatedQ' WHERE item_id = $id";
-                  $connect = mysqli_connect('localhost','OFS','sesame','OFS');
-                  mysqli_query($connect,$sql);
+            $sql = "UPDATE item SET inventory = '$updatedQ' WHERE item_id = $id";
+            $connect = mysqli_connect('localhost','OFS','sesame','OFS');
+            mysqli_query($connect,$sql);
           } 
           else 
           {
@@ -185,7 +201,8 @@
                 <th>Item Weight</th>
                 <th>Item Price</th>
                 <th>Inventory</th>
-                <th>Increment Quantity</th>
+                <th>Quantity</th>
+                <th></th>
                 <th></th>
                 </tr>
               </thead>";
@@ -195,14 +212,15 @@
                 foreach($items as $key=>$value)
                 {
             ?>
-                  <form method="post" action="adminHome.php?action=add&item_id=<?php echo $items[$key]["item_id"]; ?>">
+                  <form method="post" action="adminHome.php?action=addOrRemove&item_id=<?php echo $items[$key]["item_id"]; ?>">
                     <tr>
                       <td><?php echo $items[$key]["item_name"]; ?></td>
                       <td><?php echo $items[$key]["item_weight"];?></td>
                       <td><?php echo "$".$items[$key]["item_price"]; ?></td>
                       <td><?php echo $items[$key]["inventory"];?></td>
                       <td><span class="ui input"><input type="number"name="quantity" min="0" value="1"/></span></td>
-                      <td><button class="ui bottom attached olive fluid button" type="submit"><i class="shop icon"></i>Add to inventory</button></td>
+                      <td><input class="ui bottom attached olive fluid button" type="submit" name="add" value ="Add to inventory"></></td>
+                      <td><input class="ui fluid red button" type="submit" name="remove" value="Remove from inventory"></></td>
                     </tr>
                   </form>  
                   <?php
@@ -225,5 +243,3 @@
 </body>
 
 </html>
-
-
