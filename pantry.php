@@ -38,20 +38,29 @@
                   'quantity'=>$_POST["quantity"], 
                   'item_price'=>$products[0]["item_price"],
                   'inventory'=>$products[0]["inventory"]));
-      
+   
           if(!empty($_SESSION["cart"])) 
           { 
             if(in_array($products[0]["item_id"],array_keys($_SESSION["cart"]))) 
             {
               foreach($_SESSION["cart"] as $a => $b) 
               {
+                $itemHold = $products[0]["inventory"];
                 if($products[0]["item_id"] == $a) 
                 {
                   if(empty($_SESSION["cart"][$a]["quantity"])) 
                   {
                     $_SESSION["cart"][$a]["quantity"] = 0;
                   }
-                  $_SESSION["cart"][$a]["quantity"] += $_POST["quantity"];
+                  if($_POST["quantity"] < $itemHold)
+                  {
+                    $_SESSION["cart"][$a]["quantity"] += $_POST["quantity"];
+                    $itemHold -= $_POST["quantity"];
+                  }
+                  else
+                  {
+                    echo "Out of stock.";
+                  }
                 }
               }
             } 
@@ -63,7 +72,6 @@
           else 
           {
             $_SESSION["cart"] = $itemArray;
-            $_SESSION["hasOrder"] = false;
           }
         }
         break;
