@@ -182,7 +182,7 @@
                     <div class="ui grid">
                       <div class="ui four wide column field">
                         <label>Card Number</label>
-                        <input type="text" name="card_number" value="<?php echo $card_number; ?>" id="cardNumber">
+                        <input type="number" name="card_number" value="<?php echo $card_number; ?>" id="cardNumber">
                         <label>No spaces</label>
                       </div>
 
@@ -194,7 +194,7 @@
 
                       <div class="ui four wide column field">
                         <label>CVC</label>
-                        <input type="text" name="cvc" value="<?php echo $cvc; ?>" max="999">
+                        <input type="number" name="cvc" value="<?php echo $cvc; ?>" max="999">
                       </div>
 
                       <div class="ui four wide column field">

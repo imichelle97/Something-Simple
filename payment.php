@@ -210,7 +210,7 @@
                 <div class="ui grid">
                   <div class="ui six wide column field">
                     <label>Card Number</label>
-                    <input type="text" name="card_number" id="cardNumber" value="<?php echo $card_number; ?>">
+                    <input type="number" name="card_number" id="cardNumber" value="<?php echo $card_number; ?>">
                   </div>
 
                   <div class="ui five wide column field">
@@ -220,7 +220,7 @@
 
                   <div class="ui two wide column field">
                     <label>CVC</label>
-                    <input type="text" name="cvc" value="<?php echo $cvc; ?>" max="999">
+                    <input type="number" name="cvc" value="<?php echo $cvc; ?>" max="999">
                   </div>
 
                   <div class="ui six wide column field">
