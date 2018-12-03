@@ -17,7 +17,7 @@
 					$quantity = $product["quantity"];
 					$inventory = $product["inventory"];
 													
-			      	if($quantity < $inventory)
+			      	if($quantity <= $inventory)
 					{										
 						$updatedQuan = $inventory - $quantity;
 						$inventoryQuery = "UPDATE item SET inventory = '$updatedQuan' WHERE item_id = $item_id";
