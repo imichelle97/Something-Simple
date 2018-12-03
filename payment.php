@@ -5,6 +5,16 @@
     $_SESSION['msg'] = "You must log in first";
     header('location: login.php');
   }
+  if(!isset($_SESSION['checkout']))
+  {
+    $_SESSION['msg'] = "You must add items to your cart first";
+    header('location: pantry.php');
+  }
+  if(!isset($_SESSION['proceed']))
+  {
+    $_SESSION['msg'] = "You must fill in your shipping information first";
+    header('location: shipping.php');
+  }
 
   // User Profile Contents
   $username = $_SESSION['username']['username'];
@@ -56,6 +66,18 @@
             VALUES(NULL, '$first_name', '$last_name', '$username', '$phone_number', '$address', '$city', '$state', '$zipcode');";
     }
     mysqli_query($db, $query);
+  }
+
+  if(!empty($_GET["action"])) 
+  {
+    switch($_GET["action"]) 
+    {
+
+      case "confirm":
+        $_SESSION["confirm"] = "true";
+        header('location: confirmation.php');
+        break;
+    }
   }
 ?>
 
@@ -264,7 +286,7 @@
                 	}
                 	else
                 	{
-	                  echo "<a href='confirmation.php'>
+	                  echo "<a href='payment.php?action=confirm'>
 	                    <button class='ui fluid green button' id='confirm_button'>Confirm</button>
 	                  </a>";
               		}
