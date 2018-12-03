@@ -15,6 +15,10 @@
   if(isset($_POST['cancel']))
   {
     unset($_SESSION["cart"]);
+    unset($_SESSION["checkout"]);
+    unset($_SESSION["proceed"]);
+    unset($_SESSION["confirm"]);
+    unset($_SESSION["complete"]);
   }
 
 ?>
