@@ -133,7 +133,7 @@
               if(1 < $itemHold)
               {
                 $_SESSION["cart"][$a]["quantity"] ++;
-                $itemHold -= $_POST["quantity"];
+                $itemHold--;
               }
               else
               {
