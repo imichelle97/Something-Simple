@@ -247,7 +247,7 @@
 
                   <div class="ui six wide column field">
                         <label>Expiration Date</label>
-                        <input type="month" name="expiration_date" id="cardDate" value="<?php echo $expiration_date; ?>">
+                        <input type="month" name="expiration_date" value="<?php echo $expiration_date; ?>" id="cardDate" min="<?php echo date('Y-m'); ?>" required>
                   </div>
 
                   <div class="ui left aligned container">
@@ -427,11 +427,11 @@
                            return false; 
                         };   
                         // See if the expiration date has passed
-                        var now = new Date();
-                        if (document.getElementById("cardDate").value < now){
-                          alert("Credit catd date is out of date");
-                          return false;
-                        }
+                        // var now = new Date();
+                        // if (document.getElementById("cardDate").value < now){
+                        //   alert("Credit catd date is out of date");
+                        //   return false;
+                        // }
                         
                         // The credit card is in the required format.
                         return true;
