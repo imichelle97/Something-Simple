@@ -129,7 +129,7 @@
                       <div class="ui four wide column field">
                         <label>Username</label>
                         <!-- <input type="text" name="username" value="<?php echo $username; ?>"> -->
-                        <input type="text" name="username" value="<?php echo $_SESSION['username']['username']; ?>">
+                        <input type="text" name="username" value="<?php echo $_SESSION['username']['username']; ?>" readonly="readonly">
                       </div>
 
                       <div class="ui four wide column field">
