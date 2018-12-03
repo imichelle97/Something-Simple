@@ -5,6 +5,11 @@
     $_SESSION['msg'] = "You must log in first";
     header('location: login.php');
   }
+  if(!isset($_SESSION['checkout']))
+  {
+    $_SESSION['msg'] = "You must add items to your cart first";
+    header('location: pantry.php');
+  }
   $weight = 0;
   $price = 0;
   $tax = 0;
@@ -16,6 +21,7 @@
     $tax = $_SESSION["tax"];
     $orderTot = $_SESSION["orderTot"];
   }
+
 
   // User Profile Contents
   $username = $_SESSION['username']['username'];
@@ -47,8 +53,17 @@
 		$cvc = "-";
 		$expiration_date = "-";
   }
-
   
+  if(!empty($_GET["action"])) 
+  {
+    switch($_GET["action"]) 
+    {
+      case "proceed":
+        $_SESSION["proceed"] = "true";
+        header('location: payment.php');
+        break;
+    }
+  }
 ?>
 
 <!DOCTYPE html>
@@ -296,7 +311,7 @@
                     }
                     else
                     {
-                      echo "<a href='payment.php'>
+                      echo "<a href='shipping.php?action=proceed'>
                         <button class='ui fluid green button'>Proceed to payment</button>
                       </a>";
                     }
