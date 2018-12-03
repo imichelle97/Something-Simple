@@ -1,9 +1,25 @@
 <?php 
 	include("server.php");
-  if (!isset($_SESSION['username'])) {
+  	if (!isset($_SESSION['username'])) {
     $_SESSION['msg'] = "You must log in first";
     header('location: login.php');
 	}
+	if(!isset($_SESSION['checkout']))
+  	{
+    	$_SESSION['msg'] = "You must add items to your cart first";
+    	header('location: pantry.php');
+  	}
+  	if(!isset($_SESSION['proceed']))
+  	{
+    	$_SESSION['msg'] = "You must fill in your shipping information first";
+    	header('location: shipping.php');
+  	}
+  	if(!isset($_SESSION['confirm']))
+  	{
+    	$_SESSION['msg'] = "You must fill in your payment information first";
+    	header('location: payment.php');
+  	}
+
   $weight = 0;
   $price = 0;
   $tax = 0;
@@ -58,6 +74,34 @@
 	$substring = substr($card_number, -4); 
 	
 	// echo $customerID;
+	if(!empty($_GET["action"])) 
+  	{
+	    switch($_GET["action"]) 
+	    {
+	      	case "complete":
+	      		$_SESSION["complete"] = "true";
+	      		if(isset($_SESSION["cart"])) 
+	      		{
+					foreach ($_SESSION["cart"] as $product) 
+					{
+						$item_id = $product["item_id"];
+						$quantity = $product["quantity"];
+						$inventory = $product["inventory"];
+													
+			      		if($quantity <= $inventory)
+						{										
+							$updatedQuan = $inventory - $quantity;
+							$inventoryQuery = "UPDATE item SET inventory = '$updatedQuan' WHERE item_id = $item_id";
+							mysqli_query($db,$inventoryQuery);
+						}
+					}
+					header('location: complete.php');
+					//Destroys cart session
+					unset($_SESSION["cart"]);
+				}	
+	      		break;
+	    }
+	}
 
 ?>
 
@@ -347,7 +391,7 @@
 
 				<!-- BUTTONS -->
 				<div class="ui center aligned container">
-					<a href="complete.php?action=submit&item_id=$item_id">
+					<a href="confirmation.php?action=complete&item_id=$item_id">
 						<button class="ui big green button">Submit order</button>
 					</a>
 				</div>
