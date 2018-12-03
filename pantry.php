@@ -19,41 +19,44 @@
   }
   if(!empty($_GET["action"])) 
   {
-    if(!empty($_POST["quantity"]))
+    if(!empty($_GET["item_id"]))
     {
-      $products = query("SELECT * FROM item WHERE item_id='" . $_GET["item_id"] . "'");
-      $itemArray = 
-        array
-        (
-          $products[0]["item_id"]=>
-            array
-            (
-              'item_id'=>$products[0]["item_id"],
-              'image'=>$products[0]["image"],
-              'item_name'=>$products[0]["item_name"], 
-              'item_weight'=>$products[0]["item_weight"], 
-              'quantity'=>number_format($_POST["quantity"]), 
-              'item_price'=>$products[0]["item_price"],
-              'inventory'=>$products[0]["inventory"]));
-      $itemHold = $products[0]["inventory"];
-    }
-    else
-    {
-      $products = query("SELECT * FROM item WHERE item_id='" . $_GET["item_id"] . "'");
-      $itemArray = 
-        array
-        (
-          $products[0]["item_id"]=>
-            array
-            (
-              'item_id'=>$products[0]["item_id"],
-              'image'=>$products[0]["image"],
-              'item_name'=>$products[0]["item_name"], 
-              'item_weight'=>$products[0]["item_weight"], 
-              'quantity'=>number_format(0), 
-              'item_price'=>$products[0]["item_price"],
-              'inventory'=>$products[0]["inventory"]));
-      $itemHold = $products[0]["inventory"];
+      if(!empty($_POST["quantity"]))
+      {
+        $products = query("SELECT * FROM item WHERE item_id='" . $_GET["item_id"] . "'");
+        $itemArray = 
+          array
+          (
+            $products[0]["item_id"]=>
+              array
+              (
+                'item_id'=>$products[0]["item_id"],
+                'image'=>$products[0]["image"],
+                'item_name'=>$products[0]["item_name"], 
+                'item_weight'=>$products[0]["item_weight"], 
+                'quantity'=>number_format($_POST["quantity"]), 
+                'item_price'=>$products[0]["item_price"],
+                'inventory'=>$products[0]["inventory"]));
+        $itemHold = $products[0]["inventory"];
+      }
+      else
+      {
+        $products = query("SELECT * FROM item WHERE item_id='" . $_GET["item_id"] . "'");
+        $itemArray = 
+          array
+          (
+            $products[0]["item_id"]=>
+              array
+              (
+                'item_id'=>$products[0]["item_id"],
+                'image'=>$products[0]["image"],
+                'item_name'=>$products[0]["item_name"], 
+                'item_weight'=>$products[0]["item_weight"], 
+                'quantity'=>number_format(0), 
+                'item_price'=>$products[0]["item_price"],
+                'inventory'=>$products[0]["inventory"]));
+        $itemHold = $products[0]["inventory"];
+      }
     }
     switch($_GET["action"]) 
     {
