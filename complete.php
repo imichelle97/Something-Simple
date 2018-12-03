@@ -4,31 +4,41 @@
     $_SESSION['msg'] = "You must log in first";
     header('location: login.php');
 	}
+	if(!isset($_SESSION['checkout']))
+  	{
+    	$_SESSION['msg'] = "You must add items to your cart first";
+    	header('location: pantry.php');
+  	}
+  	if(!isset($_SESSION['proceed']))
+  	{
+    	$_SESSION['msg'] = "You must fill in your shipping information first";
+    	header('location: shipping.php');
+  	}
+  	if(!isset($_SESSION['confirm']))
+  	{
+    	$_SESSION['msg'] = "You must fill in your payment information first";
+    	header('location: payment.php');
+  	}
+  	if(!isset($_SESSION['complete']))
+  	{
+  		$_SESSION['msg'] = "You must confirm your order first";
+    	header('location: confirmation.php');
+  	}
   	if(!empty($_GET["action"])) 
   	{
 	    switch($_GET["action"]) 
 	    {
-	      	case "submit":
-	      	if(isset($_SESSION["cart"])) 
-	      	{
-				foreach ($_SESSION["cart"] as $product) 
-				{
-					$item_id = $product["item_id"];
-					$quantity = $product["quantity"];
-					$inventory = $product["inventory"];
-													
-			      	if($quantity <= $inventory)
-					{										
-						$updatedQuan = $inventory - $quantity;
-						$inventoryQuery = "UPDATE item SET inventory = '$updatedQuan' WHERE item_id = $item_id";
-						mysqli_query($db,$inventoryQuery);
-					}
-				}
-				//Destroys cart session
-				unset($_SESSION["cart"]);
-			}	
-	      break;
-	  	}
+	      	case "home":
+				unset($_SESSION["complete"]);
+				unset($_SESSION["checkout"]);
+				unset($_SESSION["proceed"]);
+				unset($_SESSION["confirm"]);
+	      		header('location: home.php');
+	      		break;
+	      	case "track":
+	      		header('location: tracking.php');
+	      		break;
+	    }
 	}
 ?>
 <!DOCTYPE html>
@@ -103,13 +113,13 @@
 					<h3>
 						Hi, <?php echo $_SESSION["username"]["username"]; ?>! Thank you from purchasing from our Something Simple. Your order has been placed and will be arriving soon.
 					</h3>
-					<a href="home.php">
+					<a href="complete.php?action=home">
 						<div class="ui large blue button">
 							<i class="home icon"></i>
 							<span class="text">Go home</span>
 						</div>
 					</a>
-					<a href="tracking.php">
+					<a href="complete.php?action=track">
 						<div class="ui large green button">
 							<i class="thumbtack icon"></i>
 							<span class="text">Track order</span>
