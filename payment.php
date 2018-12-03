@@ -220,7 +220,7 @@
 
                   <div class="ui two wide column field">
                     <label>CVC</label>
-                    <input type="text" name="cvc" value="<?php echo $cvc; ?>">
+                    <input type="text" name="cvc" value="<?php echo $cvc; ?>" max="999">
                   </div>
 
                   <div class="ui six wide column field">
