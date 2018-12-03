@@ -5,6 +5,27 @@
     $_SESSION['msg'] = "You must log in first";
     header('location: login.php');
 	}
+  if(!isset($_SESSION['checkout']))
+  {
+    $_SESSION['msg'] = "You must add items to your cart first";
+    header('location: pantry.php');
+  }
+  if(!isset($_SESSION['proceed']))
+  {
+    $_SESSION['msg'] = "You must fill in your shipping information first";
+    header('location: shipping.php');
+  }
+  if(!isset($_SESSION['confirm']))
+  {
+    $_SESSION['msg'] = "You must fill in your payment information first";
+    header('location: payment.php');
+  }
+  if(!isset($_SESSION['complete']))
+  {
+    $_SESSION['msg'] = "You must confirm your order first";
+    header('location: confirmation.php');
+  }
+
 	$weight = 0;
   $price = 0;
   $tax = 0;
@@ -52,6 +73,20 @@
   $substring = substr($card_number, -4);   
   $fullAddress = $address . ", " . $city . ", " . $state . " ,USA";
   // $addressString = settype($fullAddress, 'string');
+  
+  if(!empty($_GET["action"])) 
+  {
+    switch($_GET["action"]) 
+    {
+      case "home":
+        unset($_SESSION["complete"]);
+        unset($_SESSION["checkout"]);
+        unset($_SESSION["proceed"]);
+        unset($_SESSION["confirm"]);
+        header('location: home.php');
+        break;
+    }
+  }
 
 ?>
 
@@ -133,7 +168,7 @@
 							<span>something simple.</span>
 							<i class="leaf icon"></i>
 						</div>
-						<a class="item" href="home.php">Home</a>
+						<a class="item" href="tracking.php?action=home">Home</a>
 						<a href="home.php#about" class="item">About</a>
             <a href="home.php#about" class="item">Team</a>
             <a href="home.php#contact" class="item">Contact</a>
