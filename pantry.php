@@ -148,6 +148,11 @@
       case "removeAll":
         unset($_SESSION["cart"]);
         break;
+      
+      case "checkout":
+        $_SESSION["checkout"] = "true";
+        header('location: shipping.php');
+        break;
     }
   }
 ?>
@@ -395,7 +400,7 @@
         echo "<button class='ui disabled fluid green button'>Checkout</button>";
       }
       else {
-        echo "<a href='shipping.php'>
+        echo "<a href='pantry.php?action=checkout'>
           <button class='ui fluid green button'>Checkout</button>
         </a>";
       }
