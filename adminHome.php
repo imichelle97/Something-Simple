@@ -52,7 +52,7 @@
           
           if(!empty($itemArray))
           {
-            echo "NOT EMPTY ";
+            //echo "NOT EMPTY ";
             $id = $product[0]["item_id"];
             $updatedQ = $product[0]["inventory"];
           
@@ -60,32 +60,32 @@
             {
               if($product[0]["item_id"] == $a) 
               {
-                echo "ID MATCHES ";
+                //echo "ID MATCHES ";
                 if(!empty($_POST["add"]))
                 {
-                  echo "ADD ";
-                  echo $product[0]["inventory"]."+".$_POST["quantity"];
+                  //echo "ADD ";
+                  //echo $product[0]["inventory"]."+".$_POST["quantity"];
                   $updatedQ = $product[0]["inventory"] + $_POST["quantity"];
                 }
                 else
                 {
-                  echo "REMOVE ";
+                  //echo "REMOVE ";
                   if($product[0]["inventory"] < $_POST["quantity"])
                   {
-                    echo $product[0]["inventory"]."<".$_POST["quantity"];
+                    //echo $product[0]["inventory"]."<".$_POST["quantity"];
                     $negativeError = true;
                     $updatedQ = $product[0]["inventory"];
                   }
                   else
                   {
-                    echo $product[0]["inventory"].">=".$_POST["quantity"];
+                    //echo $product[0]["inventory"].">=".$_POST["quantity"];
                     $updatedQ = $product[0]["inventory"] - $_POST["quantity"];
                   }
                 }
               }
             }
           } 
-          echo "updatedInventory = $updatedQ";
+          //echo "updatedInventory = $updatedQ";
           $sql = "UPDATE item SET inventory = '$updatedQ' WHERE item_id = $id";
           $connect = mysqli_connect('localhost','OFS','sesame','OFS');
           mysqli_query($connect,$sql);
