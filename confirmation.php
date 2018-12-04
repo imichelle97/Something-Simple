@@ -100,6 +100,57 @@
 					unset($_SESSION["cart"]);
 				}	
 	      		break;
+
+	      	
+	      	case "pantry":
+        		unset($_SESSION["checkout"]);
+        		unset($_SESSION["proceed"]);
+        		header('location: pantry.php');
+        		break;
+
+		    case "shipping":
+		        unset($_SESSION["checkout"]);
+		        header('location: shipping.php');
+		        break;
+
+		    case "payment":
+        		unset($_SESSION["checkout"]);
+        		unset($_SESSION["proceed"]);
+        		unset($_SESSION["confirm"]);
+        		header('location: pantry.php');
+        		break;
+
+        	case "home":
+		        unset($_SESSION["complete"]);
+		        unset($_SESSION["checkout"]);
+		        unset($_SESSION["proceed"]);
+		        unset($_SESSION["confirm"]);
+		        header('location: home.php');
+		        break;
+
+		    case "about":
+		        unset($_SESSION["complete"]);
+		        unset($_SESSION["checkout"]);
+		        unset($_SESSION["proceed"]);
+		        unset($_SESSION["confirm"]);
+		        header('location: home.php#about');
+		        break;
+
+		    case "team":
+		        unset($_SESSION["complete"]);
+		        unset($_SESSION["checkout"]);
+		        unset($_SESSION["proceed"]);
+		        unset($_SESSION["confirm"]);
+		        header('location: home.php#about');
+		        break;  
+
+		    case "contact":
+		        unset($_SESSION["complete"]);
+		        unset($_SESSION["checkout"]);
+		        unset($_SESSION["proceed"]);
+		        unset($_SESSION["confirm"]);
+		        header('location: home.php#contact');
+		        break;
 	    }
 	}
 
@@ -176,10 +227,10 @@
               <span>something simple.</span>
               <i class="leaf icon"></i>
             </div>
-            <a class="item" href="home.php">Home</a>
-            <a href="home.php#about" class="item">About</a>
-            <a href="home.php#about" class="item">Team</a>
-            <a href="home.php#contact" class="item">Contact</a>
+            <a class="item" href="confirmation.php?action=home">Home</a>
+            <a href="confirmation.php?action=about" class="item">About</a>
+            <a href="confirmation.php?action=team" class="item">Team</a>
+            <a href="confirmation.php?action=contact" class="item">Contact</a>
             <div class="right item">
               <h3>Welcome, <?php echo $_SESSION['username']['username']; ?>!</h3>
               <a class="ui primary button" href="profile.php">Profile</a>
@@ -197,21 +248,21 @@
         <div class="row">
 					<div class="ui four small steps">
             
-            <a href="pantry.php" class="completed link step">
+            <a href="confirmation.php?action=pantry" class="completed link step">
               <i class="cart icon"></i>
               <div class="content">
                 <div class="title">Pantry</div>
                 <div class="description">Choose items to order</div>
               </div>
             </a>
-            <a href="shipping.php" class="completed link step">
+            <a href="confirmation.php?action=shipping" class="completed link step">
               <i class="truck icon"></i>
               <div class="content">
                 <div class="title">Shipping</div>
                 <div class="description">Choose your shipping options</div>
               </div>
             </a>
-            <a href="payment.php" class="completed link step">
+            <a href="confirmation.php?action=payment" class="completed link step">
               <i class="payment icon"></i>
               <div class="content">
                 <div class="title">Billing</div>
