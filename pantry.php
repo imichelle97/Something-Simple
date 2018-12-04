@@ -17,54 +17,34 @@
       return $set;
     }
   }
-  if(!empty($_GET["action"])) 
+  if(!empty($_POST["quantity"])) 
   {
     if(!empty($_GET["item_id"]))
     {
-      if(!empty($_POST["quantity"]))
-      {
-        $products = query("SELECT * FROM item WHERE item_id='" . $_GET["item_id"] . "'");
-        $itemArray = 
-          array
-          (
-            $products[0]["item_id"]=>
-              array
-              (
-                'item_id'=>$products[0]["item_id"],
-                'image'=>$products[0]["image"],
-                'item_name'=>$products[0]["item_name"], 
-                'item_weight'=>$products[0]["item_weight"], 
-                'quantity'=>number_format($_POST["quantity"]), 
-                'item_price'=>$products[0]["item_price"],
-                'inventory'=>$products[0]["inventory"]));
-        $itemHold = $products[0]["inventory"];
-      }
-      else
-      {
-        $products = query("SELECT * FROM item WHERE item_id='" . $_GET["item_id"] . "'");
-        $itemArray = 
-          array
-          (
-            $products[0]["item_id"]=>
-              array
-              (
-                'item_id'=>$products[0]["item_id"],
-                'image'=>$products[0]["image"],
-                'item_name'=>$products[0]["item_name"], 
-                'item_weight'=>$products[0]["item_weight"], 
-                'quantity'=>number_format(0), 
-                'item_price'=>$products[0]["item_price"],
-                'inventory'=>$products[0]["inventory"]));
-        $itemHold = $products[0]["inventory"];
-      }
+      $products = query("SELECT * FROM item WHERE item_id='" . $_GET["item_id"] . "'");
+      $itemArray = 
+        array
+        (
+          $products[0]["item_id"]=>
+            array
+            (
+              'item_id'=>$products[0]["item_id"],
+              'image'=>$products[0]["image"],
+              'item_name'=>$products[0]["item_name"], 
+              'item_weight'=>$products[0]["item_weight"], 
+              'quantity'=>number_format($_POST["quantity"]), 
+              'item_price'=>$products[0]["item_price"],
+              'inventory'=>$products[0]["inventory"],
+              'itemHold'=>$products[0]["inventory"]-$_POST["quantity"]));
     }
+  }
+  if(!empty($_GET["action"])) 
+  {
     switch($_GET["action"]) 
     {
-
       case "addToCart":
         if(!empty($_POST["quantity"])) 
         {
-
           if(!empty($_SESSION["cart"])) 
           { 
             if(in_array($products[0]["item_id"],array_keys($_SESSION["cart"]))) 
@@ -77,14 +57,21 @@
                   {
                     $_SESSION["cart"][$a]["quantity"] = 0;
                   }
-                  if($_POST["quantity"] < $itemHold)
-                  {
-                    $_SESSION["cart"][$a]["quantity"] += $_POST["quantity"];
-                    $itemHold -= $_POST["quantity"];
-                  }
-                  else
+                  
+                  if($_SESSION["cart"][$a]["itemHold"] == 0)
                   {
                     echo "Out of stock.";
+                  }
+                  else if ($_POST["quantity"] > $_SESSION["cart"][$a]["itemHold"])
+                  {
+                    $num = $_SESSION["cart"][$a]["itemHold"];
+                    $name = $_SESSION["cart"][$a]["item_name"];
+                    echo "Can only add $num $name.";
+                  }
+                  else if($_POST["quantity"] <= $_SESSION["cart"][$a]["itemHold"])
+                  {
+                    $_SESSION["cart"][$a]["quantity"] += $_POST["quantity"];
+                    $_SESSION["cart"][$a]["itemHold"] -= $_POST["quantity"];
                   }
                 }
               }
@@ -109,6 +96,7 @@
             if($_GET["item_id"] == $b["item_id"])
             {
               $_SESSION["cart"][$a]["quantity"]--;
+              $_SESSION["cart"][$a]["itemHold"]++;
               if($_SESSION["cart"][$a]["quantity"] == 0)
               {
                 unset($_SESSION["cart"][$a]);
@@ -130,14 +118,14 @@
           {
             if($_GET["item_id"] == $b["item_id"])
             {
-              if(1 < $itemHold)
-              {
-                $_SESSION["cart"][$a]["quantity"] ++;
-                $itemHold--;
-              }
-              else
+              if ($_SESSION["cart"][$a]["itemHold"] == 0)
               {
                 echo "Out of stock.";
+              }
+              else if(1 <= $_SESSION["cart"][$a]["itemHold"])
+              {
+                $_SESSION["cart"][$a]["quantity"]++;
+                $_SESSION["cart"][$a]["itemHold"]--;
               }
               
             }       
