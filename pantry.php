@@ -7,7 +7,7 @@
   $name = "";
   if (!isset($_SESSION['username'])) {
     $_SESSION['msg'] = "You must log in first";
-    header('location: login.php');
+    header('location: signin.php');
   }
   function query($query)
   {
@@ -596,6 +596,10 @@
                 }
                 $products = query($string);
               }
+            }
+            else
+            {
+              $products = query("SELECT * FROM item");
             }
             
             if(!empty($products))
