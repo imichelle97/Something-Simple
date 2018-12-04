@@ -285,8 +285,24 @@
                       </div>
 
                       <div class="ui left aligned container">
-                        <button type="submit" class="ui big green submit button" name="shipping_update">Save</button>
+                        <button type="submit" class="ui big green submit button" onmouseover="inRangeValidation()" name="shipping_update">Save</button>
 			                </div>
+                      <script>
+                        // Validation for checking if the address is in the range of two county, Santa Clara and S
+                        function inRangeValidation(){
+                          //All Cities in Santa Clara County
+                          var SantaClaraCounty = ["campbell", "cupertino", "gilroy", "los altos", "milpitas", "monta sereno", "morgan hill", "mountain view", "palo alto", "san jose", "santa clara", "sratoga", "sunnyvale"];
+                          //All Cities in San Mateo County
+                          var SanMateoCounty = ["atherton","belmont", "brisbane", "burlingame", "colma", "daly city", "east palo alto", "foster city", "half moon bay", "hillsborough", "menlo park", "millbrae", "pacifica", "portola valley", "redwood city", "san bruno", "san carlos", "san mateo", "searsville", "south san francisco" , "woodside"];
+
+                          // Checking
+                          if(!SantaClaraCounty.includes(document.getElementById("locality").value.toLowerCase()) && !SanMateoCounty.includes(document.getElementById("locality").value.toLowerCase())){
+                            alert("Address must be in Santa Clara County or San Mateo County");
+                            return false;
+                          }
+                          return true;
+                        }
+                      </script>
                 </div>
 
               </form>

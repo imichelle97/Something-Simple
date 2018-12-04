@@ -29,7 +29,7 @@
         return $set;
       }
   }
- if(!empty($_GET["action"])) 
+  if(!empty($_GET["action"])) 
   {
     switch($_GET["action"]) 
     {
@@ -46,58 +46,51 @@
                   'item_name'=>$product[0]["item_name"], 
                   'item_id'=>$product[0]["item_id"], 
                   'inventory'=>$product[0]["inventory"],
-                  'invenQuantity'=>$_POST["quantity"], 
                   'item_price'=>$product[0]["item_price"], 
                 )
             );
           
-          if(!empty($_SESSION["inven"])) 
+          if(!empty($itemArray))
           {
+            //echo "NOT EMPTY ";
             $id = $product[0]["item_id"];
-            if(in_array($product[0]["item_id"],array_keys($_SESSION["inven"]))) 
+            $updatedQ = $product[0]["inventory"];
+          
+            foreach($itemArray as $a => $b) 
             {
-              foreach($_SESSION["inven"] as $a => $b) 
+              if($product[0]["item_id"] == $a) 
               {
-                if($product[0]["item_id"] == $a) 
+                //echo "ID MATCHES ";
+                if(!empty($_POST["add"]))
                 {
-                  if(empty($_SESSION["inven"][$a]["invenQuantity"])) 
+                  //echo "ADD ";
+                  //echo $product[0]["inventory"]."+".$_POST["quantity"];
+                  $updatedQ = $product[0]["inventory"] + $_POST["quantity"];
+                }
+                else
+                {
+                  //echo "REMOVE ";
+                  if($product[0]["inventory"] < $_POST["quantity"])
                   {
-                    $_SESSION["inven"][$a]["invenQuantity"] = 0;
+                    //echo $product[0]["inventory"]."<".$_POST["quantity"];
+                    $negativeError = true;
+                    $updatedQ = $product[0]["inventory"];
                   }
-                  if(isset($_POST["add"]))
+                  else
                   {
-                    $_SESSION["inven"][$a]["invenQuantity"] += $_POST["quantity"];
-                    $updatedQ = $product[0]["inventory"] + $_POST["quantity"];
-                  }
-                  else if(isset($_POST["remove"]))
-                  {
-                    if($_SESSION["inven"][$a]["invenQuantity"] < $_POST["quantity"])
-                    {
-                      $negativeError = true;
-                      $updatedQ = $_SESSION["inven"][$a]["invenQuantity"];
-                    }
-                    else
-                    {
-                      $_SESSION["inven"][$a]["invenQuantity"] -= $_POST["quantity"];
-                      $updatedQ = $product[0]["inventory"] - $_POST["quantity"];
-                    }
+                    //echo $product[0]["inventory"].">=".$_POST["quantity"];
+                    $updatedQ = $product[0]["inventory"] - $_POST["quantity"];
                   }
                 }
               }
-            } 
-            else 
-            {
-              $_SESSION["inven"] = $_SESSION["inven"] + $itemArray; 
             }
-            $sql = "UPDATE item SET inventory = '$updatedQ' WHERE item_id = $id";
-            $connect = mysqli_connect('localhost','OFS','sesame','OFS');
-            mysqli_query($connect,$sql);
           } 
-          else 
-          {
-            $_SESSION["inven"] = $itemArray;
-          }
-        }
+          //echo "updatedInventory = $updatedQ";
+          $sql = "UPDATE item SET inventory = '$updatedQ' WHERE item_id = $id";
+          $connect = mysqli_connect('localhost','OFS','sesame','OFS');
+          mysqli_query($connect,$sql);
+        } 
+          
       break;
     }
   }
