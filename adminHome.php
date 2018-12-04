@@ -6,6 +6,7 @@
 	// 	$_SESSION['msg'] = "You must log in first";
 	// 	header('location: login.php');
     // }
+  $negativeError = false;
   
     if (!isAdmin()) {
 		$_SESSION['msg'] = "You must log in first";
@@ -72,7 +73,7 @@
                   {
                     if($_SESSION["inven"][$a]["invenQuantity"] < $_POST["quantity"])
                     {
-                      echo "Cannot have negative inventory.";
+                      $negativeError = true;
                       $updatedQ = $_SESSION["inven"][$a]["invenQuantity"];
                     }
                     else
@@ -188,6 +189,21 @@
             <a class="ui negative button" href="index.php">Log Out</a>
           </div>
         </div>
+
+        <?php
+        if ($negativeError) {
+          echo "<div class='ui grid container'>
+                  <div class='column'>
+                      <div class='ui center aligned negative message'>
+                          <div class='header'>
+                              <i class='exclamation triangle icon'></i>
+                              Item can't have negative inventory!
+                          </div>
+                      </div>
+                  </div>
+                </div>";
+        }
+        ?>
 
         <div class="ui raised segment container">
           <div class="ui grid">
