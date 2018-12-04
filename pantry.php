@@ -430,6 +430,7 @@
         <div class='column'>
             <div class='ui center aligned negative message'>
                 <div class='header'>
+                    <i class='exclamation triangle icon'></i>
                     Item is out of stock!
                 </div>
             </div>
@@ -440,8 +441,9 @@
         if ($differenceWarning) {
           echo "<div class='ui grid container'>
         <div class='column'>
-            <div class='ui center aligned negative message'>
+            <div class='ui center aligned warning message'>
                 <div class='header'>
+                    <i class='info circle icon'></i>
                     Can only add $num $name.
                 </div>
             </div>
