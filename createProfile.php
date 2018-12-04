@@ -155,7 +155,7 @@
                     <div class="ui grid">
                       <div class="ui nine wide column field">
                         <label>City</label>
-                        <input type="text" name="city" id = "locality" value="<?php echo $city; ?>">
+                        <input type="text" name="city" id = "locality" onmouseover="inRangeValidation()" value="<?php echo $city; ?>">
                       </div>
 
                       <div class="ui three wide column field">
@@ -212,6 +212,20 @@
             </a>
 			    </div>
           <script>
+            // Validation for checking if the address is in the range of two county, Santa Clara and S
+            function inRangeValidation(){
+                          //All Cities in Santa Clara County
+                          var SantaClaraCounty = ["campbell", "cupertino", "gilroy", "los altos", "milpitas", "monta sereno", "morgan hill", "mountain view", "palo alto", "san jose", "santa clara", "sratoga", "sunnyvale"];
+                          //All Cities in San Mateo County
+                          var SanMateoCounty = ["atherton","belmont", "brisbane", "burlingame", "colma", "daly city", "east palo alto", "foster city", "half moon bay", "hillsborough", "menlo park", "millbrae", "pacifica", "portola valley", "redwood city", "san bruno", "san carlos", "san mateo", "searsville", "south san francisco" , "woodside"];
+
+                          // Checking
+                          if(!SantaClaraCounty.includes(document.getElementById("locality").value.toLowerCase()) && !SanMateoCounty.includes(document.getElementById("locality").value.toLowerCase())){
+                            alert("Address must be in Santa Clara County or San Mateo County");
+                            return false;
+                          }
+                          return true;
+                        }
                   //credit card validation function
                     function creditcardValidation(cardNumber = document.getElementById("cardNumber").value, cardType = document.getElementById("cardType").value){
                         var cards = new Array();
