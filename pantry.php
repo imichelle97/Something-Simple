@@ -122,7 +122,7 @@
               {
                 echo "Out of stock.";
               }
-              else if(1 <= $_SESSION["itemHold"])
+              else if(1 <= $_SESSION["cart"][$a]["itemHold"])
               {
                 $_SESSION["cart"][$a]["quantity"]++;
                 $_SESSION["cart"][$a]["itemHold"]--;
