@@ -63,12 +63,12 @@
                   {
                     $_SESSION["inven"][$a]["invenQuantity"] = 0;
                   }
-                  if(!empty($_POST["add"]))
+                  if(isset($_POST["add"]))
                   {
                     $_SESSION["inven"][$a]["invenQuantity"] += $_POST["quantity"];
                     $updatedQ = $product[0]["inventory"] + $_POST["quantity"];
                   }
-                  if(!empty($_POST["remove"]))
+                  else if(isset($_POST["remove"]))
                   {
                     if($_SESSION["inven"][$a]["invenQuantity"] < $_POST["quantity"])
                     {
