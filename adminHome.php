@@ -46,7 +46,6 @@
                   'item_name'=>$product[0]["item_name"], 
                   'item_id'=>$product[0]["item_id"], 
                   'inventory'=>$product[0]["inventory"],
-                  'invenQuantity'=>$_POST["quantity"], 
                   'item_price'=>$product[0]["item_price"], 
                 )
             );
@@ -54,31 +53,32 @@
           if(!empty($_SESSION["inven"])) 
           {
             $id = $product[0]["item_id"];
+            $updatedQ = 0;
             if(in_array($product[0]["item_id"],array_keys($_SESSION["inven"]))) 
             {
               foreach($_SESSION["inven"] as $a => $b) 
               {
                 if($product[0]["item_id"] == $a) 
                 {
-                  if(empty($_SESSION["inven"][$a]["invenQuantity"])) 
+                  if(empty($_SESSION["inven"][$a]["inventory"])) 
                   {
-                    $_SESSION["inven"][$a]["invenQuantity"] = 0;
+                    $_SESSION["inven"][$a]["inventory"] = 0;
                   }
                   if(isset($_POST["add"]))
                   {
-                    $_SESSION["inven"][$a]["invenQuantity"] += $_POST["quantity"];
+                    $_SESSION["inven"][$a]["inventory"] += $_POST["quantity"];
                     $updatedQ = $product[0]["inventory"] + $_POST["quantity"];
                   }
-                  else if(isset($_POST["remove"]))
+                  else if (isset($_POST["remove"]))
                   {
-                    if($_SESSION["inven"][$a]["invenQuantity"] < $_POST["quantity"])
+                    if($_SESSION["inven"][$a]["inventory"] < $_POST["quantity"])
                     {
                       $negativeError = true;
-                      $updatedQ = $_SESSION["inven"][$a]["invenQuantity"];
+                      $updatedQ = $_SESSION["inven"][$a]["inventory"];
                     }
                     else
                     {
-                      $_SESSION["inven"][$a]["invenQuantity"] -= $_POST["quantity"];
+                      $_SESSION["inven"][$a]["inventory"] -= $_POST["quantity"];
                       $updatedQ = $product[0]["inventory"] - $_POST["quantity"];
                     }
                   }
