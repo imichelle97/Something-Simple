@@ -2,7 +2,7 @@
   include('server.php');
   if (!isset($_SESSION['username'])) {
    $_SESSION['msg'] = "You must log in first";
-   header('location: login.php');
+   header('location: signin.php');
   }
 
   // echo $_SESSION['username'];
@@ -151,7 +151,7 @@
                   </div>
                 </a>
             <a class="ui primary button" href="profile.php">Profile</a>
-            <a class="ui negative button" href="index.php">Log Out</a>
+            <a class="ui negative button" href="pantry.php?action=logout">Log Out</a>
           </div>
         </div>
       </div>

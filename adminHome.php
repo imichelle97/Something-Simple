@@ -10,7 +10,7 @@
   
     if (!isAdmin()) {
 		$_SESSION['msg'] = "You must log in first";
-		header('location: ../login.php');
+		header('location: signin.php');
 	}
   function query($query)
   {
@@ -179,7 +179,7 @@
                 </div>
               </div>
             </a> -->
-            <a class="ui negative button" href="index.php">Log Out</a>
+            <a class="ui negative button" href="pantry.php?action=logout">Log Out</a>
           </div>
         </div>
 

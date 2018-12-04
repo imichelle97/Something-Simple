@@ -146,6 +146,15 @@
         $_SESSION["checkout"] = "true";
         header('location: shipping.php');
         break;
+
+      case "logout":
+        session_destroy();
+        unset($_SESSION["username"]);
+        unset($_SESSION["complete"]);
+        unset($_SESSION["checkout"]);
+        unset($_SESSION["proceed"]);
+        unset($_SESSION["confirm"]);
+        header("location: index.php");
     }
   }
 ?>
@@ -423,7 +432,7 @@
           <div class="right item">
             <h3>Welcome, <?php echo $_SESSION['username']['username']; ?>!</h3>
             <a class="ui primary button" href="profile.php">Profile</a>
-            <a class="ui negative button" href="index.php">Log Out</a>
+            <a class="ui negative button" href="pantry.php?action=logout">Log Out</a>
           </div>
         </div>
       </div>

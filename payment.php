@@ -3,7 +3,7 @@
   // session_start(); 
   if (!isset($_SESSION['username'])) {
     $_SESSION['msg'] = "You must log in first";
-    header('location: login.php');
+    header('location: signin.php');
   }
   if(!isset($_SESSION['checkout']))
   {
@@ -209,7 +209,7 @@
             <div class="right item">
               <h3>Welcome, <?php echo $_SESSION['username']['username']; ?>!</h3>
               <a class="ui primary button" href="profile.php">Profile</a>
-              <a class="ui negative button" href="index.php">Log Out</a>
+              <a class="ui negative button" href="pantry.php?action=logout">Log Out</a>
             </div>
           </div>
         </div>
