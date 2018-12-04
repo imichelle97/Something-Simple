@@ -570,7 +570,16 @@
                     </div>
                   </div>
                 </div>
-                <button class='ui olive fluid button' type='submit'>Search</button>
+              </div>
+              <div class="row">
+                <div class="eight wide column">
+                  <button class='ui green button' type='submit'>Apply</button>
+                </div>
+                <div class="eight wide column right aligned">
+                  <form action="">
+                    <button class='ui green button' type='submit'>Show All</button>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
