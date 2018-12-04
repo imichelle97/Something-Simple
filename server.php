@@ -48,15 +48,23 @@
 			array_push($errors, "The two passwords do not match");
 		}
 
+		$usernameError = "SELECT * FROM customer WHERE username = '$username';";
+		$usernameResults = mysqli_query($db, $usernameError);
+		if(mysqli_num_rows($usernameResults) == 1) {
+			// echo "username exsits...";
+			array_push($errors, "Username already exists, please choose another username");
+		}
+
 		// If no errors, proceed to register user
 		if (count($errors) == 0) {
 
 			// Encrypt password before saving into database
-			$password = sha1($password_1);		
+			$password = sha1($password_1);
+	
 			$query = "INSERT INTO customer (user_id, username, email, password, user_type) 
 					  VALUES(NULL, '$username', '$email', '$password', 'user')";
 			$results = mysqli_query($db, $query);
-			// print_r( $results );
+			print_r( $results );
 			
 			// if(mysqli_num_rows($results) == 1) {
 			// 	$logged_in_user = mysqli_fetch_assoc($results);
@@ -120,9 +128,6 @@
 					$_SESSION['success']  = "You are now logged in";
 					header('location: home.php');
 				}
-				// $_SESSION['username'] = $username;
-				// $_SESSION['success'] = "You are now logged in";
-				// header('location: home.php');
 			} 
 			else {
 				array_push($errors, "Wrong username/password combination");
