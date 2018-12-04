@@ -428,7 +428,9 @@
         </div>
       </div>
 
-      <?php if ($outOfStockError) {
+      <?php 
+      if ($outOfStockError) 
+      {
         echo "<div class='ui grid container'>
         <div class='column'>
             <div class='ui center aligned negative message'>
@@ -440,19 +442,19 @@
         </div>
       </div>";
       }
-
-        if ($differenceWarning) {
-          echo "<div class='ui grid container'>
-        <div class='column'>
-            <div class='ui center aligned warning message'>
+      if ($differenceWarning) 
+      {
+        echo "<div class='ui grid container'>
+            <div class='column'>
+              <div class='ui center aligned warning message'>
                 <div class='header'>
                     <i class='info circle icon'></i>
                     Can only add $num $name.
                 </div>
             </div>
-        </div>
-      </div>";
-        }
+          </div>
+        </div>";
+      }
       ?>
 
       <!-- STICKY BUTTON -->
@@ -489,14 +491,14 @@
 
       <div class="ui raised green segment container">
         <h2>Categories:</h2>
-        <form action="">
+        <form action="pantry.php" method="post">
           <div class="ui form">
             <div class="ui grid categories container">
               <div class="row">
                 <div class="four wide column">
                   <div class="inline field">
                     <div class="ui checkbox">
-                      <input type="checkbox" tabindex="0" class="hidden">
+                      <input type="checkbox" tabindex="0" class="hidden" name="category[]" value="Breads and Bakery">
                       <label><strong>Breads and Bakery</strong></label>
                     </div>
                   </div>
@@ -504,7 +506,7 @@
                 <div class="four wide column">
                   <div class="inline field">
                     <div class="ui checkbox">
-                      <input type="checkbox" tabindex="0" class="hidden">
+                      <input type="checkbox" tabindex="0" class="hidden" name="category[]" value="Dairy, Cheese, and Eggs">
                       <label><strong>Dairy, Cheese, and Eggs</strong></label>
                     </div>
                   </div>
@@ -512,7 +514,7 @@
                 <div class="four wide column">
                   <div class="inline field">
                     <div class="ui checkbox">
-                      <input type="checkbox" tabindex="0" class="hidden">
+                      <input type="checkbox" tabindex="0" class="hidden" name="category[]" value="Deli">
                       <label><strong>Deli</strong></label>
                     </div>
                   </div>
@@ -520,7 +522,7 @@
                 <div class="four wide column">
                   <div class="inline field">
                     <div class="ui checkbox">
-                      <input type="checkbox" tabindex="0" class="hidden">
+                      <input type="checkbox" tabindex="0" class="hidden" name="category[]" value="Frozen">
                       <label><strong>Frozen</strong></label>
                     </div>
                   </div>
@@ -530,7 +532,7 @@
                 <div class="four wide column">
                   <div class="inline field">
                     <div class="ui checkbox">
-                      <input type="checkbox" tabindex="0" class="hidden">
+                      <input type="checkbox" tabindex="0" class="hidden" name="category[]" value="Meat and Seafood">
                       <label><strong>Meat and Seafood</strong></label>
                     </div>
                   </div>
@@ -538,7 +540,7 @@
                 <div class="four wide column">
                   <div class="inline field">
                     <div class="ui checkbox">
-                      <input type="checkbox" tabindex="0" class="hidden">
+                      <input type="checkbox" tabindex="0" class="hidden" name="category[]" value="Meat Substitutes">
                       <label><strong>Meat Substitutes</strong></label>
                     </div>
                   </div>
@@ -546,7 +548,7 @@
                 <div class="four wide column">
                   <div class="inline field">
                     <div class="ui checkbox">
-                      <input type="checkbox" tabindex="0" class="hidden">
+                      <input type="checkbox" tabindex="0" class="hidden" name="category[]" value="Produce">
                       <label><strong>Produce</strong></label>
                     </div>
                   </div>
@@ -554,11 +556,12 @@
                 <div class="four wide column">
                   <div class="inline field">
                     <div class="ui checkbox">
-                      <input type="checkbox" tabindex="0" class="hidden">
+                      <input type="checkbox" tabindex="0" class="hidden" name="category[]" value="Soups, Stocks, and Broths">
                       <label><strong>Soups, Stocks, and Broths</strong></label>
                     </div>
                   </div>
                 </div>
+                <button class='ui olive fluid button' type='submit'>Search</button>
               </div>
             </div>
           </div>
@@ -568,18 +571,33 @@
       <div class="ui container">
         <div class="ui four center aligned column doubling stackable grid container cards">
 
-           <?php
+          <?php
+            if(isset($_POST['category']))
+            {
+              $category = $_POST['category'];
+              if(!empty($category))
+              {
+                $num = count($category);
+                $string = "SELECT * FROM item WHERE ";
+                for($i = 0; $i < $num; $i++)
+                {
+                  if($i < $num - 1)
+                  {
+                    $query = "$category[$i]";
+                    $query = htmlspecialchars($query);
+                    $string = $string."(`item_category` LIKE '%".$query."%') OR";
+                  }
+                  else
+                  {
+                    $query = "$category[$i]";
+                    $query = htmlspecialchars($query);
+                    $string = $string."(`item_category` LIKE '%".$query."%')";
+                  }
+                }
+                $products = query($string);
+              }
+            }
             
-            if (isset($_GET['query']))
-            {
-              $query = $_GET['query'];
-              $query = htmlspecialchars($query);
-              $products = query("SELECT * FROM item WHERE (`item_name` LIKE '%".$query."%') OR (`item_desc` LIKE '%".$query."%') OR (`item_category` LIKE '%".$query."%')");
-            }
-            else
-            {
-              $products = query("SELECT * FROM item");
-            }
             if(!empty($products))
             {
               foreach($products as $key => $value)
