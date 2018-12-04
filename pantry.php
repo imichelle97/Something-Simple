@@ -1,5 +1,10 @@
 <?php 
   session_start(); 
+
+  $outOfStockError = false;
+  $differenceWarning = false;
+  $num = 0;
+  $name = "";
   if (!isset($_SESSION['username'])) {
     $_SESSION['msg'] = "You must log in first";
     header('location: login.php');
@@ -60,13 +65,13 @@
                   
                   if($_SESSION["cart"][$a]["itemHold"] == 0)
                   {
-                    echo "Out of stock.";
+                    $outOfStockError = true;
                   }
                   else if ($_POST["quantity"] > $_SESSION["cart"][$a]["itemHold"])
                   {
                     $num = $_SESSION["cart"][$a]["itemHold"];
                     $name = $_SESSION["cart"][$a]["item_name"];
-                    echo "Can only add $num $name.";
+                    $differenceWarning = true;
                   }
                   else if($_POST["quantity"] <= $_SESSION["cart"][$a]["itemHold"])
                   {
@@ -120,7 +125,7 @@
             {
               if ($_SESSION["cart"][$a]["itemHold"] == 0)
               {
-                echo "Out of stock.";
+                $outOfStockError = true;
               }
               else if(1 <= $_SESSION["cart"][$a]["itemHold"])
               {
@@ -273,12 +278,12 @@
                   "<div class='item'>
                     <div class='ui grid'>
                       <div class='row'>
-                        <div class='ten wide column'>
+                        <div class='eight wide column'>
                           <div class='content'>
                           $name
                           </div>
                         </div>
-                        <div class='three wide column right aligned'>
+                        <div class='two wide column right aligned'>
                           <span>$quantity</span>
                         </div>
                         <div class='three wide column right aligned'>
@@ -419,6 +424,31 @@
           </div>
         </div>
       </div>
+
+      <?php if ($outOfStockError) {
+        echo "<div class='ui grid container'>
+        <div class='column'>
+            <div class='ui center aligned negative message'>
+                <div class='header'>
+                    Item is out of stock!
+                </div>
+            </div>
+        </div>
+      </div>";
+      }
+
+        if ($differenceWarning) {
+          echo "<div class='ui grid container'>
+        <div class='column'>
+            <div class='ui center aligned negative message'>
+                <div class='header'>
+                    Can only add $num $name.
+                </div>
+            </div>
+        </div>
+      </div>";
+        }
+      ?>
 
       <!-- STICKY BUTTON -->
       <div id="toggle" class="ui sticky green massive launch right attached fixed button">
