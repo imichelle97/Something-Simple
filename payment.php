@@ -285,7 +285,7 @@
 
                   <div class="ui two wide column field">
                     <label>CVC</label>
-                    <input type="number" name="cvc" id="cvc" value="<?php echo $cvc; ?>" maxlength="3">
+                    <input type="text" name="cvc" id="cvc" value="<?php echo $cvc; ?>" maxlength="3">
                   </div>
 
                   <div class="ui six wide column field">
@@ -475,6 +475,12 @@
                         //   alert("Credit catd date is out of date");
                         //   return false;
                         // }
+
+                        //Check if CVC isDigit
+                        if (isNaN(document.getElementById("cvc").value)){
+                          alert("CVC is invalid");
+                          return false;
+                        }
                         
                         // The credit card is in the required format.
                         return true;

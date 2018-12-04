@@ -194,7 +194,7 @@
 
                       <div class="ui four wide column field">
                         <label>CVC</label>
-                        <input type="number" name="cvc" value="<?php echo $cvc; ?>" max="9999">
+                        <input type="text" name="cvc" id="cvc" value="<?php echo $cvc; ?>" maxlength="3">
                       </div>
 
                       <div class="ui four wide column field">
@@ -350,9 +350,15 @@
                         };   
 
                         // See if the expiration date has passed
-                        var now = new Date();
-                        if (document.getElementById("cardDate").value < now){
-                          alert("Credit card date is out of date");
+                        // var now = new Date();
+                        // if (document.getElementById("cardDate").value < now){
+                        //   alert("Credit card date is out of date");
+                        //   return false;
+                        // }
+
+                        //Check if CVC isDigit
+                        if (isNaN(document.getElementById("cvc").value)){
+                          alert("CVC is invalid");
                           return false;
                         }
                         
