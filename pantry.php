@@ -199,10 +199,13 @@
     #pantry .navbar .right h3 {
       margin: 0 1em !important;
     }
-    #pantry .container .row .left h1 {
-      font-size: 5em;
+    #pantry .header h1 {
+      font-size: 4em;
       margin-bottom: 0em;
       font-family: 'Pacifico', cursive;
+    }
+    #pantry .categories {
+      margin-top: 1.5em;
     }
     #pantry .container .eight .button {
       margin-top: 1.5em;
@@ -458,7 +461,7 @@
         <span class="text">Cart</span>
       </div>
 
-      <div class="ui grid container">
+      <!-- <div class="ui grid container">
         <div class="bottom aligned row">
           <div class="ui left aligned left floated six wide column">
             <h1>Pantry</h1>
@@ -476,7 +479,91 @@
             </div>
           </form>
         </div>
-      </div>   
+      </div>    -->
+
+      <div class="ui header container">
+        <div class="ui left aligned">
+          <h1>Pantry</h1>
+        </div>
+      </div>
+
+      <div class="ui raised green segment container">
+        <h2>Categories:</h2>
+        <form action="">
+          <div class="ui form">
+            <div class="ui grid categories container">
+              <div class="row">
+                <div class="four wide column">
+                  <div class="inline field">
+                    <div class="ui checkbox">
+                      <input type="checkbox" tabindex="0" class="hidden">
+                      <label><strong>Breads and Bakery</strong></label>
+                    </div>
+                  </div>
+                </div>
+                <div class="four wide column">
+                  <div class="inline field">
+                    <div class="ui checkbox">
+                      <input type="checkbox" tabindex="0" class="hidden">
+                      <label><strong>Dairy, Cheese, and Eggs</strong></label>
+                    </div>
+                  </div>
+                </div>
+                <div class="four wide column">
+                  <div class="inline field">
+                    <div class="ui checkbox">
+                      <input type="checkbox" tabindex="0" class="hidden">
+                      <label><strong>Deli</strong></label>
+                    </div>
+                  </div>
+                </div>
+                <div class="four wide column">
+                  <div class="inline field">
+                    <div class="ui checkbox">
+                      <input type="checkbox" tabindex="0" class="hidden">
+                      <label><strong>Frozen</strong></label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="four wide column">
+                  <div class="inline field">
+                    <div class="ui checkbox">
+                      <input type="checkbox" tabindex="0" class="hidden">
+                      <label><strong>Meat and Seafood</strong></label>
+                    </div>
+                  </div>
+                </div>
+                <div class="four wide column">
+                  <div class="inline field">
+                    <div class="ui checkbox">
+                      <input type="checkbox" tabindex="0" class="hidden">
+                      <label><strong>Meat Substitutes</strong></label>
+                    </div>
+                  </div>
+                </div>
+                <div class="four wide column">
+                  <div class="inline field">
+                    <div class="ui checkbox">
+                      <input type="checkbox" tabindex="0" class="hidden">
+                      <label><strong>Produce</strong></label>
+                    </div>
+                  </div>
+                </div>
+                <div class="four wide column">
+                  <div class="inline field">
+                    <div class="ui checkbox">
+                      <input type="checkbox" tabindex="0" class="hidden">
+                      <label><strong>Soups, Stocks, and Broths</strong></label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
 
       <div class="ui container">
         <div class="ui four center aligned column doubling stackable grid container cards">
@@ -582,6 +669,7 @@
         $(this).find('.text').hide();
         $(this).stop().animate({width: '70px'}, 200);
     });
+  $('.ui.checkbox').checkbox();
   </script>
 
 
