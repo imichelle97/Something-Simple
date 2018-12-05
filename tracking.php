@@ -3,8 +3,8 @@
   include('server.php');
   if (!isset($_SESSION['username'])) {
     $_SESSION['msg'] = "You must log in first";
-    header('location: signin.php');
-	}
+    header('location: login.php');
+  }
   if(!isset($_SESSION['checkout']))
   {
     $_SESSION['msg'] = "You must add items to your cart first";
@@ -26,7 +26,7 @@
     header('location: confirmation.php');
   }
 
-	$weight = 0;
+  $weight = 0;
   $price = 0;
   $tax = 0;
   $orderTot = 0;
@@ -93,16 +93,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Track Order</title>
-	<script   src="https://code.jquery.com/jquery-3.3.1.min.js"   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="   crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.css">
-	<link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+  <title>Track Order</title>
+  <script   src="https://code.jquery.com/jquery-3.3.1.min.js"   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="   crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.css">
+  <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
 
 
-	<style>
+  <style>
 
-	body {
+  body {
       min-height: 700px;
       padding: 0.5em 0em;
       background: #F5EAD1 url('images/web-graphics/leaf-watermark.png');
@@ -141,73 +141,73 @@
     #tracking .container .column {
       margin-bottom: 0;
     }
-		#tracking .container .grid .row {
+    #tracking .container .grid .row {
       padding: 1em 0;
     }
     #map{
-		height: 600px;
-		width: 100%;
+    height: 600px;
+    width: 100%;
 
-	}
+  }
 
-	</style>
+  </style>
 
 </head>
 <body>
 
-	<div class="pusher">
+  <div class="pusher">
 
-		<!-- MASTER HEAD -->
-		<section id="tracking">
-		
-			<!-- NAV BAR -->
-			<div class="navbar">
-				<div class="ui container">
-					<div class="ui large secondary menu">
-						<div class="header item">
-							<span>something simple.</span>
-							<i class="leaf icon"></i>
-						</div>
-						<a class="item" href="tracking.php?action=home">Home</a>
-						<a href="home.php#about" class="item">About</a>
+    <!-- MASTER HEAD -->
+    <section id="tracking">
+    
+      <!-- NAV BAR -->
+      <div class="navbar">
+        <div class="ui container">
+          <div class="ui large secondary menu">
+            <div class="header item">
+              <span>something simple.</span>
+              <i class="leaf icon"></i>
+            </div>
+            <a class="item" href="tracking.php?action=home">Home</a>
+            <a href="home.php#about" class="item">About</a>
             <a href="home.php#about" class="item">Team</a>
             <a href="home.php#contact" class="item">Contact</a>
-						<div class="right item">
-							<h3>Welcome, <?php echo $_SESSION['username']['username']; ?>!</h3>
-							<a class="ui primary button" href="profile.php">Profile</a>
-							<a class="ui negative button" href="pantry.php?action=logout">Log Out</a>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="ui container">
-				<div class="row">
-					<h1>Track Order</h1>
-				</div>
-			</div>
-
-			<div class="ui container">
-				<h2 id = "order">Your order will arrive in <span id="timeLeft"></span> </h2>
-				<div class="ui indicating progress">
-					<div class="bar"></div>
-					<div id = "processing" class="label">Processing</div>
-				</div>
-				<div class="ui grid">
-					<div class="sixteen wide column">
-						<div class="ui raised segment">
-							<div id="map"></div>
-						</div>
-					</div>
-			</div>
+            <div class="right item">
+              <h3>Welcome, <?php echo $_SESSION['username']['username']; ?>!</h3>
+              <a class="ui primary button" href="profile.php">Profile</a>
+              <a class="ui negative button" href="index.php">Log Out</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ui container">
+        <div class="row">
+          <h1>Track Order</h1>
+        </div>
       </div>
 
-		</section>
-	</div>
+      <div class="ui container">
+        <h2 id = "order">Your order will arrive in <span id="timeLeft"></span> </h2>
+        <div class="ui indicating progress">
+          <div class="bar"></div>
+          <div id = "processing" class="label">Processing</div>
+        </div>
+        <div class="ui grid">
+          <div class="sixteen wide column">
+            <div class="ui raised segment">
+              <div id="map"></div>
+            </div>
+          </div>
+      </div>
+      </div>
 
-	
+    </section>
+  </div>
 
-	
-	<script>
+  
+
+  
+  <script>
         var SanJose = {lat: 37.34411, lng: -121.88155};
         var SanMateo = {lat: 37.562992, lng: -122.325523};
         var markersArray = [];
@@ -387,11 +387,25 @@
     function getPointBetween(a, b, ratio) {
         return new google.maps.LatLng(a.lat() + (b.lat() - a.lat()) * ratio, a.lng() + (b.lng() - a.lng()) * ratio);
         }
+
+    window.onbeforeunload = function() {
+          console.log("im inside onbeforeunload");
+          return "string";
+          }; 
+
         //Start animation google maps
+      var string = "help";
     function startRouteAnimation(marker,list,interval){
+         var boolean = false;
          var percent = 0;
          var add = (1 / (list.length -1))*100; 
-         console.log("list length is "+ list.length);
+         
+
+         window.onbeforeunload = function() {
+          console.log("im inside onbeforeunload");
+          return string;
+          }; 
+
          var autoDriveTimer = setInterval(function(){
         //stop the timer if the route is finished
         if(list.length === 0){
@@ -399,6 +413,7 @@
                 $('.progress').progress({
                  percent: 100 
               });
+              string = null;
         } else {
          //move marker to the next position (always the first in the array)
          marker.setPosition(list[0]);
@@ -411,14 +426,20 @@
           console.log(percent);
           percent = percent + add;
         }
+        console.log("im here");
+
       }, interval);
     }
+
+
     </script>
 
 
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZU_P11ldjxwdBWYQSX6Gzj-5aeoEUAUo&libraries=places&callback=init"
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZU_P11ldjxwdBWYQSX6Gzj-5aeoEUAUo&libraries=places&callback=init"
 
-        async defer></script>
+  async defer></script>
+<script>
+</script>
 
 
 
