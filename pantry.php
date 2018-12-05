@@ -1,6 +1,5 @@
 <?php 
   session_start(); 
-
   $outOfStockError = false;
   $differenceWarning = false;
   $num = 0;
@@ -115,7 +114,6 @@
           }
         }
         break; 
-
       case "addOneToCart":
         if(!empty($_SESSION["cart"])) 
         {
@@ -137,7 +135,6 @@
           }
         }
         break; 
-
       case "removeAll":
         unset($_SESSION["cart"]);
         break;
@@ -146,7 +143,6 @@
         $_SESSION["checkout"] = "true";
         header('location: shipping.php');
         break;
-
       case "logout":
         session_destroy();
         unset($_SESSION["username"]);
@@ -576,8 +572,8 @@
                   <button class='ui green button' type='submit'>Apply</button>
                 </div>
                 <div class="eight wide column right aligned">
-                  <form action="">
-                    <button class='ui green button' type='submit'>Show All</button>
+                  <form action="pantry.php" method="post">
+                    <button class='ui green button' name='showAll' type='submit'>Show All</button>
                   </form>
                 </div>
               </div>
@@ -616,6 +612,10 @@
               }
             }
             else
+            {
+              $products = query("SELECT * FROM item");
+            }
+            if(isset($_POST['showAll']))
             {
               $products = query("SELECT * FROM item");
             }
