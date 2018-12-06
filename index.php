@@ -294,7 +294,7 @@
               <h3>Leave us a note!</h3>
               <div class="field">
                 <label>Name</label>
-                <input type="text" name="name" value=<?php echo $name; ?>>
+                <input type="text" name="name" maxlength="70" value=<?php echo $name; ?>>
               </div>
               <div class="field">
                 <label>Message</label>
