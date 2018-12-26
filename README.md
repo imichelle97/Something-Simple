@@ -5,9 +5,6 @@ ABOUT US: Something Simple is a grocery delivery company that delivers fresh pro
 
 USER GUIDE: You can view our user guide video here: https://youtu.be/wOKAsOR5QjM
 
-SERVER CONFIGURATION: Something Simple is actually deployed on its own server.  You may explore our website by going to the following link:
-http://something-simple.bitnamiapp.com/cs160/. If you would like to watch our server configuration video, you can view it here: https://youtu.be/AEFqWkakcPg
-
 LOCAL CONFIGURATION: If you would like to run Something Simple on your local machine, you can download our source files at our GitHub: https://github.com/imichelle97/Something-Simple. Our application uses the LAMP Stack (Linux, Apache, MySQL, PHP). We would recommend the following steps to ensure a successful installation of our application:
 
 1. Download our source files from the above GitHub Repository link.
@@ -32,6 +29,8 @@ LOCAL CONFIGURATION: If you would like to run Something Simple on your local mac
 14. Now from your browser, you should be able to navigate to Something Simple by typing in http://localhost/something-simple/. 
 
 If you would like to watch a video on configuring/installing Something Simple on your local machine, watch our video: https://youtu.be/sDIdQrAc2wU.  
+
+* Note: You must provide your own Google Maps API Key in tracking.php to have maps working properly.
 
 
 
