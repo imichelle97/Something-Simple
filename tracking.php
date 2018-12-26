@@ -435,7 +435,7 @@
     </script>
 
 
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZU_P11ldjxwdBWYQSX6Gzj-5aeoEUAUo&libraries=places&callback=init"
+  <script src="https://maps.googleapis.com/maps/api/js?key={API Key}&libraries=places&callback=init"
 
   async defer></script>
 <script>
